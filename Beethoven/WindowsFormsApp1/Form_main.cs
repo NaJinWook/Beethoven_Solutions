@@ -50,7 +50,7 @@ namespace WindowsFormsApp1
             logo.Size = new Size(282, 100);
             logo.Location = new Point(1015, 0);
 
-            bg.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("bg2");
+            bg.BackColor = Color.White;
             bg.SizeMode = PictureBoxSizeMode.StretchImage;
             bg.Size = new Size(1461, 633);
             bg.Location = new Point(20, 24);
@@ -65,8 +65,8 @@ namespace WindowsFormsApp1
             mdi_pnl = os.Pnl((ob_Pnl)arr[1]);
             logout = os.Btn((ob_Btn)arr[2]);
             logout.Click += Logout_Click;
-            logout.MouseHover += Logout_MouseHover;
-            logout.MouseLeave += Logout_MouseLeave;
+            //logout.MouseHover += Logout_MouseHover;
+            //logout.MouseLeave += Logout_MouseLeave;
             logout.Cursor = Cursors.Hand;
             start = os.Lbl((ob_Lbl)arr[3]);
             total_pnl = os.Pnl((ob_Pnl)arr[4]);
@@ -85,7 +85,7 @@ namespace WindowsFormsApp1
                 menu_btn = new Button();
                 menu_btn.Size = new Size(200, 100);
                 menu_btn.Location = new Point((203 * i) + 0, 0);
-                menu_btn.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Titanium");
+                menu_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
                 menu_btn.ForeColor = Color.White;
                 menu_btn.Name = string.Format("btn{0}", i + 1);
                 menu_btn.TabStop = false; // 탭방지
@@ -93,8 +93,8 @@ namespace WindowsFormsApp1
                 menu_btn.FlatAppearance.BorderSize = 0; // 테두리 제거
                 menu_pnl.Controls.Add(menu_btn);
                 menu_btn.Click += Menu_btn_Click;
-                menu_btn.MouseHover += Menu_btn_MouseHover;
-                menu_btn.MouseLeave += Menu_btn_MouseLeave;
+                //menu_btn.MouseHover += Menu_btn_MouseHover;
+                //menu_btn.MouseLeave += Menu_btn_MouseLeave;
                 menu_btn.Cursor = Cursors.Hand;
 
                 if(menu_btn.Name == "btn1")
@@ -107,11 +107,11 @@ namespace WindowsFormsApp1
                 }
                 else if (menu_btn.Name == "btn3")
                 {
-                    menu_btn.Text = "락커 관리";
+                    menu_btn.Text = "정보 추가";
                 }
                 else if (menu_btn.Name == "btn4")
                 {
-                    menu_btn.Text = "매출 현황";
+                    menu_btn.Text = "도구 관리";
                 }
                 else if (menu_btn.Name == "btn5")
                 {
@@ -121,50 +121,49 @@ namespace WindowsFormsApp1
             option();
         }
 
-        private void Logout_MouseLeave(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            logout.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("VeryBlue");
-        }
+        //private void Logout_MouseLeave(object sender, EventArgs e)
+        //{
+        //    Button btn = (Button)sender;
+        //    logout.BackColor = Color.Green;
+        //}
 
-        private void Logout_MouseHover(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            logout.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sherbert");
-        }
+        //private void Logout_MouseHover(object sender, EventArgs e)
+        //{
+        //    Button btn = (Button)sender;
+        //    logout.BackColor = Color.Blue;
+        //}
 
-        private void Menu_btn_MouseLeave(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            btn.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Titanium");
+        //private void Menu_btn_MouseLeave(object sender, EventArgs e)
+        //{
+        //    Button btn = (Button)sender;
+        //    btn.BackColor = Color.Lime;
             
-        }
+        //}
 
-        private void Menu_btn_MouseHover(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            btn.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("SolidVault");
+        //private void Menu_btn_MouseHover(object sender, EventArgs e)
+        //{
+        //    Button btn = (Button)sender;
+        //    btn.BackColor = Color.DarkBlue;
             
-        }
+        //}
 
         private void option()
         {
-            menu_pnl.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
-            mdi_pnl.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
-            total_pnl.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Royal");
+            menu_pnl.BackColor = Color.FromArgb(220, 9, 29, 81);
+            mdi_pnl.BackColor = Color.FromArgb(220, 9, 29, 81);
+            total_pnl.BackColor = Color.FromArgb(220, 3, 5, 20);
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
-            logout.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("VeryBlue");
+            logout.BackColor = Color.Green;
             logout.ForeColor = Color.White;
             logout.TabStop = false; // 탭방지
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
             logout.Font = new Font(FontFamily.GenericSerif, 30, FontStyle.Bold);
-            start.ForeColor = Color.White;
+            start.ForeColor = Color.Black;
             start.Font = new Font(FontFamily.GenericSerif, 30, FontStyle.Bold);
             start.Parent = bg;
             start.BackColor = Color.Transparent;
-            total_pnl.BackColor = Color.DarkGray;
         }
 
         private void Menu_btn_Click(object sender, EventArgs e)
