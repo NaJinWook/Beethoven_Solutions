@@ -107,11 +107,11 @@ namespace WindowsFormsApp1
                 }
                 else if (menu_btn.Name == "btn3")
                 {
-                    menu_btn.Text = "정보 추가";
+                    menu_btn.Text = "락커 관리";
                 }
                 else if (menu_btn.Name == "btn4")
                 {
-                    menu_btn.Text = "도구 관리";
+                    menu_btn.Text = "매출 현황";
                 }
                 else if (menu_btn.Name == "btn5")
                 {
