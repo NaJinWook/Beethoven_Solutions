@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
             
             Series series = new Series();
             series.ChartType = SeriesChartType.Doughnut;
-            int[] arrData = { 400, 200, 300, 100 };
+            int[] arrData = { 400, 200};
             for (int i = 0; i < arrData.Length; i++)
             {
                 series.Points.Add(arrData[i]);
@@ -58,13 +58,50 @@ namespace WindowsFormsApp1
             pieChart.Series.Add(series);
             pn1.Controls.Add(pieChart);
 
+
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
-            lv = cmm.getListView(hashtable, pn2);
+           // lv = cmm.getListView(hashtable, pn2);
             lv.Columns.Add("월");
             lv.Columns.Add("매출액");
+            /*
+            // 객체 선언 및 생성
+            Chart chart1 = new Chart();
+            ChartArea chartArea1 = new ChartArea();
+            Legend legend1 = new Legend();
+            Series series1 = new Series();
+
+            // 기본 설정
+            chartArea1.Name = "ChartArea1";
+            legend1.Name = "Legend1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = SeriesChartType.Doughnut;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+
+            // 차트 기본 설정
+            chart1.Name = "chart1";
+            chart1.Dock = DockStyle.Fill;
+            chart1.Text = "chart1";
+            chart1.ChartAreas.Add(chartArea1);
+            chart1.Legends.Add(legend1);
+            chart1.Series.Add(series1);
+
+            // 데이터 부분
+            chart1.Series["Series1"].IsValueShownAsLabel = false;
+            chart1.Series["Series1"].Points.AddXY("1", "10");
+            chart1.Series["Series1"].Points.AddXY("2", "20");
+            chart1.Series["Series1"].Points.AddXY("3", "30");
+            chart1.Series["Series1"].Points.AddXY("4", "40");
+            chart1.Series["Series1"].Points.AddXY("5", "50");
+            chart1.Series["Series1"].Points.AddXY("6", "60");
+
+            // 컨트롤 등록
+            this.Controls.Add(chart1);
+            */
+
         }
 
         private void listView_click(object sender, MouseEventArgs e)

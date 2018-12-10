@@ -16,13 +16,14 @@ namespace WindowsFormsApp1
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
         Panel pnl1, pnl2, pnl3;
-        Button btn1, btn2, btn3,btn4,btn5;
+        Button btn1, btn2, btn3,btn4;
         TextBox tb,tb1,tb2,tb3,tb4,tb5,tb6;
         Label lb1;
         ComboBox cb1;
         ListView lv = new ListView();
         Hashtable hashtable=new Hashtable();
         Commons cmm = new Commons();
+
         public Form_member()
         {
             InitializeComponent();

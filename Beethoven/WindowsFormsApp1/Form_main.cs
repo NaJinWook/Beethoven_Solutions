@@ -43,6 +43,7 @@ namespace WindowsFormsApp1
 
         private void Form_main_Load(object sender, EventArgs e)
         {
+            this.
             this.IsMdiContainer = true;
 
             logo.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("goodee_logo");
@@ -78,7 +79,6 @@ namespace WindowsFormsApp1
             menu_pnl.Controls.Add(logo);
             menu_pnl.Controls.Add(logout);
             Controls.Add(mdi_pnl);
-            
 
             for (int i = 0; i < 5; i++)
             {
@@ -107,11 +107,11 @@ namespace WindowsFormsApp1
                 }
                 else if (menu_btn.Name == "btn3")
                 {
-                    menu_btn.Text = "락커 관리";
+                    menu_btn.Text = "정보 추가";
                 }
                 else if (menu_btn.Name == "btn4")
                 {
-                    menu_btn.Text = "매출 현황";
+                    menu_btn.Text = "도구 관리";
                 }
                 else if (menu_btn.Name == "btn5")
                 {
@@ -174,7 +174,7 @@ namespace WindowsFormsApp1
             menu_btn = (Button)sender;
             if (menu_btn.Name == "btn1") close = new Form_member();
             else if (menu_btn.Name == "btn2") close = new Form_register();
-
+            else if (menu_btn.Name == "btn3") close = new Form_infoAdd();
             else if (menu_btn.Name == "btn5") close = new Form_stats();
 
             close.WindowState = FormWindowState.Maximized;
