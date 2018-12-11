@@ -42,8 +42,7 @@ namespace WindowsFormsApp1
         }
 
         private void Form_main_Load(object sender, EventArgs e)
-        {
-            this.
+        { 
             this.IsMdiContainer = true;
 
             logo.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("goodee_logo");
