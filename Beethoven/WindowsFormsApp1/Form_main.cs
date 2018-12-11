@@ -18,7 +18,6 @@ namespace WindowsFormsApp1
         Panel menu_pnl = new Panel();
         Panel mdi_pnl = new Panel();
         Panel total_pnl = new Panel();
-        Button main_btn = new Button();
         Button view_all = new Button();
         Button register = new Button();
         Button locker = new Button();
@@ -29,13 +28,14 @@ namespace WindowsFormsApp1
         Button menu_btn;
         PictureBox bg = new PictureBox();
         Label start = new Label();
+        Label test = new Label();
         Form close;
 
         public Form_main()
         {
             InitializeComponent();
             Load += Form_main_Load;
-            ClientSize = new Size(1500, 800);
+            ClientSize = new Size(1500, 772);
             this.MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Text = "Beethoven Management System ver 0.1";
@@ -56,31 +56,31 @@ namespace WindowsFormsApp1
             bg.Location = new Point(20, 24);
 
             arr.Add(new ob_Pnl(this, "", "", 1500, 100, 0, 0));
-            arr.Add(new ob_Pnl(this, "", "", 1500, 675, 0, 95));
+            arr.Add(new ob_Pnl(this, "", "", 1500, 677, 0, 95));
+            arr.Add(new ob_Lbl(this, "", "", 200, 200, 813, 0));
             arr.Add(new ob_Btn(this, "logout", "로그아웃", 200, 100, 1300, 0));
             arr.Add(new ob_Lbl(this, "", "안녕하세요", 300, 300, 20, 24));
-            arr.Add(new ob_Pnl(this, "", "", 1500, 30, 0, 770));
 
             menu_pnl = os.Pnl((ob_Pnl)arr[0]);
             mdi_pnl = os.Pnl((ob_Pnl)arr[1]);
-            logout = os.Btn((ob_Btn)arr[2]);
+            test = os.Lbl((ob_Lbl)arr[2]);
+            logout = os.Btn((ob_Btn)arr[3]);
             logout.Click += Logout_Click;
             //logout.MouseHover += Logout_MouseHover;
             //logout.MouseLeave += Logout_MouseLeave;
             logout.Cursor = Cursors.Hand;
-            start = os.Lbl((ob_Lbl)arr[3]);
-            total_pnl = os.Pnl((ob_Pnl)arr[4]);
+            start = os.Lbl((ob_Lbl)arr[4]);
 
             Controls.Add(menu_pnl);
-            Controls.Add(total_pnl);
             mdi_pnl.Controls.Add(bg);
             mdi_pnl.Controls.Add(start);
             menu_pnl.Controls.Add(logo);
+            menu_pnl.Controls.Add(test);
             menu_pnl.Controls.Add(logout);
             Controls.Add(mdi_pnl);
             
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 menu_btn = new Button();
                 menu_btn.Size = new Size(200, 100);
@@ -107,13 +107,9 @@ namespace WindowsFormsApp1
                 }
                 else if (menu_btn.Name == "btn3")
                 {
-                    menu_btn.Text = "정보 추가";
-                }
-                else if (menu_btn.Name == "btn4")
-                {
                     menu_btn.Text = "도구 관리";
                 }
-                else if (menu_btn.Name == "btn5")
+                else if (menu_btn.Name == "btn4")
                 {
                     menu_btn.Text = "통계 정보";
                 }
@@ -149,8 +145,8 @@ namespace WindowsFormsApp1
 
         private void option()
         {
-            menu_pnl.BackColor = Color.FromArgb(220, 9, 29, 81);
-            mdi_pnl.BackColor = Color.FromArgb(220, 9, 29, 81);
+            menu_pnl.BackColor = Color.FromArgb(13, 49, 123);
+            mdi_pnl.BackColor = Color.FromArgb(13, 49, 123);
             total_pnl.BackColor = Color.FromArgb(220, 3, 5, 20);
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
@@ -164,6 +160,9 @@ namespace WindowsFormsApp1
             start.Font = new Font(FontFamily.GenericSerif, 30, FontStyle.Bold);
             start.Parent = bg;
             start.BackColor = Color.Transparent;
+            test.BackColor = Color.Black;
+            test.ForeColor = Color.White;
+            test.Text = "안녕";
         }
 
         private void Menu_btn_Click(object sender, EventArgs e)

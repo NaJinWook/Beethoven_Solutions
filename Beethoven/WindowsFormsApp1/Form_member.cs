@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
 
         private void Form_member_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.FromArgb(9, 29, 81);
+            this.BackColor = Color.FromArgb(13, 49, 123);
 
             arr.Add(new ob_Pnl(this, "", "", 1461, 460, 20, 54));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 20, 520));
