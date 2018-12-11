@@ -78,7 +78,7 @@ namespace WindowsFormsApp1
             menu_pnl.Controls.Add(logo);
             menu_pnl.Controls.Add(logout);
             Controls.Add(mdi_pnl);
-
+            
 
             for (int i = 0; i < 5; i++)
             {
@@ -97,21 +97,21 @@ namespace WindowsFormsApp1
                 menu_btn.MouseLeave += Menu_btn_MouseLeave;
                 menu_btn.Cursor = Cursors.Hand;
 
-                if (menu_btn.Name == "btn1")
+                if(menu_btn.Name == "btn1")
                 {
                     menu_btn.Text = "회원 목록";
                 }
-                else if (menu_btn.Name == "btn2")
+                else if(menu_btn.Name == "btn2")
                 {
                     menu_btn.Text = "회원 등록";
                 }
                 else if (menu_btn.Name == "btn3")
                 {
-                    menu_btn.Text = "정보 추가";
+                    menu_btn.Text = "락커 관리";
                 }
                 else if (menu_btn.Name == "btn4")
                 {
-                    menu_btn.Text = "도구 관리";
+                    menu_btn.Text = "매출 현황";
                 }
                 else if (menu_btn.Name == "btn5")
                 {
@@ -137,14 +137,14 @@ namespace WindowsFormsApp1
         {
             Button btn = (Button)sender;
             btn.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Titanium");
-
+            
         }
 
         private void Menu_btn_MouseHover(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             btn.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("SolidVault");
-
+            
         }
 
         private void option()
