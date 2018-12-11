@@ -15,11 +15,13 @@ namespace WindowsFormsApp1
     {
         Commons cmm = new Commons();
         Hashtable hashtable = new Hashtable();
-        TextBox tb1;
+        public TextBox tb1;
         Button btn1, btn2, btn3, btn4, btn5;
         Label lb1;
-        DateTime startDate;
-        Form reg = new Form_register();
+        public DateTime startDate;
+        
+
+
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         public Form_Calender()
         {
@@ -88,7 +90,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.Silver);
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "1개월");
-            //hashtable.Add("click", (EventHandler)btn_calendar);
+            hashtable.Add("click", (EventHandler)btn_calendar);
             btn1 = cmm.getButton(hashtable, this);
             
             
@@ -128,11 +130,14 @@ namespace WindowsFormsApp1
             tb1.Text = startDate.ToShortDateString();
             tb1.ReadOnly = true;
         }
-        //private void btn_calendar(object o, EventArgs a)
-        //{
-        //    this.Visible = false;
-
-
-        //}
+        
+        
+        private void btn_calendar(object o, EventArgs a)
+        {
+            
+            //MessageBox.Show(tb1.Text);
+            this.Visible = false;
+            
+        }
     }
 }

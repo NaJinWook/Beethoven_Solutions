@@ -219,9 +219,12 @@ namespace WindowsFormsApp1
 
         private void btn_calendar(object o, EventArgs a)
         {
-           
             this.Visible = true;
-            cal.Show();
+            cal.ShowDialog();
+
+            //MessageBox.Show(cal.tb1.Text);
+            tb5.Text = cal.tb1.Text;
+            cal.Dispose();
 
         }
 
