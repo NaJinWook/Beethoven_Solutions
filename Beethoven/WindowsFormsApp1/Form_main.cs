@@ -172,8 +172,8 @@ namespace WindowsFormsApp1
             menu_btn = (Button)sender;
             if (menu_btn.Name == "btn1") close = new Form_member();
             else if (menu_btn.Name == "btn2") close = new Form_register();
-
-            else if (menu_btn.Name == "btn5") close = new Form_stats();
+            else if (menu_btn.Name == "btn3") close = new Form_infoAdd();
+            else if (menu_btn.Name == "btn4") close = new Form_stats();
 
             close.WindowState = FormWindowState.Maximized;
             close.FormBorderStyle = FormBorderStyle.None;

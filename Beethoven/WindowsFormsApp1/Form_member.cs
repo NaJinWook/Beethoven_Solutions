@@ -204,12 +204,7 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv=cmm.getListView(hashtable, pnl1);
-            Select();
-
-        }
-        private void Select()
-        {
-            lv.Columns.Add("번호",60, HorizontalAlignment.Center);
+            lv.Columns.Add("번호", 60, HorizontalAlignment.Center);
             lv.Columns.Add("이름", 120, HorizontalAlignment.Center);
             lv.Columns.Add("나이", 70, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 70, HorizontalAlignment.Center);
@@ -219,6 +214,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("삭제", 70, HorizontalAlignment.Center);
 
         }
+     
 
         
         private void btn_click(object o, EventArgs a)
