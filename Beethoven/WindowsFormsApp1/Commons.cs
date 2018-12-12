@@ -123,5 +123,6 @@ namespace WindowsFormsApp1
             parentDomain.Controls.Add(listView);
             return listView;
         }
+       
     }
 }

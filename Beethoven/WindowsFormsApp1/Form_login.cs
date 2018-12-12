@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             Load += Form_login_Load;
             ClientSize = new Size(600, 400);
-            this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Royal");
+            this.BackgroundImage = BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("bg2");
             this.MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Text = "Beethoven Management System ver 0.1";
@@ -45,10 +45,10 @@ namespace WindowsFormsApp1
             logo.Size = new Size(250, 250);
             logo.Location = new Point(20, 70);
 
-            arr.Add(new ob_Lbl(this, "", "BMS Solutions", 270, 50, 10, 10));
-            arr.Add(new ob_Lbl(this, "", "프로그램 문의 전화) 010-1234-5678\n                            02-123-4567", 280, 45, 10, 335));
+            arr.Add(new ob_Lbl(this, "", "BMS Solutions", 290, 60, 10, 10));
+            arr.Add(new ob_Lbl(this, "", "프로그램 문의 전화) 010-1234-5678", 280, 50, 10, 330));
             arr.Add(new ob_Pnl(this, "", "", 280, 360, 300, 20));
-            arr.Add(new ob_Lbl(this, "", "비밀번호를 입력해주세요.", 280, 30, 27, 5));
+            arr.Add(new ob_Lbl(this, "", "비밀번호를 입력해주세요.", 280, 30, 23, 5));
             arr.Add(new ob_Tbx(this, "", "", 240, 100, 20, 35));
 
             BMS_lbl = os.Lbl((ob_Lbl)arr[0]);
@@ -74,13 +74,12 @@ namespace WindowsFormsApp1
                     num_btn.Size = new Size(60, 60);
                     num_btn.Location = new Point((70 * j) + 38, (70*i)+80);
                     num_btn.Name = string.Format("btn{0}", count++);
-                    num_btn.BackColor = Color.DimGray;
-                    num_btn.Font = new Font(FontFamily.GenericSerif, 15, FontStyle.Bold);
+                    num_btn.Font = new Font("휴먼옛체", 15, FontStyle.Bold);
                     num_btn.ForeColor = Color.White;
                     num_btn.TabStop = false; // 탭방지
                     num_btn.FlatStyle = FlatStyle.Flat; // 테두리 제거
                     num_btn.FlatAppearance.BorderSize = 0; // 테두리 제거
-                    num_btn.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Titanium");
+                    num_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
                     pnl.Controls.Add(num_btn);
                     num_btn.Click += Btn_Click;
 
@@ -111,16 +110,17 @@ namespace WindowsFormsApp1
         private void option()
         {
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            BMS_lbl.Font = new Font(FontFamily.GenericSerif, 30, FontStyle.Bold);
+            BMS_lbl.Font = new Font("Vladimir Script", 32, FontStyle.Bold);
             BMS_lbl.ForeColor = Color.White;
             BMS_lbl.BackColor = Color.Transparent;
-            call_lbl.Font = new Font(FontFamily.GenericSerif, 15, FontStyle.Bold);
+            call_lbl.Font = new Font("휴먼편지체", 15, FontStyle.Bold);
             call_lbl.ForeColor = Color.White;
             call_lbl.BackColor = Color.Transparent;
-            pnl.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
-            pw_lbl.Font = new Font(FontFamily.GenericSerif, 18, FontStyle.Bold);
+            pnl.BackColor = Color.FromArgb(220, 9, 29, 81);
+            pw_lbl.Font = new Font("휴면옛체", 18, FontStyle.Bold);
+            pw_lbl.ForeColor = Color.White;
             pw_lbl.BackColor = Color.Transparent;
-            pw_input.Font = new Font(FontFamily.GenericSerif, 20, FontStyle.Regular);
+            pw_input.Font = new Font("휴먼둥근헤드라인", 20, FontStyle.Regular);
             pw_input.PasswordChar = '●';
             pw_input.Enabled = false;
             pw_input.BackColor = Color.White;
