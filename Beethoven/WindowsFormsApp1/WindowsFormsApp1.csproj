@@ -51,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commons.cs" />
+    <Compile Include="Form_calender.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_calender.Designer.cs">
+      <DependentUpon>Form_calender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_infoAdd.cs">
       <SubType>Form</SubType>
     </Compile>
