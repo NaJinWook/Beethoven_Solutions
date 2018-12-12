@@ -19,9 +19,9 @@ namespace WindowsFormsApp1
         Label lb1;
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
-        TextBox tb1, tb2, tb3, tb4, tb5, tb6;
+        public TextBox tb1, tb2, tb3, tb4, tb5, tb6;
         Button btn1, btn2, btn3, btn4, btn5;
-        Form_Calender cal = new Form_Calender();
+        Form_Calender cal;
 
         public Form_register()
         {
@@ -184,7 +184,7 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "달력");
             hashtable.Add("click", (EventHandler)btn_calendar);
             btn1 = cmm.getButton(hashtable, pnl);
-           
+
             ///*    라커부분     */
             //hashtable = new Hashtable();
             //hashtable.Add("size", new Size(100, 70));
@@ -194,38 +194,51 @@ namespace WindowsFormsApp1
             //hashtable.Add("text", "저장");
             ////hashtable.Add("click", (EventHandler)btn_click);
             //btn2 = cmm.getButton(hashtable, pnl);
-           
-            ///*    등록부분     */
-            //hashtable = new Hashtable();
-            //hashtable.Add("size", new Size(100, 70));
-            //hashtable.Add("point", new Point(1350, 0));
-            //hashtable.Add("color", Color.White);
-            //hashtable.Add("name", "btn4");
-            //hashtable.Add("text", "삭제");
-            ////hashtable.Add("click", (EventHandler)btn_click);
-            //btn4 = cmm.getButton(hashtable, pnl);
-            ///*    초기화부분     */
-            //hashtable = new Hashtable();
-            //hashtable.Add("size", new Size(100, 70));
-            //hashtable.Add("point", new Point(1350, 0));
-            //hashtable.Add("color", Color.White);
-            //hashtable.Add("name", "btn5");
-            //hashtable.Add("text", "삭제");
-            ////hashtable.Add("click", (EventHandler)btn_click);
-            //btn5 = cmm.getButton(hashtable, pnl);
+
+            /*    등록부분     */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 70));
+            hashtable.Add("point", new Point(580, 480));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "btn4");
+            hashtable.Add("text", "등록");
+            hashtable.Add("click", (EventHandler)btn_register);
+            btn4 = cmm.getButton(hashtable, pnl);
+            /*    초기화부분     */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 70));
+            hashtable.Add("point", new Point(880, 480));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "btn5");
+            hashtable.Add("text", "초기화");
+            hashtable.Add("click", (EventHandler)btn_reset);
+            btn5 = cmm.getButton(hashtable, pnl);
 
 
         }
 
-        private void btn_calendar(object o, EventArgs a)
+        /*calender 폼에서 받아온 출력*/
+        private void btn_calendar(object o, EventArgs a) 
         {
-            this.Visible = true;
+            //this.Visible = true;
+            cal = new Form_Calender();
             cal.ShowDialog();
 
-            //MessageBox.Show(cal.tb1.Text);
-            tb5.Text = cal.tb1.Text;
-            cal.Dispose();
+            tb5.Text = cal.Date;
+            tb6.Text = cal.Date2;
 
+            cal.Dispose();
+        }
+
+
+        private void btn_register(object o, EventArgs a)
+        {
+            MessageBox.Show("등록");    
+        }
+
+        private void btn_reset(object o, EventArgs a)
+        {
+            MessageBox.Show("초기화");
         }
 
 
