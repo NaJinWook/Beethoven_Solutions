@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form_member : Form
     {
+
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
         Panel pnl1, pnl2, pnl3;
@@ -23,7 +24,6 @@ namespace WindowsFormsApp1
         ListView lv = new ListView();
         Hashtable hashtable=new Hashtable();
         Commons cmm = new Commons();
-
         public Form_member()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
 
         private void Form_member_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.FromArgb(13, 49, 123);
+            //this.BackColor = Color.FromArgb(13, 49, 123);
 
             arr.Add(new ob_Pnl(this, "", "", 1461, 460, 20, 54));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 20, 520));
@@ -67,9 +67,7 @@ namespace WindowsFormsApp1
             cb1.Items.Add("회원번호");
             cb1.Items.Add("이름");
             cb1.Items.Add("전화번호");
-
             //--------------------------------------여기부터 패널3번부분
-
             hashtable = new Hashtable();
             hashtable.Add("width", "80");
             hashtable.Add("point", new Point(61, 20));
@@ -196,11 +194,10 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "삭제");
             hashtable.Add("click", (EventHandler)btn_click);
             btn3 = cmm.getButton(hashtable, pnl2);
-
             //=========================================여기까지 패널2번
 
             hashtable = new Hashtable();
-            hashtable.Add("color", Color.WhiteSmoke);
+            hashtable.Add("color", Color.Yellow);
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv=cmm.getListView(hashtable, pnl1);
@@ -214,9 +211,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("삭제", 70, HorizontalAlignment.Center);
 
         }
-     
 
-        
         private void btn_click(object o, EventArgs a)
         {
 
@@ -227,7 +222,7 @@ namespace WindowsFormsApp1
         }
         private void option()
         {
-            pnl1.BackColor = Color.White;
+            pnl1.BackColor = Color.Black ;
             pnl2.BackColor = Color.Black;
             pnl3.BackColor = Color.White;
         }
