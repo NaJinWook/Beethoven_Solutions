@@ -33,9 +33,7 @@ namespace WindowsFormsApp1
 
         private void Form_member_Load(object sender, EventArgs e)
         {
-            //this.BackColor = Color.FromArgb(13, 49, 123);
-
-            arr.Add(new ob_Pnl(this, "", "", 1461, 633, 20, 24));
+            arr.Add(new ob_Pnl(this, "", "", 1461, 633, 0, 0));
             arr.Add(new ob_Pnl(this, "", "", 1461, 460, 0, 54));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 520));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 590));
@@ -44,7 +42,6 @@ namespace WindowsFormsApp1
             //arr.Add(new ob_Btn(this, "btn5", "색", 40, 23, 1060, 25));
 
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
-            main_pnl.BackColor = Color.Black;
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
             pnl2 = os.Pnl((ob_Pnl)arr[2]);
             pnl3 = os.Pnl((ob_Pnl)arr[3]);
@@ -239,7 +236,7 @@ namespace WindowsFormsApp1
         {
             main_pnl.BackColor = Color.White;
             pnl1.BackColor = Color.Blue;
-            pnl2.BackColor = Color.Black;
+            pnl2.BackColor = Color.Yellow;
             pnl3.BackColor = Color.Red;
         }
     }

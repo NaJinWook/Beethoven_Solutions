@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         private void Form_infoAdd_Load(object sender, EventArgs e)
         {
             this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
-            arr.Add(new ob_Pnl(this, "", "", 1461, 633, 20, 24));
+            arr.Add(new ob_Pnl(this, "", "", 1461, 633, 0, 0));
 
             pnl = os.Pnl((ob_Pnl)arr[0]);
 

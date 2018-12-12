@@ -26,11 +26,9 @@ namespace WindowsFormsApp1
 
         private void Form_stats_Load(object sender, EventArgs e)
         {
-            this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
-
             hashtable = new Hashtable();
             hashtable.Add("size",new Size(1461,630));
-            hashtable.Add("point", new Point(20,25));
+            hashtable.Add("point", new Point(0,0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "BackgroundPN");
             pn1=cmm.getPanel2(hashtable,this);
@@ -63,7 +61,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
-           // lv = cmm.getListView(hashtable, pn2);
+            lv = cmm.getListView(hashtable, pn2);
             lv.Columns.Add("월");
             lv.Columns.Add("매출액");
             /*
