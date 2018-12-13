@@ -34,6 +34,7 @@ namespace WindowsFormsApp1
             FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Text = "회원기간 등록창";
             this.BackColor = Color.White;
+
         }
 
         private void Form_calender_Load(object sender, EventArgs e)

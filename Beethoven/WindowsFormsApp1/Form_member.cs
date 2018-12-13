@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
 
         private void Form_member_Load(object sender, EventArgs e)
         {
-            arr.Add(new ob_Pnl(this, "", "", 1461, 633, 0, 0));
+            arr.Add(new ob_Pnl(this, "", "", 1461, 633, 10, 0));
             arr.Add(new ob_Pnl(this, "", "", 1461, 460, 0, 54));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 520));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 590));

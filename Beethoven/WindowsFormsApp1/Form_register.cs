@@ -294,17 +294,26 @@ namespace WindowsFormsApp1
         /*calender 폼에서 받아온 출력*/
         private void btn_calendar(object o, EventArgs a)
         {
-            
-            //this.Visible = true;
-            pnl2 = new Panel();
-            
-            cal = new Form_calender();
-            cal.ShowDialog();
-            
-            tb6.Text = cal.Date;
-            tb7.Text = cal.Date2;
 
-            cal.Dispose();
+
+            Form_calender fc = new Form_calender();
+            fc.MdiParent = this.ParentForm;
+            fc.WindowState = FormWindowState.Maximized;
+            fc.FormBorderStyle = FormBorderStyle.None;
+            pnl2.Controls.Add(fc);
+            fc.Show();
+
+            //this.Visible = true;
+            //pnl2 = new Panel();
+
+            //cal = new Form_calender();
+            //cal.ShowDialog();
+
+            //tb6.Text = cal.Date;
+            //tb7.Text = cal.Date2;
+
+            //cal.Dispose();
+
         }
 
 
