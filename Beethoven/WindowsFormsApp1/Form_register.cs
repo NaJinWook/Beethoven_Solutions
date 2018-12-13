@@ -19,14 +19,23 @@ namespace WindowsFormsApp1
         Label lb1, lb2, lb3, lb4, lb5, lb6, lb7, lb8, lb9;
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
-        public TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
+        public TextBox tb1, tb2, tb3, tb4, tb5,tb6,tb7;
+        
         Button btn1, btn2, btn3, btn4, btn5;
-        Form_calender cal;
+        //Form_calender cal;
+        Form_calender fc;
+        public string start;
+        public string end;
+
+        //private string Date;
+        //private string Date2;
+
 
         public Form_register()
         {
             InitializeComponent();
             Load += Form_register_Load;
+           
         }
 
         private void Form_register_Load(object sender, EventArgs e)
@@ -45,6 +54,7 @@ namespace WindowsFormsApp1
             main_pnl.Controls.Add(pnl2);
             option();
 
+            
             Label();
             Textbox();
             Button();
@@ -292,34 +302,44 @@ namespace WindowsFormsApp1
         }
 
         /*calender 폼에서 받아온 출력*/
+        
         private void btn_calendar(object o, EventArgs a)
         {
-
-
-            Form_calender fc = new Form_calender();
+            fc = new Form_calender(tb6,tb7,start,end);
+            
             fc.MdiParent = this.ParentForm;
             fc.WindowState = FormWindowState.Maximized;
             fc.FormBorderStyle = FormBorderStyle.None;
             pnl2.Controls.Add(fc);
             fc.Show();
 
-            //this.Visible = true;
-            //pnl2 = new Panel();
+            //MessageBox.Show(fc.Date); 
+            //fc.Date2 
 
-            //cal = new Form_calender();
-            //cal.ShowDialog();
+            //fc.ShowDialog();
+            
 
-            //tb6.Text = cal.Date;
-            //tb7.Text = cal.Date2;
+            //tb6.Text = "11";
+            //tb7.Text = "22";
 
-            //cal.Dispose();
+            //tb6.Text = start;
+            //tb7.Text = end;
+            //tb6.Text = Date;
+            //tb7.Text = Date2;
+
+           
+
+            
 
         }
 
 
         private void btn_register(object o, EventArgs a)
         {
-            MessageBox.Show("등록");
+            
+           MessageBox.Show(start);
+
+
         }
 
         private void btn_reset(object o, EventArgs a)
