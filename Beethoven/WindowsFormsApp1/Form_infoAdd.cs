@@ -217,13 +217,14 @@ namespace WindowsFormsApp1
 
         private void listView_click(object sender, MouseEventArgs e)
         {
+
         }
 
         private void btn_click(object sender, EventArgs e)
         {
+
         }
-
-
+        
         private void option()
         {
             pn1.BackColor = Color.White;

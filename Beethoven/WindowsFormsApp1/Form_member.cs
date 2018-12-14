@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         private string temp;
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker from member;";
 
         public Form_member()
         {
@@ -42,7 +43,7 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 590));
             arr.Add(new ob_Tbx(this, "", "", 500, 20, 500, 25));
             arr.Add(new ob_Btn(this, "btn4", "검색", 40, 23, 1010, 25));
-            //arr.Add(new ob_Btn(this, "btn5", "색", 40, 23, 1060, 25));
+            arr.Add(new ob_Btn(this, "btn5", "전체보기", 70, 23, 1060, 25));
 
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
@@ -50,7 +51,7 @@ namespace WindowsFormsApp1
             pnl3 = os.Pnl((ob_Pnl)arr[3]);
             tb = os.Tbx((ob_Tbx)arr[4]);
             btn4 = os.Btn((ob_Btn)arr[5]);
-            btn5 = os.Btn((ob_Btn)arr[5]);
+            btn5 = os.Btn((ob_Btn)arr[6]);
 
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(pnl1);
@@ -59,7 +60,9 @@ namespace WindowsFormsApp1
             main_pnl.Controls.Add(tb);//검색 텍스트박스
             main_pnl.Controls.Add(btn4);//검색 버튼
             main_pnl.Controls.Add(btn5);
-
+            btn4.Click += search;
+            btn5.Click += btn_click;
+            
             option();
             hashtable = new Hashtable();
             hashtable.Add("width", "70");
@@ -209,11 +212,10 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
+            lv.FullRowSelect = true;
             lv = cmm.getListView(hashtable, pnl1);
             lv.Dock = DockStyle.Fill;
-
-           
-            Select();
+            Select(printAll);
         }
 
         private void btn_click(object o, EventArgs a)
@@ -227,7 +229,9 @@ namespace WindowsFormsApp1
                 case "btn3":
                     Delete();
                     break;
-                
+                case "btn5":
+                    Select(printAll);
+                    break;
             }
         }
 
@@ -244,12 +248,39 @@ namespace WindowsFormsApp1
             tb5.Text = item.SubItems[5].Text;
             tb6.Text = item.SubItems[6].Text;
         }
+
         private void Delete()
         {
 
         }
 
-        private void Select()
+        private void search(object o,EventArgs e)
+        {
+            //MessageBox.Show(cb1.Text);
+            //tb
+            if (cb1.Text == "회원번호")
+            {
+                Select(string.Format("select * from member where mNo like'%{0}%'; ",tb.Text));
+            }
+            else if (cb1.Text == "이름")
+            {
+                Select(string.Format("select * from member where mName like'%{0}%'; ", tb.Text));
+            }
+            else if (cb1.Text == "전화번호")
+            {
+                Select(string.Format("select * from member where phone like'%{0}%'; ", tb.Text));
+            }
+            else if (tb.Text == "")
+            {
+                lv.Items.Clear();
+            }
+            else
+            {
+                Select(string.Format("select * from member where mName like'%{0}%'; ", tb.Text));
+            }
+        }
+
+        private void Select(string sql)
         {
             tb1.Text = "";
             tb2.Text = "";
@@ -265,8 +296,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("전화번호", 400, HorizontalAlignment.Center);
             lv.Columns.Add("주소", 630, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 70, HorizontalAlignment.Center);
-
-            string sql = "select mNo,mName,Age,Sex,phone,address,locker from member;";
+            
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
             {
@@ -282,12 +312,18 @@ namespace WindowsFormsApp1
 
         private void Update()
         {
-            if (true)
+            DialogResult dialogresult = MessageBox.Show("수정 하시겠습니까?","",MessageBoxButtons.YesNo);
+            if (dialogresult == DialogResult.Yes)
             {
-                string sql = string.Format("update member set mName='{0}',Age = {1},Sex'{2}',phone='{3}',address='{4}',locher='{5}' where mNo={6};", tb1.Text, tb2.Text, tb3.Text, tb4.Text, tb5.Text, tb6.Text, temp);
-                if (db.NonQuery(sql)) Select();
-                
+                string sql = string.Format("update member set mName='{0}',Age={1},Sex='{2}',phone='{3}',address='{4}',locker={5} where mNo={6};", tb1.Text, tb2.Text, tb3.Text, tb4.Text, tb5.Text, tb6.Text, temp);
+                if (db.NonQuery(sql))
+                    Select(printAll);
             }
+            else
+            {
+                return;
+            }
+           
         }
 
         private void option()
