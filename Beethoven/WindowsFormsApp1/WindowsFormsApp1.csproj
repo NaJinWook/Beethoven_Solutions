@@ -97,6 +97,7 @@
     <Compile Include="ob_Lbl.cs" />
     <Compile Include="ob_Liv.cs" />
     <Compile Include="ob_Pnl.cs" />
+    <Compile Include="ob_Rdb.cs" />
     <Compile Include="ob_Set.cs" />
     <Compile Include="ob_Tbx.cs" />
     <Compile Include="Program.cs" />
