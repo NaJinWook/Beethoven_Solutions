@@ -29,14 +29,15 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             Load += Form_member_Load;
+            this.BackColor = Color.White;
         }
 
         private void Form_member_Load(object sender, EventArgs e)
         {
-            arr.Add(new ob_Pnl(this, "", "", 1461, 633, 10, 0));
+            arr.Add(new ob_Pnl(this, "", "", 1441, 613, 10, 10));
             arr.Add(new ob_Pnl(this, "", "", 1461, 460, 0, 54));
-            arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 520));
-            arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 590));
+            arr.Add(new ob_Pnl(this, "", "", 1461, 45, 0, 520));
+            arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 570));
             arr.Add(new ob_Tbx(this, "", "", 500, 20, 500, 25));
             arr.Add(new ob_Btn(this, "btn4", "검색", 40, 23, 1010, 25));
             //arr.Add(new ob_Btn(this, "btn5", "색", 40, 23, 1060, 25));
@@ -173,8 +174,8 @@ namespace WindowsFormsApp1
             //================================================여기까지 패널 3번
             //------------------------------------------------패널 2번
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 70));
-            hashtable.Add("point", new Point(1130, 0));
+            hashtable.Add("size", new Size(100, 45));
+            hashtable.Add("point", new Point(1120, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "수정");
@@ -182,8 +183,8 @@ namespace WindowsFormsApp1
             btn1 = cmm.getButton(hashtable, pnl2);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 70));
-            hashtable.Add("point", new Point(1240, 0));
+            hashtable.Add("size", new Size(100, 45));
+            hashtable.Add("point", new Point(1230, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "저장");
@@ -191,8 +192,8 @@ namespace WindowsFormsApp1
             btn2 = cmm.getButton(hashtable, pnl2);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 70));
-            hashtable.Add("point", new Point(1350, 0));
+            hashtable.Add("size", new Size(100, 45));
+            hashtable.Add("point", new Point(1340, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "삭제");
@@ -202,7 +203,7 @@ namespace WindowsFormsApp1
             //=========================================여기까지 패널2번
 
             hashtable = new Hashtable();
-            hashtable.Add("color", Color.WhiteSmoke);
+            hashtable.Add("color", Color.White);
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv=cmm.getListView(hashtable, pnl1);
@@ -234,8 +235,9 @@ namespace WindowsFormsApp1
         }
         private void option()
         {
-            main_pnl.BackColor = Color.White;
+            main_pnl.BackColor = Color.FromArgb(240, 240, 240);
             pnl1.BackColor = Color.Blue;
+            pnl1.Dock = DockStyle.Fill;
             pnl2.BackColor = Color.Yellow;
             pnl3.BackColor = Color.Red;
         }

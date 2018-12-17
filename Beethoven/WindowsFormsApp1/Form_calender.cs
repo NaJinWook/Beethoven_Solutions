@@ -18,6 +18,9 @@ namespace WindowsFormsApp1
         public TextBox tb1;
         Button btn1, btn2, btn3, btn4, btn5;
         Label lb1;
+        private TextBox tb6, tb7;
+        private string start, end;
+
 
         public DateTime startDate; //시작일
         public DateTime endDate;  //종료일
@@ -25,7 +28,7 @@ namespace WindowsFormsApp1
         public string Date2;   //종료일 string으로 받는 변수
         private System.Windows.Forms.MonthCalendar monthCalendar1;
 
-        public Form_calender()
+        public Form_calender(TextBox tb6, TextBox tb7, string start, string end)
         {
             InitializeComponent();
             Load += Form_calender_Load;
@@ -34,8 +37,12 @@ namespace WindowsFormsApp1
             FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Text = "회원기간 등록창";
             this.BackColor = Color.White;
-
+            this.tb6 = tb6;
+            this.tb7 = tb7;
         }
+
+
+
 
         private void Form_calender_Load(object sender, EventArgs e)
         {
@@ -146,42 +153,46 @@ namespace WindowsFormsApp1
         {
             Button btn = (Button)o;
 
-
-
-
             if (tb1.Text == "")
             {
                 MessageBox.Show("날짜를 선택해주세요");
                 return;
             }
-
-
             switch (btn.Name)
             {
                 case "btn1":
                     endDate = startDate.AddDays(30);
                     Date2 = endDate.ToShortDateString();
+                    tb6.Text = Date;
+                    tb7.Text = Date2;
+                    start = Date;
+                    end = Date2;
                     break;
                 case "btn2":
                     endDate = startDate.AddDays(90);
                     Date2 = endDate.ToShortDateString();
+                    tb6.Text = Date;
+                    tb7.Text = Date2;
                     break;
                 case "btn3":
                     endDate = startDate.AddDays(180);
                     Date2 = endDate.ToShortDateString();
+                    tb6.Text = Date;
+                    tb7.Text = Date2;
                     break;
                 case "btn4":
                     endDate = startDate.AddDays(365);
                     Date2 = endDate.ToShortDateString();
+                    tb6.Text = Date;
+                    tb7.Text = Date2;
                     break;
                 default:
                     break;
             }
 
-            //tb1.Text = "";
-            //this.Close();
-            //MessageBox.Show(Date);
-            this.Visible = false;
+            MessageBox.Show(start);
+            //this.Visible = false;
+
         }
     }
 }
