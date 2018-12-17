@@ -203,7 +203,6 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv = cmm.getListView(hashtable, pn1);
-           // Controls.Add(pn1);
             lv.Columns.Add("제품명",100,HorizontalAlignment.Center);
             lv.Columns.Add("회사명", 150, HorizontalAlignment.Center);
             lv.Columns.Add("제품번호",120, HorizontalAlignment.Center);
@@ -217,13 +216,14 @@ namespace WindowsFormsApp1
 
         private void listView_click(object sender, MouseEventArgs e)
         {
+
         }
 
         private void btn_click(object sender, EventArgs e)
         {
+
         }
-
-
+        
         private void option()
         {
             pn1.BackColor = Color.White;
