@@ -152,7 +152,7 @@ namespace WindowsFormsApp1
         private void btn_calendar(object o, EventArgs a)
         {
             Button btn = (Button)o;
-
+            
             if (tb1.Text == "")
             {
                 MessageBox.Show("날짜를 선택해주세요");
