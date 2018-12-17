@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         Form_calender fc;
         public string start;
         public string end;
+        public string gender;
 
         //private string Date;
         //private string Date2;
@@ -374,11 +375,12 @@ namespace WindowsFormsApp1
             switch (rdb.Text)
             {
                 case "남성":
-                    MessageBox.Show(rdb.Text);
+                    gender = "남성";
+                    
                     break;
 
                 case "여성":
-                    MessageBox.Show(rdb.Text);
+                    gender = "여성";
                     break;
 
 
@@ -387,9 +389,17 @@ namespace WindowsFormsApp1
         }
         private void btn_register(object o, EventArgs a)
         {
-            
-           MessageBox.Show(start);
+            if(tb1.Text == "" || tb2.Text == "" || gender == "" || tb3.Text == "" || tb4.Text == "" || tb6.Text == "" || tb7.Text == "")
+            {
+                MessageBox.Show("빈 칸이 있읍니다");
+            }
 
+            else
+            {
+                MessageBox.Show(tb1.Text + " " + tb2.Text + " " + gender + " " + tb3.Text + " " + tb4.Text + " " + tb5.Text + " " + tb6.Text + " " + tb7.Text);
+            }
+                    //MessageBox.Show(tb1.Text + " " + tb2.Text + " " + gender + " "+ tb3.Text + " " + tb4.Text + " " + tb5.Text + " " + tb6.Text + " " + tb7.Text);
+            //MessageBox.Show(tb6.Text + " " + tb7.Text);
 
         }
 

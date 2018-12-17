@@ -59,7 +59,7 @@ namespace WindowsFormsApp1
             // Create the calendar.
             monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             // Set the calendar location.
-            monthCalendar1.Location = new System.Drawing.Point(320, 50);
+            monthCalendar1.Location = new System.Drawing.Point(230, 50);
 
             Controls.Add(this.monthCalendar1);
 
