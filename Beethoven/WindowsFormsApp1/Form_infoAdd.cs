@@ -38,7 +38,6 @@ namespace WindowsFormsApp1
             //pn1 = os.Pnl((ob_Pnl)arr[0]);
 
             hashtable = new Hashtable();
-            hashtable = new Hashtable();
             hashtable.Add("size", new Size(720, 460));
             hashtable.Add("point", new Point(20, 54));
             hashtable.Add("color", Color.White);

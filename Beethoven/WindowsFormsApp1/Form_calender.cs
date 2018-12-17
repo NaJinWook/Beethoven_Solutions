@@ -15,18 +15,16 @@ namespace WindowsFormsApp1
     {
         Commons cmm = new Commons();
         Hashtable hashtable = new Hashtable();
-        public TextBox tb1;
         Button btn1, btn2, btn3, btn4, btn5;
         Label lb1;
-        private TextBox tb6, tb7;
+        Panel Calendar_pnl, Locker_pnl;
+        private TextBox tb1, tb6, tb7;
         private string start, end;
-
-
         public DateTime startDate; //시작일
         public DateTime endDate;  //종료일
         public string Date;    //시작일 string으로 받는 변수
         public string Date2;   //종료일 string으로 받는 변수
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private MonthCalendar monthCalendar1;
 
         public Form_calender(TextBox tb6, TextBox tb7, string start, string end)
         {
@@ -41,16 +39,33 @@ namespace WindowsFormsApp1
             this.tb7 = tb7;
         }
 
-
-
-
         private void Form_calender_Load(object sender, EventArgs e)
         {
+            Panel();
             Calender();
             Textbox();
             Label();
             Button();
+            Locker();
+            
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+        }
+
+        private void Panel()
+        {
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 300));
+            hashtable.Add("point", new Point(0, 0));
+            hashtable.Add("color", Color.Black);
+            hashtable.Add("name", "Calender_pnl");
+            Calendar_pnl = cmm.getPanel(hashtable, this);
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 600));
+            hashtable.Add("point", new Point(0, 0));
+            hashtable.Add("color", Color.Yellow);
+            hashtable.Add("name", "Locker_pnl");
+            Locker_pnl = cmm.getPanel(hashtable, this);
         }
 
         private void Calender()
@@ -59,9 +74,9 @@ namespace WindowsFormsApp1
             // Create the calendar.
             monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             // Set the calendar location.
-            monthCalendar1.Location = new System.Drawing.Point(320, 50);
+            monthCalendar1.Location = new System.Drawing.Point(220, 50);
 
-            Controls.Add(this.monthCalendar1);
+            Calendar_pnl.Controls.Add(this.monthCalendar1);
 
         }
 
@@ -73,7 +88,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb1");
             hashtable.Add("enabled", true);
-            tb1 = cmm.getTextBox(hashtable, this);
+            tb1 = cmm.getTextBox(hashtable, Calendar_pnl);
 
             tb1.ReadOnly = true;
             // tb1.Text = monthCalendar1.SelectionRange.Start.ToShortDateString();
@@ -88,7 +103,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb1");
             hashtable.Add("text", "시작일");
-            lb1 = cmm.getLabel(hashtable, this);
+            lb1 = cmm.getLabel(hashtable, Calendar_pnl);
         }
 
 
@@ -103,7 +118,7 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "1개월");
             hashtable.Add("click", (EventHandler)btn_calendar);
-            btn1 = cmm.getButton(hashtable, this);
+            btn1 = cmm.getButton(hashtable, Calendar_pnl);
 
             /*         3개월          */
             hashtable = new Hashtable();
@@ -113,7 +128,7 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "3개월");
             hashtable.Add("click", (EventHandler)btn_calendar);
-            btn2 = cmm.getButton(hashtable, this);
+            btn2 = cmm.getButton(hashtable, Calendar_pnl);
 
 
             /*         6개월          */
@@ -124,7 +139,7 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "6개월");
             hashtable.Add("click", (EventHandler)btn_calendar);
-            btn3 = cmm.getButton(hashtable, this);
+            btn3 = cmm.getButton(hashtable, Calendar_pnl);
 
 
             /*         12개월          */
@@ -135,7 +150,7 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "btn4");
             hashtable.Add("text", "1년");
             hashtable.Add("click", (EventHandler)btn_calendar);
-            btn4 = cmm.getButton(hashtable, this);
+            btn4 = cmm.getButton(hashtable, Calendar_pnl);
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -147,7 +162,6 @@ namespace WindowsFormsApp1
             tb1.ReadOnly = true;
 
         }
-
 
         private void btn_calendar(object o, EventArgs a)
         {
@@ -189,10 +203,33 @@ namespace WindowsFormsApp1
                 default:
                     break;
             }
-
             MessageBox.Show(start);
             //this.Visible = false;
-
+        }
+        
+        /*             라커              */
+        private void Locker()
+        {
+            int count = 0;
+            int k = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    count++;
+                    hashtable = new Hashtable();
+                    hashtable.Add("size", new Size(30, 30));
+                    hashtable.Add("point", new Point(20 + (40 * j), 320 + (35 * i + k)));
+                    hashtable.Add("color", Color.Black);
+                    hashtable.Add("name", "btn4");
+                    hashtable.Add("text", "1년");
+                    if(count == 20 || count == 40)
+                    {
+                        k = k + 30;
+                    }
+                    btn4 = cmm.getButton(hashtable, Locker_pnl);
+                }
+            }
         }
     }
 }
