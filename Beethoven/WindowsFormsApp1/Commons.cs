@@ -123,18 +123,6 @@ namespace WindowsFormsApp1
             parentDomain.Controls.Add(listView);
             return listView;
         }
-
-        public RadioButton getRadioButton(Hashtable hashtable, Control parentDomain)
-        {
-            RadioButton RadioButton = new RadioButton();
-            RadioButton.Size = (Size)hashtable["size"];
-            RadioButton.Location = (Point)hashtable["point"];
-            RadioButton.Name = hashtable["name"].ToString();
-            RadioButton.Text = hashtable["text"].ToString();
-            RadioButton.Click += (EventHandler)hashtable["click"];
-            parentDomain.Controls.Add(RadioButton);
-            return RadioButton;
-        }
-
+       
     }
 }

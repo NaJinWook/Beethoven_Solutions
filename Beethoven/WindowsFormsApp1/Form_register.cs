@@ -20,7 +20,7 @@ namespace WindowsFormsApp1
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         public TextBox tb1, tb2, tb3, tb4, tb5,tb6,tb7;
-        RadioButton rb1, rb2;
+        
         Button btn1, btn2, btn3, btn4, btn5;
         //Form_calender cal;
         Form_calender fc;
@@ -58,7 +58,6 @@ namespace WindowsFormsApp1
             Label();
             Textbox();
             Button();
-            Radiobutton();
         }
 
         private void option()
@@ -67,9 +66,7 @@ namespace WindowsFormsApp1
             pnl1.BackColor = Color.FromArgb(240, 240, 240);
             pnl2.BackColor = Color.Red;
         }
-        
-        
-        /*     라벨     */
+
         private void Label()
         {
             /*       이름부분         */
@@ -178,9 +175,7 @@ namespace WindowsFormsApp1
             lb9.BackColor = Color.Gray;
             lb9.Font = new Font("맑은 고딕", 25, FontStyle.Bold);
         }
-        
-        
-        /*     텍박     */
+
         private void Textbox()
         {
             /*       이름부분       */
@@ -262,8 +257,6 @@ namespace WindowsFormsApp1
 
         }
 
-
-        /*     버튼     */
         private void Button()
         {
             /*    달력부분     */
@@ -308,36 +301,8 @@ namespace WindowsFormsApp1
 
         }
 
-        
-        
-        /*     라디오버튼    */
-        private void Radiobutton()
-        {
-            /* 남성부분 */
-            hashtable = new Hashtable();
-            hashtable.Add("point", new Point(230, 165));
-            hashtable.Add("size", new Size(100, 100));
-            hashtable.Add("name", "rb1");
-            hashtable.Add("text", "남성");
-            hashtable.Add("click", (EventHandler)rdb_click);
-            rb1 = cmm.getRadioButton(hashtable, pnl1);
-            rb1.Font = new Font("Impact", 25);
-
-
-            /* 여성부분 */
-            hashtable = new Hashtable();
-            hashtable.Add("point", new Point(340, 165));
-            hashtable.Add("size", new Size(100, 100));
-            hashtable.Add("name", "rb2");
-            hashtable.Add("text", "여성");
-            hashtable.Add("click", (EventHandler)rdb_click);
-            rb2 = cmm.getRadioButton(hashtable, pnl1);
-            rb2.Font = new Font("Impact", 25);
-        }
-        
-        
-        
         /*calender 폼에서 받아온 출력*/
+        
         private void btn_calendar(object o, EventArgs a)
         {
             fc = new Form_calender(tb6,tb7,start,end);
@@ -362,29 +327,13 @@ namespace WindowsFormsApp1
             //tb6.Text = Date;
             //tb7.Text = Date2;
 
+           
+
+            
 
         }
 
 
-
-        /* 라디오버튼 이벤트*/
-        private void rdb_click(object o, EventArgs a)
-        {
-            RadioButton rdb = (RadioButton)o;
-            switch (rdb.Text)
-            {
-                case "남성":
-                    MessageBox.Show(rdb.Text);
-                    break;
-
-                case "여성":
-                    MessageBox.Show(rdb.Text);
-                    break;
-
-
-            }
-
-        }
         private void btn_register(object o, EventArgs a)
         {
             
@@ -395,14 +344,7 @@ namespace WindowsFormsApp1
 
         private void btn_reset(object o, EventArgs a)
         {
-            //MessageBox.Show("초기화");
-            tb1.Text = "";
-            tb2.Text = "";
-            tb3.Text = "";
-            tb4.Text = "";
-            tb5.Text = "";
-            tb6.Text = "";
-            tb7.Text = "";
+            MessageBox.Show("초기화");
         }
 
 
