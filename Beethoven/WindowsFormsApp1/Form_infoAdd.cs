@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
         TextBox tb1, tb2, tb3, tb4, tb5, tb6;
         Label lb1;
         Button btn1, btn2, btn3;
-        Panel pn1,pn2,pn3,pn4;
+        Panel pn1,pn2,pn3,pn4,main_pnl;
         Hashtable hashtable;
         ListView lv;
        
@@ -36,6 +36,13 @@ namespace WindowsFormsApp1
             //arr.Add(new ob_Pnl(this, "", "", 1461, 633, 20, 24));
 
             //pn1 = os.Pnl((ob_Pnl)arr[0]);
+            hashtable = new Hashtable();
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(1441, 613));
+            hashtable.Add("point", new Point(10, 10));
+            hashtable.Add("color", Color.Blue);
+            hashtable.Add("name", "pn1");
+            main_pnl = cmm.getPanel2(hashtable, this);
 
             hashtable = new Hashtable();
             hashtable = new Hashtable();
@@ -43,28 +50,28 @@ namespace WindowsFormsApp1
             hashtable.Add("point", new Point(20, 54));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn1");
-            pn1 = cmm.getPanel2(hashtable, this);
+            pn1 = cmm.getPanel(hashtable, main_pnl);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(1461, 65));
             hashtable.Add("point", new Point(20, 520));
             hashtable.Add("color", Color.SkyBlue);
             hashtable.Add("name", "pn2");
-            pn2 = cmm.getPanel2(hashtable, this);
+            pn2 = cmm.getPanel(hashtable, main_pnl);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(1461, 65));
             hashtable.Add("point", new Point(20, 590));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn3");
-            pn3 = cmm.getPanel2(hashtable, this);
+            pn3 = cmm.getPanel(hashtable, main_pnl);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(720, 460));
             hashtable.Add("point", new Point(760, 54));
             hashtable.Add("color", Color.Blue);
             hashtable.Add("name", "pn3");
-            pn4 = cmm.getPanel2(hashtable, this);
+            pn4 = cmm.getPanel(hashtable, main_pnl);
 
             //------------------------------------------------패널 2번
 
