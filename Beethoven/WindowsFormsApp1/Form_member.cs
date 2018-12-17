@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
         private void Form_member_Load(object sender, EventArgs e)
         {
             arr.Add(new ob_Pnl(this, "", "", 1441, 613, 10, 10));
-            arr.Add(new ob_Pnl(this, "", "", 1461, 460, 0, 54));
+            arr.Add(new ob_Pnl(this, "", "", 1441, 460, 0, 54));
             arr.Add(new ob_Pnl(this, "", "", 1461, 45, 0, 520));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 570));
             arr.Add(new ob_Tbx(this, "", "", 500, 20, 500, 25));
@@ -218,7 +218,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("나이", 70, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 70, HorizontalAlignment.Center);
             lv.Columns.Add("전화번호", 400, HorizontalAlignment.Center);
-            lv.Columns.Add("주소", 600, HorizontalAlignment.Center);
+            lv.Columns.Add("주소", 580, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 70, HorizontalAlignment.Center);
             lv.Columns.Add("삭제", 70, HorizontalAlignment.Center);
 
@@ -237,7 +237,6 @@ namespace WindowsFormsApp1
         {
             main_pnl.BackColor = Color.FromArgb(240, 240, 240);
             pnl1.BackColor = Color.Blue;
-            pnl1.Dock = DockStyle.Fill;
             pnl2.BackColor = Color.Yellow;
             pnl3.BackColor = Color.Red;
         }
