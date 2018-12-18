@@ -73,7 +73,7 @@ namespace WindowsFormsApp1
                     num_btn.Size = new Size(60, 60);
                     num_btn.Location = new Point((70 * j) + 38, (70 * i) + 80);
                     num_btn.Name = string.Format("btn{0}", count++);
-                    num_btn.Font = new Font("휴먼옛체", 15, FontStyle.Bold);
+                    num_btn.Font = new Font("나눔 고딕", 15, FontStyle.Bold);
                     num_btn.ForeColor = Color.White;
                     num_btn.TabStop = false; // 탭방지
                     num_btn.FlatStyle = FlatStyle.Flat; // 테두리 제거

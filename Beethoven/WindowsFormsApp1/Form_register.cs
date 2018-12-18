@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form_register : Form
     {
+        private MYsql db = new MYsql();
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
         Panel main_pnl, pnl1, pnl2;
@@ -25,6 +26,7 @@ namespace WindowsFormsApp1
         Form_calender fc;
         public string start;
         public string end;
+        public string gender;
         public TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
 
         //private string Date;
@@ -108,22 +110,10 @@ namespace WindowsFormsApp1
             lb3.BackColor = Color.Gray;
             lb3.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
 
-            /*       주소부분         */
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(35, 285));
-            hashtable.Add("color", Color.Black);
-            hashtable.Add("name", "lb4");
-            hashtable.Add("text", "주소");
-            lb4 = cmm.getLabel(hashtable, pnl1);
-            lb4.ForeColor = Color.Black;
-            lb4.BackColor = Color.Gray;
-            lb4.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
-
             /*       전화번호부분         */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 50));
-            hashtable.Add("point", new Point(35, 375));
+            hashtable.Add("point", new Point(35, 285));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb5");
             hashtable.Add("text", "전화번호");
@@ -131,6 +121,18 @@ namespace WindowsFormsApp1
             lb5.ForeColor = Color.Black;
             lb5.BackColor = Color.Gray;
             lb5.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+
+            /*       주소부분         */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(90, 50));
+            hashtable.Add("point", new Point(35, 375));
+            hashtable.Add("color", Color.Black);
+            hashtable.Add("name", "lb4");
+            hashtable.Add("text", "주소");
+            lb4 = cmm.getLabel(hashtable, pnl1);
+            lb4.ForeColor = Color.Black;
+            lb4.BackColor = Color.Gray;
+            lb4.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
 
             /*       라커부분          */
             hashtable = new Hashtable();
@@ -203,7 +205,7 @@ namespace WindowsFormsApp1
             tb2 = cmm.getTextBox(hashtable, pnl1);
             tb2.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
 
-            /*       주소부분         */
+            /*       전화번호부분         */
             hashtable = new Hashtable();
             hashtable.Add("point", new Point(230, 285));
             hashtable.Add("width", "700");
@@ -213,7 +215,7 @@ namespace WindowsFormsApp1
             tb3 = cmm.getTextBox(hashtable, pnl1);
             tb3.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
 
-            /*       전화번호부분         */
+            /*       주소부분         */
             hashtable = new Hashtable();
             hashtable.Add("point", new Point(230, 375));
             hashtable.Add("width", "700");
@@ -295,6 +297,7 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "등록");
             hashtable.Add("click", (EventHandler)btn_register);
             btn3 = cmm.getButton(hashtable, pnl1);
+
             /*    초기화부분     */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 70));
@@ -357,7 +360,7 @@ namespace WindowsFormsApp1
         }
         private void Pass()
         {
-            fc = new Form_calender(tb6, tb7, start, end);
+            fc = new Form_calender(tb5, tb6, tb7, start, end);
 
             fc.MdiParent = this.ParentForm;
             fc.WindowState = FormWindowState.Maximized;
@@ -371,25 +374,24 @@ namespace WindowsFormsApp1
         {
             RadioButton rdb = (RadioButton)o;
 
-            rdb.Size = new Size(50, 50);
             switch (rdb.Text)
             {
                 case "남성":
-                    MessageBox.Show(rdb.Text);
+                    gender = "남성";
                     break;
 
                 case "여성":
-                    MessageBox.Show(rdb.Text);
+                    gender = "여성";
                     break;
             }
 
         }
         private void btn_register(object o, EventArgs a)
         {
-
-            MessageBox.Show(start);
-
-
+            //MessageBox.Show(tb5.Text);
+            
+            string sql = string.Format("insert into member (mName, Age, Sex, phone, address, locker, mStart, mEnd) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');",tb1.Text, tb2.Text, gender, tb3.Text, tb4.Text, tb5.Text, tb6.Text, tb7.Text);
+            db.NonQuery(sql);
         }
 
         private void btn_reset(object o, EventArgs a)

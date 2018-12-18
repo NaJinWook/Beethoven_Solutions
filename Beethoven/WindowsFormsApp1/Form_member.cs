@@ -41,7 +41,7 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Pnl(this, "", "", 1441, 460, 0, 54));
             arr.Add(new ob_Pnl(this, "", "", 1461, 45, 0, 520));
             arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 570));
-            arr.Add(new ob_Pnl(this, "", "", 1461, 50, 0, 0));
+            arr.Add(new ob_Pnl(this, "", "", 1441, 50, 0, 0));
             arr.Add(new ob_Tbx(this, "", "", 500, 20, 500, 25));
             arr.Add(new ob_Btn(this, "btn4", "검색", 40, 23, 1010, 25));
             arr.Add(new ob_Btn(this, "btn5", "전체보기", 70, 23, 1060, 25));
@@ -54,7 +54,6 @@ namespace WindowsFormsApp1
             tb = os.Tbx((ob_Tbx)arr[5]);
             btn4 = os.Btn((ob_Btn)arr[6]);
             btn5 = os.Btn((ob_Btn)arr[7]);
-            
 
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(pnl1);
@@ -66,19 +65,19 @@ namespace WindowsFormsApp1
             pnl4.Controls.Add(btn5);
             btn4.Click += search;
             btn5.Click += btn_click;
-            
+
             option();
             hashtable = new Hashtable();
             hashtable.Add("width", "70");
             hashtable.Add("point", new Point(1, 25));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
+            hashtable.Add("text", "이름");
             hashtable.Add("value", "이름");
             hashtable.Add("key", "1");
-
             cb1 = cmm.getComboBox(hashtable, pnl4);
-            cb1.Items.Add("회원번호");
             cb1.Items.Add("이름");
+            cb1.Items.Add("회원번호");
             cb1.Items.Add("전화번호");
 
             //--------------------------------------여기부터 패널3번부분
@@ -258,13 +257,13 @@ namespace WindowsFormsApp1
 
         }
 
-        private void search(object o,EventArgs e)
+        private void search(object o, EventArgs e)
         {
             //MessageBox.Show(cb1.Text);
             //tb
             if (cb1.Text == "회원번호")
             {
-                Select(string.Format("select * from member where mNo like'%{0}%'; ",tb.Text));
+                Select(string.Format("select * from member where mNo like'%{0}%'; ", tb.Text));
             }
             else if (cb1.Text == "이름")
             {
@@ -300,7 +299,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("전화번호", 400, HorizontalAlignment.Center);
             lv.Columns.Add("주소", 580, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 70, HorizontalAlignment.Center);
-            
+
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
             {
@@ -316,7 +315,7 @@ namespace WindowsFormsApp1
 
         private void Update()
         {
-            DialogResult dialogresult = MessageBox.Show("수정 하시겠습니까?","",MessageBoxButtons.YesNo);
+            DialogResult dialogresult = MessageBox.Show("수정 하시겠습니까?", "", MessageBoxButtons.YesNo);
             if (dialogresult == DialogResult.Yes)
             {
                 string sql = string.Format("update member set mName='{0}',Age={1},Sex='{2}',phone='{3}',address='{4}',locker={5} where mNo={6};", tb1.Text, tb2.Text, tb3.Text, tb4.Text, tb5.Text, tb6.Text, temp);
@@ -327,7 +326,6 @@ namespace WindowsFormsApp1
             {
                 return;
             }
-           
         }
 
         private void option()
@@ -337,7 +335,6 @@ namespace WindowsFormsApp1
             pnl2.BackColor = Color.Yellow;
             pnl3.BackColor = Color.White;
             pnl4.BackColor = Color.Pink;
-            
         }
         /*
         private bool TextBoxCheck()
