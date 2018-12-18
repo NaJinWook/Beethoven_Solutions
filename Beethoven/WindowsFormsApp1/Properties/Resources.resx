@@ -118,59 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bms_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bms_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="goodee_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goodee_logo.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Main" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Main.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BlueSkies" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BlueSkies.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EasyMed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EasyMed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LittleLeaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LittleLeaf.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Lush" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lush.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Midnight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Midnight.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Ohhappiness" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Ohhappiness.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Petrol" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Petrol.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Portrait" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Portrait.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Scooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Scooter.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sherbert" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sherbert.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SolidVault" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SolidVault.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Telegram" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Telegram.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Titanium" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Titanium.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="VeryBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VeryBlue.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bg2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,19 +127,10 @@
   <data name="btv_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btv_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Clouds" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Clouds.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cal_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cal_img.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Frost" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Frost.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Grandeur" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Grandeur.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Royal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Royal.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sky" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sky.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="locker_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\locker_img.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

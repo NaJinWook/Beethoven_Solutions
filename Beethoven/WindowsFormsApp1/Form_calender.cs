@@ -15,8 +15,8 @@ namespace WindowsFormsApp1
     {
         Commons cmm = new Commons();
         Hashtable hashtable = new Hashtable();
-        Button btn1, btn2, btn3, btn4, btn5;
-        Label lb1;
+        Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, lk_btn;
+        Label lb1, lb2, lb3;
         Panel Calendar_pnl, Locker_pnl;
         private TextBox tb1, tb6, tb7;
         private string start, end;
@@ -47,23 +47,23 @@ namespace WindowsFormsApp1
             Label();
             Button();
             Locker();
-            
+
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
         }
 
         private void Panel()
         {
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 300));
+            hashtable.Add("size", new Size(455, 305));
             hashtable.Add("point", new Point(0, 0));
-            hashtable.Add("color", Color.Black);
+            hashtable.Add("color", Color.FromArgb(231, 235, 254));
             hashtable.Add("name", "Calender_pnl");
             Calendar_pnl = cmm.getPanel(hashtable, this);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 600));
-            hashtable.Add("point", new Point(0, 0));
-            hashtable.Add("color", Color.Yellow);
+            hashtable.Add("size", new Size(455, 305));
+            hashtable.Add("point", new Point(0, 310));
+            hashtable.Add("color", Color.FromArgb(231, 235, 254));
             hashtable.Add("name", "Locker_pnl");
             Locker_pnl = cmm.getPanel(hashtable, this);
         }
@@ -74,7 +74,7 @@ namespace WindowsFormsApp1
             // Create the calendar.
             monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             // Set the calendar location.
-            monthCalendar1.Location = new System.Drawing.Point(220, 50);
+            monthCalendar1.Location = new System.Drawing.Point(225, 133);
 
             Calendar_pnl.Controls.Add(this.monthCalendar1);
 
@@ -83,13 +83,14 @@ namespace WindowsFormsApp1
         private void Textbox()
         {
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(100, 70));
-            hashtable.Add("width", "100");
+            hashtable.Add("point", new Point(226, 75));
+            hashtable.Add("width", "218");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb1");
             hashtable.Add("enabled", true);
             tb1 = cmm.getTextBox(hashtable, Calendar_pnl);
-
+            tb1.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            tb1.TextAlign = HorizontalAlignment.Center;
             tb1.ReadOnly = true;
             // tb1.Text = monthCalendar1.SelectionRange.Start.ToShortDateString();
 
@@ -98,12 +99,31 @@ namespace WindowsFormsApp1
         private void Label()
         {
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(50, 30));
-            hashtable.Add("point", new Point(40, 70));
+            hashtable.Add("size", new Size(120, 45));
+            hashtable.Add("point", new Point(57, 75));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb1");
             hashtable.Add("text", "시작일");
             lb1 = cmm.getLabel(hashtable, Calendar_pnl);
+            lb1.Font = new Font("나눔 고딕", 30, FontStyle.Bold);
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(435, 45));
+            hashtable.Add("point", new Point(5, 5));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "lb2");
+            hashtable.Add("text", "날짜를 선택하고 버튼을 눌러주세요.");
+            lb2 = cmm.getLabel(hashtable, Calendar_pnl);
+            lb2.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(415, 35));
+            hashtable.Add("point", new Point(25, 5));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "lb3");
+            hashtable.Add("text", "사용하실 라커 번호를 눌러주세요.");
+            lb3 = cmm.getLabel(hashtable, Locker_pnl);
+            lb3.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
         }
 
 
@@ -112,45 +132,100 @@ namespace WindowsFormsApp1
 
             /*         1개월          */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(80, 50));
-            hashtable.Add("point", new Point(20, 100));
+            hashtable.Add("size", new Size(98, 77));
+            hashtable.Add("point", new Point(12, 135));
             hashtable.Add("color", Color.Silver);
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "1개월");
             hashtable.Add("click", (EventHandler)btn_calendar);
             btn1 = cmm.getButton(hashtable, Calendar_pnl);
+            btn1.TabStop = false; // 탭방지
+            btn1.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
 
             /*         3개월          */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(80, 50));
-            hashtable.Add("point", new Point(120, 100));
+            hashtable.Add("size", new Size(98, 77));
+            hashtable.Add("point", new Point(116, 135));
             hashtable.Add("color", Color.Silver);
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "3개월");
             hashtable.Add("click", (EventHandler)btn_calendar);
             btn2 = cmm.getButton(hashtable, Calendar_pnl);
+            btn2.TabStop = false; // 탭방지
+            btn2.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
+
 
 
             /*         6개월          */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(80, 50));
-            hashtable.Add("point", new Point(20, 170));
+            hashtable.Add("size", new Size(98, 77));
+            hashtable.Add("point", new Point(12, 217));
             hashtable.Add("color", Color.Silver);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "6개월");
             hashtable.Add("click", (EventHandler)btn_calendar);
             btn3 = cmm.getButton(hashtable, Calendar_pnl);
+            btn3.TabStop = false; // 탭방지
+            btn3.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn3.FlatAppearance.BorderSize = 0; // 테두리 제거
 
 
             /*         12개월          */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(80, 50));
-            hashtable.Add("point", new Point(120, 170));
+            hashtable.Add("size", new Size(98, 77));
+            hashtable.Add("point", new Point(116, 217));
             hashtable.Add("color", Color.Silver);
             hashtable.Add("name", "btn4");
             hashtable.Add("text", "1년");
             hashtable.Add("click", (EventHandler)btn_calendar);
             btn4 = cmm.getButton(hashtable, Calendar_pnl);
+            btn4.TabStop = false; // 탭방지
+            btn4.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn4.FlatAppearance.BorderSize = 0; // 테두리 제거
+
+            /*         라커 선택 가능          */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(55, 35));
+            hashtable.Add("point", new Point(5, 45));
+            hashtable.Add("color", Color.Green);
+            hashtable.Add("name", "btn5");
+            hashtable.Add("text", "가능");
+            btn5 = cmm.getButton(hashtable, Locker_pnl);
+            btn5.TabStop = false; // 탭방지
+            btn5.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn5.FlatAppearance.BorderSize = 0; // 테두리 제거
+            btn5.ForeColor = Color.White;
+            btn5.Font = new Font("나눔 고딕", 12, FontStyle.Bold);
+
+            /*         라커 선택 불가          */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(55, 35));
+            hashtable.Add("point", new Point(5, 83));
+            hashtable.Add("color", Color.Red);
+            hashtable.Add("name", "btn6");
+            hashtable.Add("text", "불가능");
+            btn6 = cmm.getButton(hashtable, Locker_pnl);
+            btn6.TabStop = false; // 탭방지
+            btn6.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn6.FlatAppearance.BorderSize = 0; // 테두리 제거
+            btn6.ForeColor = Color.White;
+            btn6.Font = new Font("나눔 고딕", 12, FontStyle.Bold);
+
+            /*         라커 선택 안함          */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(55, 160));
+            hashtable.Add("point", new Point(5, 131));
+            hashtable.Add("color", Color.Silver);
+            hashtable.Add("name", "btn7");
+            hashtable.Add("text", "사용 안함");
+            hashtable.Add("click", (EventHandler)btn_calendar);
+            btn7 = cmm.getButton(hashtable, Locker_pnl);
+            btn7.TabStop = false; // 탭방지
+            btn7.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn7.FlatAppearance.BorderSize = 0; // 테두리 제거
+            btn7.Font = new Font("나눔 고딕", 20, FontStyle.Bold);
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -166,7 +241,7 @@ namespace WindowsFormsApp1
         private void btn_calendar(object o, EventArgs a)
         {
             Button btn = (Button)o;
-            
+
             if (tb1.Text == "")
             {
                 MessageBox.Show("날짜를 선택해주세요");
@@ -206,7 +281,7 @@ namespace WindowsFormsApp1
             MessageBox.Show(start);
             //this.Visible = false;
         }
-        
+
         /*             라커              */
         private void Locker()
         {
@@ -218,16 +293,28 @@ namespace WindowsFormsApp1
                 {
                     count++;
                     hashtable = new Hashtable();
-                    hashtable.Add("size", new Size(30, 30));
-                    hashtable.Add("point", new Point(20 + (40 * j), 320 + (35 * i + k)));
-                    hashtable.Add("color", Color.Black);
-                    hashtable.Add("name", "btn4");
-                    hashtable.Add("text", "1년");
-                    if(count == 20 || count == 40)
+                    hashtable.Add("size", new Size(35, 35));
+                    hashtable.Add("point", new Point(65 + (38 * j), 45 + (38 * i + k)));
+                    hashtable.Add("color", Color.Green);
+                    hashtable.Add("name", "lk_btn");
+                    hashtable.Add(string.Format("text", "{0}"), count);
+                    if (count == 20 || count == 40)
                     {
-                        k = k + 30;
+                        k = k + 10;
                     }
-                    btn4 = cmm.getButton(hashtable, Locker_pnl);
+                    lk_btn = cmm.getButton(hashtable, Locker_pnl);
+                    lk_btn.TabStop = false; // 탭방지
+                    lk_btn.FlatStyle = FlatStyle.Flat; // 테두리 제거
+                    lk_btn.FlatAppearance.BorderSize = 0; // 테두리 제거
+                    lk_btn.ForeColor = Color.White;
+                    lk_btn.Font = new Font("나눔 고딕", 11, FontStyle.Bold);
+
+                    if (lk_btn.Text == "1" || lk_btn.Text == "3" || lk_btn.Text == "19")
+                    {
+                        lk_btn.Enabled = false;
+                        lk_btn.BackColor = Color.Red;
+
+                    }
                 }
             }
         }
