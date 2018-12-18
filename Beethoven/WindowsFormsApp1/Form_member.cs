@@ -69,14 +69,14 @@ namespace WindowsFormsApp1
             hashtable.Add("point", new Point(1, 25));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
+            hashtable.Add("text", "이름");
             hashtable.Add("value", "이름");
             hashtable.Add("key", "1");
-
             cb1 = cmm.getComboBox(hashtable, main_pnl);
-            cb1.Items.Add("회원번호");
             cb1.Items.Add("이름");
+            cb1.Items.Add("회원번호");
             cb1.Items.Add("전화번호");
-
+            
             //--------------------------------------여기부터 패널3번부분
 
             hashtable = new Hashtable();
