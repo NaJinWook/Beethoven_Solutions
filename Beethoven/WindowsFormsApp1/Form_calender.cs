@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,9 @@ namespace WindowsFormsApp1
     public partial class Form_calender : Form
     {
         ArrayList btn_array;
+        MYsql db = new MYsql();
         Commons cmm = new Commons();
+
         Hashtable hashtable = new Hashtable();
         Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, lk_btn;
         Label lb1, lb2, lb3;
@@ -26,6 +29,7 @@ namespace WindowsFormsApp1
         public string Date;    //시작일 string으로 받는 변수
         public string Date2;   //종료일 string으로 받는 변수
         public string locker;
+        public int money;
         private MonthCalendar monthCalendar1;
 
         public Form_calender(TextBox tb5, TextBox tb6, TextBox tb7, string start, string end)
@@ -132,7 +136,6 @@ namespace WindowsFormsApp1
 
         private void Button()
         {
-
             /*         1개월          */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(98, 77));
@@ -225,7 +228,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.Silver);
             hashtable.Add("name", "btn7");
             hashtable.Add("text", "사용안함");
-            hashtable.Add("click", (EventHandler)btn_calendar);
+            hashtable.Add("click", (EventHandler)No_lock_Click);
             btn7 = cmm.getButton(hashtable, Locker_pnl);
             btn7.TabStop = false; // 탭방지
             btn7.FlatStyle = FlatStyle.Flat; // 테두리 제거
@@ -258,7 +261,7 @@ namespace WindowsFormsApp1
         private void btn_calendar(object o, EventArgs a)
         {
             Button btn = (Button)o;
-
+            money = 0;
             if (tb1.Text == "")
             {
                 MessageBox.Show("날짜를 선택해주세요");
@@ -266,9 +269,10 @@ namespace WindowsFormsApp1
             }
             switch (btn.Name)
             {
-                case "btn1":
+                case "btn1": 
                     endDate = startDate.AddDays(30);
                     Date2 = endDate.ToShortDateString();
+                    money = 50000;
                     tb6.Text = Date;
                     tb7.Text = Date2;
                     start = Date;
@@ -279,6 +283,7 @@ namespace WindowsFormsApp1
                     Date2 = endDate.ToShortDateString();
                     tb6.Text = Date;
                     tb7.Text = Date2;
+                    money = 100000;
                     break;
                 case "btn3":
                     endDate = startDate.AddDays(180);
@@ -329,6 +334,7 @@ namespace WindowsFormsApp1
                     btn_array.Add(lk_btn);
                 }
             }
+            Lk_rest();
         }
 
         private void Lk_btn_Click(object o, EventArgs e)
@@ -349,11 +355,17 @@ namespace WindowsFormsApp1
 
         private void Lk_rest()
         {
-            for (int i = 0; i < btn_array.Count; i++)
+            string sql = "select locker from member";
+            MySqlDataReader sdr = db.Reader(sql);
+            while (sdr.Read())
             {
-                Button clear = (Button)btn_array[i];
-                if (clear.Name == "btn1") clear.BackColor = Color.Red;
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }  
             }
+            db.ReaderClose(sdr);
         }
     }
 }
