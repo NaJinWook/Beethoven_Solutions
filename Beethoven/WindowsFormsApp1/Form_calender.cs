@@ -327,13 +327,6 @@ namespace WindowsFormsApp1
                     lk_btn.Font = new Font("나눔 고딕", 11, FontStyle.Bold);
                     lk_btn.Click += Lk_btn_Click;
                     btn_array.Add(lk_btn);
-
-                    if (lk_btn.Text == "1" || lk_btn.Text == "3" || lk_btn.Text == "19")
-                    {
-                        lk_btn.Enabled = false;
-                        lk_btn.BackColor = Color.Red;
-
-                    }
                 }
             }
         }
@@ -352,6 +345,15 @@ namespace WindowsFormsApp1
             lk_btn.BackColor = Color.Blue;
             locker = tb.ToString();
             tb5.Text = locker;
+        }
+
+        private void Lk_rest()
+        {
+            for (int i = 0; i < btn_array.Count; i++)
+            {
+                Button clear = (Button)btn_array[i];
+                if (clear.Name == "btn1") clear.BackColor = Color.Red;
+            }
         }
     }
 }

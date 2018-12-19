@@ -389,10 +389,10 @@ namespace WindowsFormsApp1
         private void btn_register(object o, EventArgs a)
         {
             //MessageBox.Show(tb5.Text);
-            
             string sql = string.Format("insert into member (mName, Age, Sex, phone, address, locker, mStart, mEnd) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}');",tb1.Text, tb2.Text, gender, tb3.Text, tb4.Text, tb5.Text, tb6.Text, tb7.Text);
             db.NonQuery(sql);
         }
+
 
         private void btn_reset(object o, EventArgs a)
         {
