@@ -16,13 +16,14 @@ namespace WindowsFormsApp1
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
         Commons cmm = new Commons();
-        TextBox tb1, tb2, tb3, tb4, tb5, tb6;
+        TextBox tb1, tb2, tb3, tb4, tb5, tb6,tb7;
         Label lb1;
-        Button btn1, btn2, btn3;
-        Panel pn1,pn2,pn3,pn4;
+        Button btn1, btn2, btn3,btn4,btn5;
+        Panel pn1,pn2,pn3,pn4,main_pnl;
         Hashtable hashtable;
         ListView lv;
-       
+        ComboBox cb1;
+        private string temp;
 
         public Form_infoAdd()
         {
@@ -34,42 +35,89 @@ namespace WindowsFormsApp1
         {
             this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
             //arr.Add(new ob_Pnl(this, "", "", 1461, 633, 20, 24));
-
-            //pn1 = os.Pnl((ob_Pnl)arr[0]);
+           
+            //===================================================
 
             hashtable = new Hashtable();
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(720, 460));
-            hashtable.Add("point", new Point(20, 54));
+            hashtable.Add("size", new Size(1441, 613));
+            hashtable.Add("point", new Point(10, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn1");
-            pn1 = cmm.getPanel2(hashtable, this);
+            main_pnl = cmm.getPanel2(hashtable, this);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(1461, 65));
-            hashtable.Add("point", new Point(20, 520));
+            hashtable.Add("size", new Size(720, 460));
+            hashtable.Add("point", new Point(0, 54));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "pn1");
+            pn1 = cmm.getPanel(hashtable, main_pnl);
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(1461, 45));
+            hashtable.Add("point", new Point(0, 520));
             hashtable.Add("color", Color.SkyBlue);
             hashtable.Add("name", "pn2");
-            pn2 = cmm.getPanel2(hashtable, this);
+            pn2 = cmm.getPanel(hashtable, main_pnl);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(1461, 65));
-            hashtable.Add("point", new Point(20, 590));
+            hashtable.Add("point", new Point(0, 570));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn3");
-            pn3 = cmm.getPanel2(hashtable, this);
+            pn3 = cmm.getPanel(hashtable, main_pnl);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(720, 460));
             hashtable.Add("point", new Point(760, 54));
             hashtable.Add("color", Color.Blue);
             hashtable.Add("name", "pn3");
-            pn4 = cmm.getPanel2(hashtable, this);
+            pn4 = cmm.getPanel(hashtable, main_pnl);
+
+            
+            //pn1 = os.Pnl((ob_Pnl)arr[0]);
+            hashtable = new Hashtable();
+            hashtable.Add("width", "70");
+            hashtable.Add("point", new Point(1, 25));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "선택");
+            hashtable.Add("text", "제품명");
+            hashtable.Add("value", "제품명");
+            hashtable.Add("key", "1");
+            cb1 = cmm.getComboBox(hashtable, main_pnl);
+            cb1.Items.Add("제품명");
+            cb1.Items.Add("회사명");
+            cb1.Items.Add("제품번호");
+            
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(40, 23));
+            hashtable.Add("point", new Point(1010, 0));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "btn4");
+            hashtable.Add("text", "검색");
+            hashtable.Add("click", (EventHandler)btn_click);
+            btn4 = cmm.getButton(hashtable, main_pnl);//검색
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(70, 23));
+            hashtable.Add("point", new Point(1060, 0));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "btn5");
+            hashtable.Add("text", "전체보기");
+            hashtable.Add("click", (EventHandler)btn_click);
+            btn5 = cmm.getButton(hashtable, main_pnl);//전체보기
+            
+            hashtable = new Hashtable();
+            hashtable.Add("width", "500");
+            hashtable.Add("point", new Point(500, 0));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "tb7");
+            hashtable.Add("enabled", true);
+            tb7 = cmm.getTextBox(hashtable, main_pnl);
 
             //------------------------------------------------패널 2번
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 70));
+            hashtable.Add("size", new Size(100, 45));
             hashtable.Add("point", new Point(1130, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn1");
@@ -78,7 +126,7 @@ namespace WindowsFormsApp1
             btn1 = cmm.getButton(hashtable, pn2);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 70));
+            hashtable.Add("size", new Size(100, 45));
             hashtable.Add("point", new Point(1240, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn2");
@@ -87,7 +135,7 @@ namespace WindowsFormsApp1
             btn2 = cmm.getButton(hashtable, pn2);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 70));
+            hashtable.Add("size", new Size(100, 45));
             hashtable.Add("point", new Point(1350, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn3");
@@ -96,11 +144,10 @@ namespace WindowsFormsApp1
             btn3 = cmm.getButton(hashtable, pn2);
 
             //=========================================여기까지 패널2번
-
             //--------------------------------------여기부터 패널3번부분
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(30, 20));
-            hashtable.Add("point", new Point(30, 25));
+            hashtable.Add("point", new Point(30, 15));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb1");
             hashtable.Add("text", "제품명");
@@ -108,7 +155,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 20));
-            hashtable.Add("point", new Point(170, 25));
+            hashtable.Add("point", new Point(170, 15));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb2");
             hashtable.Add("text", "회사명");
@@ -116,7 +163,7 @@ namespace WindowsFormsApp1
             //품명 회사명 품번 키로수 무게 수량 구매일
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(60, 20));
-            hashtable.Add("point", new Point(381, 25));
+            hashtable.Add("point", new Point(381, 15));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb3");
             hashtable.Add("text", "제품번호");
@@ -124,7 +171,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(60, 20));
-            hashtable.Add("point", new Point(601, 25));
+            hashtable.Add("point", new Point(601, 15));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb4");
             hashtable.Add("text", "키로수");
@@ -132,7 +179,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(30, 20));
-            hashtable.Add("point", new Point(721, 25));
+            hashtable.Add("point", new Point(721, 15));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb5");
             hashtable.Add("text", "무게");
@@ -140,7 +187,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(60, 20));
-            hashtable.Add("point", new Point(811, 25));
+            hashtable.Add("point", new Point(811, 15));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "lb6");
             hashtable.Add("text", "수량");
@@ -149,7 +196,7 @@ namespace WindowsFormsApp1
             //--------------------------------------------------------------------
             hashtable = new Hashtable();
             hashtable.Add("width", "100");
-            hashtable.Add("point", new Point(61, 20));
+            hashtable.Add("point", new Point(61, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb1");
             hashtable.Add("enabled", true);
@@ -157,7 +204,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "150");
-            hashtable.Add("point", new Point(221, 20));
+            hashtable.Add("point", new Point(221, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb2");
             hashtable.Add("enabled", true);
@@ -165,7 +212,7 @@ namespace WindowsFormsApp1
             //품명 회사명 품번 키로수 무게 수량 구매일
             hashtable = new Hashtable();
             hashtable.Add("width", "150");
-            hashtable.Add("point", new Point(441, 20));
+            hashtable.Add("point", new Point(441, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb3");
             hashtable.Add("enabled", true);
@@ -173,7 +220,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(661, 20));
+            hashtable.Add("point", new Point(661, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb4");
             hashtable.Add("enabled", true);
@@ -181,7 +228,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(751, 20));
+            hashtable.Add("point", new Point(751, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb5");
             hashtable.Add("enabled", true);
@@ -189,7 +236,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "100");
-            hashtable.Add("point", new Point(871, 20));
+            hashtable.Add("point", new Point(871, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb6");
             hashtable.Add("enabled", true);
@@ -203,7 +250,6 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv = cmm.getListView(hashtable, pn1);
-           // Controls.Add(pn1);
             lv.Columns.Add("제품명",100,HorizontalAlignment.Center);
             lv.Columns.Add("회사명", 150, HorizontalAlignment.Center);
             lv.Columns.Add("제품번호",120, HorizontalAlignment.Center);
@@ -217,13 +263,23 @@ namespace WindowsFormsApp1
 
         private void listView_click(object sender, MouseEventArgs e)
         {
+            /*ListView lv = (ListView)o;
+            ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
+            ListViewItem item = itemGroup[0];
+            temp = item.SubItems[0].Text;
+            tb1.Text = item.SubItems[1].Text;
+            tb2.Text = item.SubItems[2].Text;
+            tb3.Text = item.SubItems[3].Text;
+            tb4.Text = item.SubItems[4].Text;
+            tb5.Text = item.SubItems[5].Text;
+            tb6.Text = item.SubItems[6].Text;*/
         }
 
         private void btn_click(object sender, EventArgs e)
         {
+
         }
-
-
+        
         private void option()
         {
             pn1.BackColor = Color.White;

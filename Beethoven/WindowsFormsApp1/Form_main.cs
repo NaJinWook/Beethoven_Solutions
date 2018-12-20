@@ -85,7 +85,7 @@ namespace WindowsFormsApp1
                 menu_btn.Location = new Point((203 * i) + 0, 0);
                 menu_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
                 menu_btn.ForeColor = Color.White;
-                menu_btn.Font = new Font("휴먼편지체", 30, FontStyle.Bold);
+                menu_btn.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
                 menu_btn.Name = string.Format("btn{0}", i + 1);
                 menu_btn.TabStop = false; // 탭방지
                 menu_btn.FlatStyle = FlatStyle.Flat; // 테두리 제거
@@ -125,7 +125,7 @@ namespace WindowsFormsApp1
             logout.TabStop = false; // 탭방지
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
-            logout.Font = new Font("휴먼편지체", 30, FontStyle.Bold);
+            logout.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
             //start.ForeColor = Color.Black;
             //start.Font = new Font("휴먼편지체", 30, FontStyle.Bold);
             //start.Parent = bg;
@@ -147,11 +147,11 @@ namespace WindowsFormsApp1
             time.Text = string.Format("{0:yyyy.MM.dd(ddd)}", DateTime.Now);
             time.ForeColor = Color.White;
             time.BackColor = Color.Transparent;
-            time.Font = new Font("휴면둥근헤드라인", 19, FontStyle.Bold);
+            time.Font = new Font("나눔 고딕", 19, FontStyle.Bold);
             date.Text = string.Format("{0:HH:mm:ss}", DateTime.Now);
             date.ForeColor = Color.White;
             date.BackColor = Color.Transparent;
-            date.Font = new Font("휴면둥근헤드라인", 33, FontStyle.Bold);
+            date.Font = new Font("나눔 고딕", 33, FontStyle.Bold);
         }
 
         private void Menu_btn_Click(object sender, EventArgs e)

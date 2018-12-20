@@ -21,6 +21,16 @@ namespace WindowsFormsApp1
             return tagetForm;
         }
 
+        public PictureBox getPictureBox(Hashtable hashtable,Control control)
+        {
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Size = (Size)hashtable["size"];
+            pictureBox.Location = (Point)hashtable["point"];
+            pictureBox.BackColor = (Color)hashtable["color"];
+            pictureBox.SizeMode = (PictureBoxSizeMode)hashtable["pictureboxsizemode"];
+            return pictureBox;
+        }
+
         public Panel getPanel(Hashtable hashtable, Control parentDomain)
         {
             Panel panel = new Panel();
@@ -89,6 +99,7 @@ namespace WindowsFormsApp1
             comboBox.Location = (Point)hashtable["point"];
             comboBox.BackColor = (Color)hashtable["color"];
             comboBox.Name = hashtable["name"].ToString();
+            comboBox.Text = hashtable["text"].ToString();
             comboBox.DisplayMember = "value";
             comboBox.ValueMember = "Key";
             parentDomain.Controls.Add(comboBox);
@@ -114,7 +125,7 @@ namespace WindowsFormsApp1
             ListView listView = new ListView();
             listView.Dock = DockStyle.Fill;
             listView.View = View.Details;
-           
+
             listView.GridLines = true;
             listView.FullRowSelect = true;
             listView.BackColor = (Color)hashtable["color"];

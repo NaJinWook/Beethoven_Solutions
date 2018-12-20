@@ -127,6 +127,7 @@ namespace WindowsFormsApp1
 
         private void listView_click(object sender, MouseEventArgs e)
         {
+
         }
     }
 }
