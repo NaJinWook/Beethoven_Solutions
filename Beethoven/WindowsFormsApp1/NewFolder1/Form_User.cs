@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +14,16 @@ namespace WindowsFormsApp1
 {
     public partial class Form_User : Form
     {
+        private MYsql db = new MYsql();
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         Label lb1, lb2;
+        Panel pnl1;
+        ArrayList arr = new ArrayList();
         Button btn1, btn2, btn3, btn4;
         public TextBox tb1, tb2;
+        ListView lv = new ListView();
+        ob_Set os = new ob_Set();
         public Form_User()
         {
             InitializeComponent();
@@ -26,9 +32,14 @@ namespace WindowsFormsApp1
 
         private void Form_User_Load(object sender, EventArgs e)
         {
+            arr.Add(new ob_Pnl(this, "", "", 400, 350, 20, 150));
+            
+            pnl1 = os.Pnl((ob_Pnl)arr[0]);
+            Controls.Add(pnl1);
             Label();
             Textbox();
             Button();
+            Listview();
         }
         private void Label()
         {
@@ -87,7 +98,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.Yellow);
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "검색");
-            //hashtable.Add("click", (EventHandler)btn_calendar);
+            hashtable.Add("click", (EventHandler)btn_search);
             btn1 = cmm.getButton(hashtable, this);
 
             /*    등록부분     */
@@ -97,7 +108,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.Yellow);
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "등록");
-            //hashtable.Add("click", (EventHandler)btn_click);
+            hashtable.Add("click", (EventHandler)btn_register);
             btn2 = cmm.getButton(hashtable, this);
 
             /*    그래프부분     */
@@ -109,6 +120,50 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "그래프");
             //hashtable.Add("click", (EventHandler)btn_register);
             btn3 = cmm.getButton(hashtable, this);
+
+
+        }
+        private void Listview()
+        {
+            hashtable = new Hashtable();
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "listView");
+            //hashtable.Add("click", (MouseEventHandler)listView_click);
+            //lv.FullRowSelect = true;
+            lv = cmm.getListView(hashtable, pnl1);
+            lv.Dock = DockStyle.Fill;
+
+            lv.Columns.Add("회원번호", 70, HorizontalAlignment.Center);
+            lv.Columns.Add("이름", 50, HorizontalAlignment.Center);
+            lv.Columns.Add("몸무게", 70, HorizontalAlignment.Center);
+            lv.Columns.Add("등록일", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("입력날짜", 100, HorizontalAlignment.Center);
+        }
+
+
+        private void btn_search(object o, EventArgs e)
+        {
+            string sql = string.Format("select a.mNo,a.mName,b.kg,a.mStart,date_format(b.nowDate, '%Y-%m-%d') as nowDate from member2 a,weight b where a.mNo = '{0}' and b.mNo = '{0}';", tb1.Text);
+            MySqlDataReader sdr = db.Reader(sql);
+            lv.Items.Clear();
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }
+                lv.Items.Add(new ListViewItem(arr));
+            }
+            db.ReaderClose(sdr);
+        }
+
+
+        private void btn_register(object o, EventArgs e)
+        {
+            //MessageBox.Show("gd");
+            string sql = string.Format("insert into weight(mNo,rNum,kg) select '{0}',  case when  max(rNum) is null then 1 else  max(rNum) +1 end as rNum,'{1}' from weight where mNo = '{2}';", tb1.Text, tb2.Text, tb1.Text);
+            db.NonQuery(sql);
 
 
         }

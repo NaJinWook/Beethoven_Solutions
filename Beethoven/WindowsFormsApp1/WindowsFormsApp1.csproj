@@ -95,10 +95,10 @@
     <Compile Include="Form_stats.Designer.cs">
       <DependentUpon>Form_stats.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_User.cs">
+    <Compile Include="NewFolder1\Form_User.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_User.Designer.cs">
+    <Compile Include="NewFolder1\Form_User.Designer.cs">
       <DependentUpon>Form_User.cs</DependentUpon>
     </Compile>
     <Compile Include="ob_Btn.cs" />
@@ -115,7 +115,7 @@
     <EmbeddedResource Include="Form_main.resx">
       <DependentUpon>Form_main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_User.resx">
+    <EmbeddedResource Include="NewFolder1\Form_User.resx">
       <DependentUpon>Form_User.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
