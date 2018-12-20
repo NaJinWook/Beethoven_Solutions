@@ -143,7 +143,9 @@ namespace WindowsFormsApp1
 
         private void btn_search(object o, EventArgs e)
         {
-            string sql = string.Format("select a.mNo,a.mName,b.kg,a.mStart,date_format(b.nowDate, '%Y-%m-%d') as nowDate from member2 a,weight b where a.mNo = '{0}' and b.mNo = '{0}';", tb1.Text);
+
+            //string sql = string.Format("select a.mNo,a.mName,b.kg,a.mStart,date_format(b.nowDate, '%Y-%m-%d') as nowDate from member2 a,weight b where a.mNo = '{0}' and b.mNo = '{0}';", tb1.Text);
+            string sql = string.Format("call User_select('{0}')",tb1.Text);
             MySqlDataReader sdr = db.Reader(sql);
             lv.Items.Clear();
             while (sdr.Read())
@@ -162,10 +164,27 @@ namespace WindowsFormsApp1
         private void btn_register(object o, EventArgs e)
         {
             //MessageBox.Show("gd");
-            string sql = string.Format("insert into weight(mNo,rNum,kg) select '{0}',  case when  max(rNum) is null then 1 else  max(rNum) +1 end as rNum,'{1}' from weight where mNo = '{2}';", tb1.Text, tb2.Text, tb1.Text);
+            //string sql = string.Format("insert into weight(mNo,rNum,kg) select '{0}',  case when  max(rNum) is null then 1 else  max(rNum) +1 end as rNum,'{1}' from weight where mNo = '{2}';", tb1.Text, tb2.Text, tb1.Text);
+            
+            string sql = string.Format("call User_insert('{0}','{1}');", tb1.Text,tb2.Text);
             db.NonQuery(sql);
+            tb2.Text = "";
 
-
+            sql = string.Format("call User_select('{0}')", tb1.Text);
+            MySqlDataReader sdr = db.Reader(sql);
+            lv.Items.Clear();
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }
+                lv.Items.Add(new ListViewItem(arr));
+            }
+            db.ReaderClose(sdr);
         }
+
     }
 }
+
