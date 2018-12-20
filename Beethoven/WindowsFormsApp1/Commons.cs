@@ -21,12 +21,11 @@ namespace WindowsFormsApp1
             return tagetForm;
         }
 
-        public PictureBox getPictureBox(Hashtable hashtable,Control control)
+        public PictureBox getPictureBox(Hashtable hashtable,Control tergat)
         {
             PictureBox pictureBox = new PictureBox();
             pictureBox.Size = (Size)hashtable["size"];
             pictureBox.Location = (Point)hashtable["point"];
-            pictureBox.BackColor = (Color)hashtable["color"];
             pictureBox.SizeMode = (PictureBoxSizeMode)hashtable["pictureboxsizemode"];
             return pictureBox;
         }

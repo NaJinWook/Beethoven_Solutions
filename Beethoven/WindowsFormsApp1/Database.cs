@@ -1,8 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -101,5 +107,67 @@ namespace WindowsFormsApp1
         {
             reader.Close();
         }
+    }
+
+    class WebAPI
+    {
+        public bool SelectListView(string url, ListView listView)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                Stream stream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(stream);
+                string result = sr.ReadToEnd();
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);//스트링값의 제이슨오브젝트를 어레이리스트로 변환하여받는다.
+                listView.Items.Clear();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray j = (JArray)list[i];//JArray로 형변환을 시켜야 제대로된 값이 나온다.
+                    string[] arr = new string[6];
+                    for (int k = 0; k < j.Count; k++)
+                    {
+                        arr[k] = j[k].ToString();
+                    }
+                    listView.Items.Add(new ListViewItem(arr));
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool Post(string url, Hashtable ht)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection param = new NameValueCollection();
+
+                foreach (DictionaryEntry data in ht)
+                {
+                    //MessageBox.Show(string.Format("{0},{1}",data.Key.ToString(), data.Value.ToString()));
+                    param.Add(data.Key.ToString(), data.Value.ToString());
+                }
+                byte[] result = wc.UploadValues(url, "POST", param);
+                string resultstr = Encoding.UTF8.GetString(result);
+                if ("1" == resultstr)
+                {
+                    MessageBox.Show("성공");
+                }
+                else
+                {
+                    MessageBox.Show("실패");
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
