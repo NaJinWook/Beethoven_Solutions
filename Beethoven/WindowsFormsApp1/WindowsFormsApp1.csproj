@@ -96,6 +96,12 @@
     <Compile Include="Form_stats.Designer.cs">
       <DependentUpon>Form_stats.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewFolder1\Form_User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFolder1\Form_User.Designer.cs">
+      <DependentUpon>Form_User.cs</DependentUpon>
+    </Compile>
     <Compile Include="ob_Btn.cs" />
     <Compile Include="ob_Lbl.cs" />
     <Compile Include="ob_Liv.cs" />
@@ -109,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_main.resx">
       <DependentUpon>Form_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewFolder1\Form_User.resx">
+      <DependentUpon>Form_User.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -134,35 +143,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bms_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="goodee.ico" />
+    <None Include="Resources\locker_img.png" />
+    <None Include="Resources\cal_img.png" />
     <None Include="Resources\btv_logo.png" />
-    <None Include="Resources\Clouds.jpg" />
-    <None Include="Resources\Sky.jpg" />
-    <None Include="Resources\Grandeur.jpg" />
-    <None Include="Resources\Royal.jpg" />
-    <None Include="Resources\Frost.jpg" />
     <None Include="Resources\bg2.jpg" />
-    <None Include="Resources\bg.jpg" />
-    <None Include="Resources\background.jpg" />
-    <None Include="Resources\Titanium.jpg" />
-    <None Include="Resources\Petrol.jpg" />
-    <None Include="Resources\Midnight.jpg" />
-    <None Include="Resources\Portrait.jpg" />
-    <None Include="Resources\SolidVault.jpg" />
-    <None Include="Resources\VeryBlue.jpg" />
-    <None Include="Resources\Telegram.jpg" />
-    <None Include="Resources\Scooter.jpg" />
-    <None Include="Resources\BlueSkies.jpg" />
-    <None Include="Resources\Beyond.jpg" />
-    <None Include="Resources\Sherbert.jpg" />
-    <None Include="Resources\Ohhappiness.jpg" />
-    <None Include="Resources\EasyMed.jpg" />
-    <None Include="Resources\Lush.jpg" />
-    <None Include="Resources\LittleLeaf.jpg" />
-    <None Include="Resources\Main.jpg" />
     <None Include="Resources\goodee_logo.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
