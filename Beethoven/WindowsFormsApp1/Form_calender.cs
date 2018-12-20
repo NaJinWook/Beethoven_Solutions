@@ -41,9 +41,6 @@ namespace WindowsFormsApp1
             this.tb7 = tb7;
         }
 
-
-
-
         private void Form_calender_Load(object sender, EventArgs e)
         {
             Calender();

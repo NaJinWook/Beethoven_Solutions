@@ -53,6 +53,7 @@ namespace WindowsFormsApp1
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(pnl1);
             main_pnl.Controls.Add(pnl2);
+
             option();
 
             
