@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
         Panel main_pnl, menu_pnl, mdi_pnl, time_pnl, time_pnl2;
-        Button view_all, register, logout, menu_btn;
+        Button logout, menu_btn;
         PictureBox logo;
         Label date, time;
         Timer mTimer;

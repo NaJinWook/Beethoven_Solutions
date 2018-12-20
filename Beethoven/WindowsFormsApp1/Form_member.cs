@@ -347,16 +347,5 @@ namespace WindowsFormsApp1
             pnl3.BackColor = Color.Red;
             pnl4.BackColor = Color.Pink;
         }
-        /*
-        private bool TextBoxCheck()
-        {
-            if (textBox2.Text == "")
-            {
-                MessageBox.Show("권한이름을 입력하세요.");
-                textBox2.Focus();
-                return false;
-            }
-            return true;
-        }*/
     }
 }
