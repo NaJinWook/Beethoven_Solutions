@@ -68,8 +68,8 @@ namespace WindowsFormsApp1
 
             option();
             hashtable = new Hashtable();
-            hashtable.Add("width", "70");
-            hashtable.Add("point", new Point(1, 25));
+            hashtable.Add("width", "80");
+            hashtable.Add("point", new Point(10, 25));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
             hashtable.Add("text", "이름");
@@ -79,6 +79,7 @@ namespace WindowsFormsApp1
             cb1.Items.Add("이름");
             cb1.Items.Add("회원번호");
             cb1.Items.Add("전화번호");
+            cb1.DropDownStyle = ComboBoxStyle.DropDownList; // 콤보박스 변경 방지
 
             //--------------------------------------여기부터 패널3번부분
 
@@ -218,7 +219,15 @@ namespace WindowsFormsApp1
             lv.FullRowSelect = true;
             lv = cmm.getListView(hashtable, pnl1);
             lv.Dock = DockStyle.Fill;
+            lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
             Select(printAll);
+        }
+
+        /*              리스트뷰 컬럼 크기 고정                     */
+        private void Lv_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.NewWidth = lv.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
 
         private void btn_click(object o, EventArgs a)
@@ -292,13 +301,15 @@ namespace WindowsFormsApp1
             tb5.Text = "";
             tb6.Text = "";
             lv.Clear();
-            lv.Columns.Add("번호", 70, HorizontalAlignment.Center);
-            lv.Columns.Add("이름", 120, HorizontalAlignment.Center);
+            lv.Columns.Add("번호", 60, HorizontalAlignment.Center);
+            lv.Columns.Add("이름", 100, HorizontalAlignment.Center);
             lv.Columns.Add("나이", 80, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 80, HorizontalAlignment.Center);
             lv.Columns.Add("전화번호", 400, HorizontalAlignment.Center);
             lv.Columns.Add("주소", 580, HorizontalAlignment.Center);
-            lv.Columns.Add("라커", 70, HorizontalAlignment.Center);
+            lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
+            lv.Font = new Font("돋움체", 15, FontStyle.Regular);
+            
 
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
@@ -333,7 +344,7 @@ namespace WindowsFormsApp1
             main_pnl.BackColor = Color.White;
             pnl1.BackColor = Color.Blue;
             pnl2.BackColor = Color.Yellow;
-            pnl3.BackColor = Color.White;
+            pnl3.BackColor = Color.Red;
             pnl4.BackColor = Color.Pink;
         }
         /*

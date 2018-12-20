@@ -260,8 +260,6 @@ namespace WindowsFormsApp1
             tb7.TextAlign = HorizontalAlignment.Center;
             tb7.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
             tb7.Enabled = false;
-
-
         }
 
 
@@ -391,9 +389,12 @@ namespace WindowsFormsApp1
         {
             string sql = string.Format("insert into member (mName, Age, Sex, phone, address, locker, mStart, mEnd, cost) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');",tb1.Text, tb2.Text, gender, tb3.Text, tb4.Text, tb5.Text, tb6.Text, tb7.Text, fc.money);
             db.NonQuery(sql);
+            MessageBox.Show("회원 등록이 완료되었습니다.");
+
+            
+            
         }
-
-
+        
         private void btn_reset(object o, EventArgs a)
         {
             //MessageBox.Show("초기화");

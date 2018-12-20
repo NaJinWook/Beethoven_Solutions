@@ -272,11 +272,11 @@ namespace WindowsFormsApp1
                 case "btn1": 
                     endDate = startDate.AddDays(30);
                     Date2 = endDate.ToShortDateString();
-                    money = 50000;
                     tb6.Text = Date;
                     tb7.Text = Date2;
                     start = Date;
                     end = Date2;
+                    money = 50000;
                     break;
                 case "btn2":
                     endDate = startDate.AddDays(90);
@@ -290,12 +290,14 @@ namespace WindowsFormsApp1
                     Date2 = endDate.ToShortDateString();
                     tb6.Text = Date;
                     tb7.Text = Date2;
+                    money = 150000;
                     break;
                 case "btn4":
                     endDate = startDate.AddDays(365);
                     Date2 = endDate.ToShortDateString();
                     tb6.Text = Date;
                     tb7.Text = Date2;
+                    money = 200000;
                     break;
                 default:
                     break;
@@ -332,9 +334,9 @@ namespace WindowsFormsApp1
                     lk_btn.Font = new Font("나눔 고딕", 11, FontStyle.Bold);
                     lk_btn.Click += Lk_btn_Click;
                     btn_array.Add(lk_btn);
+                    Lk_rest();
                 }
             }
-            Lk_rest();
         }
 
         private void Lk_btn_Click(object o, EventArgs e)
@@ -363,7 +365,13 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < sdr.FieldCount; i++)
                 {
                     arr[i] = sdr.GetValue(i).ToString();
-                }  
+                    //이프문추가 사용중인 라커 빨강으로
+                    if (lk_btn.Text == arr[i])
+                    {
+                        lk_btn.BackColor = Color.Red;
+                        lk_btn.Enabled = false;
+                    }
+                }
             }
             db.ReaderClose(sdr);
         }
