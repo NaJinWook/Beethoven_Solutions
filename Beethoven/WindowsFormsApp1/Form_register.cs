@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,16 +22,14 @@ namespace WindowsFormsApp1
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         RadioButton rb1, rb2;
-        Button btn1, btn2, btn3, btn4, btn5;
-        //Form_calender cal;
+        Button btn1, btn2;
+        PictureBox pb1, pb2;
         Form_calender fc;
+
         public string start;
         public string end;
         public string gender;
         public TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
-
-        //private string Date;
-        //private string Date2;
 
 
         public Form_register()
@@ -54,13 +53,14 @@ namespace WindowsFormsApp1
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(pnl1);
             main_pnl.Controls.Add(pnl2);
-
+            pnl2.BackColor = Color.Black;
 
             Label();
             Textbox();
             Button();
             Radiobutton();
             Pass();
+            Image();
             option();
         }
 
@@ -203,6 +203,7 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "tb2");
             hashtable.Add("enabled", true);
             tb2 = cmm.getTextBox(hashtable, pnl1);
+            tb2.KeyPress += Tb3_KeyPress;
             tb2.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
 
             /*       전화번호부분         */
@@ -214,6 +215,7 @@ namespace WindowsFormsApp1
             hashtable.Add("enabled", true);
             tb3 = cmm.getTextBox(hashtable, pnl1);
             tb3.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
+            tb3.KeyPress += Tb3_KeyPress;
 
             /*       주소부분         */
             hashtable = new Hashtable();
@@ -262,39 +264,28 @@ namespace WindowsFormsApp1
             tb7.Enabled = false;
         }
 
+        /*          텍스트박스에 숫자만 입력 받게           */
+        private void Tb3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
+            {
+                e.Handled = true;
+                MessageBox.Show("숫자만 입력해주세요.");
+            }
+        }
 
         /*     버튼     */
         private void Button()
         {
-            /*    달력부분     */
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(70, 50));
-            hashtable.Add("point", new Point(425, 465));
-            hashtable.Add("color", Color.Yellow);
-            hashtable.Add("name", "btn1");
-            hashtable.Add("text", "달력");
-            hashtable.Add("click", (EventHandler)btn_calendar);
-            btn1 = cmm.getButton(hashtable, pnl1);
-
-            /*    라커부분     */
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(130, 465));
-            hashtable.Add("color", Color.Yellow);
-            hashtable.Add("name", "btn2");
-            hashtable.Add("text", "라커");
-            //hashtable.Add("click", (EventHandler)btn_click);
-            btn2 = cmm.getButton(hashtable, pnl1);
-
             /*    등록부분     */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 70));
             hashtable.Add("point", new Point(700, 530));
             hashtable.Add("color", Color.White);
-            hashtable.Add("name", "btn3");
+            hashtable.Add("name", "btn1");
             hashtable.Add("text", "등록");
             hashtable.Add("click", (EventHandler)btn_register);
-            btn3 = cmm.getButton(hashtable, pnl1);
+            btn1 = cmm.getButton(hashtable, pnl1);
 
 
             /*    초기화부분     */
@@ -302,10 +293,10 @@ namespace WindowsFormsApp1
             hashtable.Add("size", new Size(100, 70));
             hashtable.Add("point", new Point(830, 530));
             hashtable.Add("color", Color.White);
-            hashtable.Add("name", "btn4");
+            hashtable.Add("name", "btn2");
             hashtable.Add("text", "초기화");
             hashtable.Add("click", (EventHandler)btn_reset);
-            btn4 = cmm.getButton(hashtable, pnl1);
+            btn2 = cmm.getButton(hashtable, pnl1);
         }
 
         /*     라디오버튼    */
@@ -357,18 +348,8 @@ namespace WindowsFormsApp1
             //tb6.Text = Date;
             //tb7.Text = Date2;
         }
-        private void Pass()
-        {
-            fc = new Form_calender(tb5, tb6, tb7, start, end);
 
-            fc.MdiParent = this.ParentForm;
-            fc.WindowState = FormWindowState.Maximized;
-            fc.FormBorderStyle = FormBorderStyle.None;
-            pnl2.Controls.Add(fc);
-            fc.Show();
-        }
-
-        /* 라디오버튼 이벤트*/
+        /*        라디오버튼 이벤트        */
         private void rdb_click(object o, EventArgs a)
         {
             RadioButton rdb = (RadioButton)o;
@@ -383,18 +364,64 @@ namespace WindowsFormsApp1
                     gender = "여성";
                     break;
             }
-
         }
+
+        /*           라커, 달력 이미지          */
+        private void Image()
+        {
+            pb1 = new PictureBox();
+            pb2 = new PictureBox();
+
+            pb1.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("locker_img");
+            pb1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb1.BackColor = Color.Transparent;
+            pb1.Size = new Size(80, 80);
+            pb1.Location = new Point(120, 450);
+
+            pb2.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("cal_img");
+            pb2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb2.BackColor = Color.Transparent;
+            pb2.Size = new Size(70, 70);
+            pb2.Location = new Point(420, 450);
+
+            pnl1.Controls.Add(pb1);
+            pnl1.Controls.Add(pb2);
+        }
+
+        /*        값 전달        */
+        public void Pass()
+        {
+            fc = new Form_calender(tb5, tb6, tb7, start, end);
+
+            fc.MdiParent = this.ParentForm;
+            fc.WindowState = FormWindowState.Maximized;
+            fc.FormBorderStyle = FormBorderStyle.None;
+            pnl2.Controls.Add(fc);
+            fc.Show();
+        }
+
         private void btn_register(object o, EventArgs a)
         {
-            string sql = string.Format("insert into member (mName, Age, Sex, phone, address, locker, mStart, mEnd, cost) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');",tb1.Text, tb2.Text, gender, tb3.Text, tb4.Text, tb5.Text, tb6.Text, tb7.Text, fc.money);
-            db.NonQuery(sql);
-            MessageBox.Show("회원 등록이 완료되었습니다.");
-
-            
-            
+            if (tb1.Text == "" || gender == null || tb3.Text == "" || tb5.Text == "" || tb6.Text == "" || tb7.Text == "")
+            {
+                MessageBox.Show("회원 정보를 정확히 입력해 주세요.");
+            }
+            else
+            {
+                string sql = string.Format("insert into member (mName, Age, Sex, phone, address, locker, mStart, mEnd, cost) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');", tb1.Text, tb2.Text, gender, tb3.Text, tb4.Text, tb5.Text, tb6.Text, tb7.Text, fc.money);
+                db.NonQuery(sql);
+                MessageBox.Show("회원 등록이 완료되었습니다.");
+                tb1.Text = "";
+                tb2.Text = "";
+                tb3.Text = "";
+                tb4.Text = "";
+                tb5.Text = "";
+                tb6.Text = "";
+                tb7.Text = "";
+                Pass();
+            }
         }
-        
+
         private void btn_reset(object o, EventArgs a)
         {
             //MessageBox.Show("초기화");

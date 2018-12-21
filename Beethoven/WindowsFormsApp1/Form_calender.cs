@@ -250,7 +250,6 @@ namespace WindowsFormsApp1
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-
             startDate = (DateTime)monthCalendar1.SelectionRange.Start;
             Date = startDate.ToShortDateString();
             tb1.Text = Date;
@@ -260,11 +259,11 @@ namespace WindowsFormsApp1
 
         private void btn_calendar(object o, EventArgs a)
         {
-
             Button btn = (Button)o;
             money = 0;
-            startDate = (DateTime)monthCalendar1.TodayDate;
+            startDate = (DateTime)monthCalendar1.SelectionRange.Start;
             Date = startDate.ToShortDateString();
+
             if (tb1.Text == "")
             {
                 MessageBox.Show("날짜를 선택해주세요");
@@ -273,7 +272,6 @@ namespace WindowsFormsApp1
             switch (btn.Name)
             {
                 case "btn1": 
-                    
                     endDate = startDate.AddDays(30);
                     Date2 = endDate.ToShortDateString();
                     tb6.Text = Date;
@@ -304,7 +302,6 @@ namespace WindowsFormsApp1
                     money = 200000;
                     break;
                 default:
-                    
                     break;
             }
             //this.Visible = false;
@@ -360,7 +357,7 @@ namespace WindowsFormsApp1
             tb5.Text = locker;
         }
 
-        private void Lk_rest()
+        public void Lk_rest()
         {
             string sql = "select locker from member";
             MySqlDataReader sdr = db.Reader(sql);
