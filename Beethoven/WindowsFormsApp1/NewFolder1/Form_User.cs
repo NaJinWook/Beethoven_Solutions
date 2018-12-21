@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
         private void Form_User_Load(object sender, EventArgs e)
         {
             arr.Add(new ob_Pnl(this, "", "", 400, 350, 20, 150));
-            
+
             pnl1 = os.Pnl((ob_Pnl)arr[0]);
             Controls.Add(pnl1);
             Label();
@@ -118,7 +118,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "그래프");
-            //hashtable.Add("click", (EventHandler)btn_register);
+            hashtable.Add("click", (EventHandler)btn_graph);
             btn3 = cmm.getButton(hashtable, this);
 
 
@@ -143,7 +143,50 @@ namespace WindowsFormsApp1
 
         private void btn_search(object o, EventArgs e)
         {
-            string sql = string.Format("select a.mNo,a.mName,b.kg,a.mStart,date_format(b.nowDate, '%Y-%m-%d') as nowDate from member2 a,weight b where a.mNo = '{0}' and b.mNo = '{0}';", tb1.Text);
+            int num;
+            bool success = int.TryParse(tb1.Text, out num);
+
+            //string sql = string.Format("select a.mNo,a.mName,b.kg,a.mStart,date_format(b.nowDate, '%Y-%m-%d') as nowDate from member2 a,weight b where a.mNo = '{0}' and b.mNo = '{0}';", tb1.Text);
+            if (success == false)
+            {
+                MessageBox.Show("회원번호만 입력해주세요");
+                return;
+            }
+            string sql = string.Format("call User_select('{0}')", tb1.Text);
+            MySqlDataReader sdr = db.Reader(sql);
+            lv.Items.Clear();
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }
+                lv.Items.Add(new ListViewItem(arr));
+            }
+            db.ReaderClose(sdr);
+
+        }
+
+
+        private void btn_register(object o, EventArgs e)
+        {
+            //MessageBox.Show("gd");
+            //string sql = string.Format("insert into weight(mNo,rNum,kg) select '{0}',  case when  max(rNum) is null then 1 else  max(rNum) +1 end as rNum,'{1}' from weight where mNo = '{2}';", tb1.Text, tb2.Text, tb1.Text);
+            int num;
+            bool success = int.TryParse(tb1.Text + tb2.Text, out num);
+
+            if (success == false)
+            {
+                MessageBox.Show("숫자만입력해주세요2");
+                return;
+            }
+
+            string sql = string.Format("call User_insert('{0}','{1}');", tb1.Text, tb2.Text);
+            db.NonQuery(sql);
+            tb2.Text = "";
+
+            sql = string.Format("call User_select('{0}')", tb1.Text);
             MySqlDataReader sdr = db.Reader(sql);
             lv.Items.Clear();
             while (sdr.Read())
@@ -159,13 +202,16 @@ namespace WindowsFormsApp1
         }
 
 
-        private void btn_register(object o, EventArgs e)
+
+        private void btn_graph(object o, EventArgs e)
         {
-            //MessageBox.Show("gd");
-            string sql = string.Format("insert into weight(mNo,rNum,kg) select '{0}',  case when  max(rNum) is null then 1 else  max(rNum) +1 end as rNum,'{1}' from weight where mNo = '{2}';", tb1.Text, tb2.Text, tb1.Text);
-            db.NonQuery(sql);
-
-
+            MessageBox.Show("그래프");
         }
+
     }
+
 }
+
+
+
+

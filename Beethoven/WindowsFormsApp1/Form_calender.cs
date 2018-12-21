@@ -99,7 +99,7 @@ namespace WindowsFormsApp1
             tb1.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
             tb1.TextAlign = HorizontalAlignment.Center;
             tb1.ReadOnly = true;
-            // tb1.Text = monthCalendar1.SelectionRange.Start.ToShortDateString();
+            tb1.Text = monthCalendar1.SelectionRange.Start.ToShortDateString();
 
         }
 
@@ -250,7 +250,6 @@ namespace WindowsFormsApp1
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            //startDate = DateTime.Today;
             startDate = (DateTime)monthCalendar1.SelectionRange.Start;
             Date = startDate.ToShortDateString();
             tb1.Text = Date;
@@ -262,6 +261,9 @@ namespace WindowsFormsApp1
         {
             Button btn = (Button)o;
             money = 0;
+            startDate = (DateTime)monthCalendar1.SelectionRange.Start;
+            Date = startDate.ToShortDateString();
+
             if (tb1.Text == "")
             {
                 MessageBox.Show("날짜를 선택해주세요");
@@ -355,7 +357,7 @@ namespace WindowsFormsApp1
             tb5.Text = locker;
         }
 
-        private void Lk_rest()
+        public void Lk_rest()
         {
             string sql = "select locker from member";
             MySqlDataReader sdr = db.Reader(sql);
