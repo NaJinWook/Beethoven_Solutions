@@ -82,14 +82,11 @@ namespace WindowsFormsApp1
 
             chart1 = new Chart();
             ChartArea chartArea1 = new ChartArea();
-            Legend legend1 = new Legend();
             Series series1 = new Series();
 
             chartArea1.Name = "ChartArea1";
-            legend1.Name = "Legend1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
             series1.Name = "Series1";
             
             chart1.Name = "chart1";
@@ -97,7 +94,6 @@ namespace WindowsFormsApp1
             chart1.Text = "chart1";
             chart1.ChartAreas.Add(chartArea1);
             chart1.Titles.Add("현 성별 정보");
-            chart1.Legends.Add(legend1);
             chart1.Series.Add(series1);
             chart1.Series["Series1"].IsValueShownAsLabel = false;
             value_search(sql);
