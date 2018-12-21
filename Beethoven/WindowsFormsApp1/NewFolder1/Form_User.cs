@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
@@ -18,6 +19,8 @@ namespace WindowsFormsApp1
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         Label lb1, lb2;
+        private string sql;
+        Chart chart2;
         Panel pnl1;
         ArrayList arr = new ArrayList();
         Button btn1, btn2, btn3, btn4;
@@ -32,8 +35,7 @@ namespace WindowsFormsApp1
 
         private void Form_User_Load(object sender, EventArgs e)
         {
-            arr.Add(new ob_Pnl(this, "", "", 400, 350, 20, 150));
-
+            arr.Add(new ob_Pnl(this, "", "", 450, 450, 20, 150));
             pnl1 = os.Pnl((ob_Pnl)arr[0]);
             Controls.Add(pnl1);
             Label();
@@ -52,7 +54,7 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "회원번호");
             lb1 = cmm.getLabel(hashtable, this);
             lb1.ForeColor = Color.Black;
-            lb1.BackColor = Color.Gray;
+              lb1.BackColor = Color.Gray;
             lb1.Font = new Font("맑은 고딕", 12, FontStyle.Bold);
 
             /*       몸무게부분         */
@@ -114,12 +116,22 @@ namespace WindowsFormsApp1
             /*    그래프부분     */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 40));
-            hashtable.Add("point", new Point(235, 97));
+            hashtable.Add("point", new Point(370, 97));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "그래프");
             hashtable.Add("click", (EventHandler)btn_graph);
             btn3 = cmm.getButton(hashtable, this);
+
+            /*    리스트부분     */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(50, 40));
+            hashtable.Add("point", new Point(310, 97));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "btn4");
+            hashtable.Add("text", "리스트");
+            hashtable.Add("click", (EventHandler)btn_list);
+            btn4 = cmm.getButton(hashtable, this);
 
 
         }
@@ -143,6 +155,7 @@ namespace WindowsFormsApp1
 
         private void btn_search(object o, EventArgs e)
         {
+            
             int num;
             bool success = int.TryParse(tb1.Text, out num);
 
@@ -165,7 +178,7 @@ namespace WindowsFormsApp1
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
-
+            
         }
 
 
@@ -182,7 +195,7 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            string sql = string.Format("call User_insert('{0}','{1}');", tb1.Text, tb2.Text);
+            sql = string.Format("call User_insert('{0}','{1}');", tb1.Text, tb2.Text);
             db.NonQuery(sql);
             tb2.Text = "";
 
@@ -199,14 +212,71 @@ namespace WindowsFormsApp1
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
+
+            
         }
 
 
 
         private void btn_graph(object o, EventArgs e)
         {
-            MessageBox.Show("그래프");
+            lv.Visible = false;
+
+            ////pnl1.BackColor = Color.Black;
+            chart2 = new Chart();
+            ChartArea chartArea2 = new ChartArea();
+            Legend legend2 = new Legend();
+            Series series2 = new Series();
+
+            chartArea2.Name = "ChartArea2";
+            legend2.Name = "Legend2";
+            series2.ChartArea = "ChartArea2";
+            series2.ChartType = SeriesChartType.Line;
+            series2.Legend = "Legend2";
+            series2.Name = "몸무게";
+
+            chart2.Name = "chart2";
+
+            chart2.Dock = DockStyle.Fill;
+            
+            chart2.Text = "chart2";
+            chart2.BackColor = Color.Silver;
+            chart2.ChartAreas.Add(chartArea2);
+            chart2.Legends.Add(legend2);
+            chart2.Series.Add(series2);
+
+            chart2.Series["몸무게"].IsValueShownAsLabel = false;
+
+            sql = (string.Format("select DATE_FORMAT(nowDate,'%y년 %m월 %d일') as '등록날',kg from weight where mNo = '{0}';", tb1.Text));
+            MySqlDataReader sdr = db.Reader(sql);
+
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }
+                chart2.Series["몸무게"].Points.AddXY(arr[0], arr[1]);
+            }
+            db.ReaderClose(sdr);
+
+
+
+            pnl1.Controls.Add(chart2);
+
+            
         }
+
+        private void btn_list(object o, EventArgs e)
+        {
+            chart2.Visible = false;
+            lv.Visible = true;
+
+        }
+
+
+
 
     }
 

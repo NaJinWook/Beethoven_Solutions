@@ -20,7 +20,7 @@ namespace WindowsFormsApp1
         ListView lv;
         ComboBox cb1;
         Chart chart1,chart2;
-        ImageList il = new ImageList();
+        //ImageList il = new ImageList();
         private MYsql db = new MYsql();
         Commons cmm = new Commons();
         private string sql = "select count(*) from member where sex = '남성';";

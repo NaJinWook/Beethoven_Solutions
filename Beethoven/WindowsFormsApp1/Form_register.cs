@@ -389,7 +389,7 @@ namespace WindowsFormsApp1
         }
 
         /*        값 전달        */
-        public void Pass()
+        private void Pass()
         {
             fc = new Form_calender(tb5, tb6, tb7, start, end);
 
