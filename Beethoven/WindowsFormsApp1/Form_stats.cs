@@ -26,6 +26,8 @@ namespace WindowsFormsApp1
         private string sql = "select count(*) from member where sex = '남성';";
         private string sql2 = "select count(*) from member where sex = '여성';";
         private string sql3 = "select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '2018%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;";
+        private string cbyear = "select DATE_FORMAT(mStart, '%Y')as '년' from member group by DATE_FORMAT(mStart, '%Y');";
+
         public Form_stats()
         {
             InitializeComponent();
@@ -64,6 +66,20 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "BackgroundPN2");
             pn3 = cmm.getPanel(hashtable, pn4);
 
+            hashtable = new Hashtable();
+            hashtable.Add("width", "80");
+            hashtable.Add("point", new Point(10, 25));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "선택");
+            hashtable.Add("text", "이름");
+            hashtable.Add("value", "이름");
+            hashtable.Add("key", "1");
+            cb1 = cmm.getComboBox(hashtable, pn4);
+            cb1.Items.Add("전체보기");
+            cb_year(cbyear);
+            cb1.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb1.SelectedIndexChanged += Cb1_SelectedIndexChanged;
+
             chart1 = new Chart();
             ChartArea chartArea1 = new ChartArea();
             Legend legend1 = new Legend();
@@ -80,6 +96,7 @@ namespace WindowsFormsApp1
             chart1.Dock = DockStyle.Fill;
             chart1.Text = "chart1";
             chart1.ChartAreas.Add(chartArea1);
+            chart1.Titles.Add("현 성별 정보");
             chart1.Legends.Add(legend1);
             chart1.Series.Add(series1);
             chart1.Series["Series1"].IsValueShownAsLabel = false;
@@ -95,7 +112,7 @@ namespace WindowsFormsApp1
             chartArea2.Name = "ChartArea2";
             legend2.Name = "Legend2";
             series2.ChartArea = "ChartArea2";
-            series2.ChartType = SeriesChartType.Bar;
+            series2.ChartType = SeriesChartType.Column;
             series2.Legend = "Legend2";
             series2.Name = "매출액";
 
@@ -108,27 +125,43 @@ namespace WindowsFormsApp1
             chart2.Series.Add(series2);
 
             chart2.Series["매출액"].IsValueShownAsLabel = false;
-            month_cost(sql3);
+            month_cost(string.Format("select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '{0}%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;",cb1.Text));
             pn3.Controls.Add(chart2);
             
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("name", "listView");
-            hashtable.Add("click", (MouseEventHandler)listView_click);
             lv = cmm.getListView(hashtable, pn2);
             month_cost2(sql3);
-            lv.Columns.Add("월");
-            lv.Columns.Add("매출액");
+            lv.Columns.Add("월", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("매출액", 96, HorizontalAlignment.Center);
+            lv.Font = new Font("돋움체", 10, FontStyle.Regular);
         }
 
-        private void listView_click(object sender, MouseEventArgs e)
+        private void Cb1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
+            month_cost2(string.Format("select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '{0}%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;", cb1.Text));
+            month_cost(string.Format("select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '{0}%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;", cb1.Text));
+        }//콤보박스 클릭시 그래프와 리스트 초기화
+        private void cb_year(string cbyear)
+        {
+            MySqlDataReader sdr = db.Reader(cbyear);
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }
+                cb1.Items.Add(string.Format("{0}",arr));
+            }
+            db.ReaderClose(sdr);
+        }//콤보박스 년도 자동 생성
 
         private void month_cost2(string sql3)
         {
             MySqlDataReader sdr = db.Reader(sql3);
+            lv.Items.Clear();
             while (sdr.Read())
             {
                 string[] arr = new string[sdr.FieldCount];
@@ -139,11 +172,12 @@ namespace WindowsFormsApp1
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
-        }
+        }//월별 데이터 리스트뷰
 
         private void month_cost(string sql3)
         {
             MySqlDataReader sdr = db.Reader(sql3);
+            chart2.Series["매출액"].Points.Clear();
             while (sdr.Read())
             {
                 string[] arr = new string[sdr.FieldCount];
@@ -154,7 +188,7 @@ namespace WindowsFormsApp1
                 chart2.Series["매출액"].Points.AddXY(arr[0],arr[1]);
             }
             db.ReaderClose(sdr);
-        }
+        }// 월별데이터 그래프
         private void value_search(string sql)
         {
             MySqlDataReader sdr = db.Reader(sql);

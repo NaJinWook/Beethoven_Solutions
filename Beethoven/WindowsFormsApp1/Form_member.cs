@@ -310,7 +310,6 @@ namespace WindowsFormsApp1
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
             lv.Font = new Font("돋움체", 15, FontStyle.Regular);
             
-
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
             {
@@ -324,8 +323,24 @@ namespace WindowsFormsApp1
             db.ReaderClose(sdr);
         }
 
+        private void locker(string sql)
+        {
+            MySqlDataReader sdr = db.Reader(sql);
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }
+            }
+            db.ReaderClose(sdr);
+        }
+
         private void Update()
         {
+            locker("select locker from member;");
+            
             DialogResult dialogresult = MessageBox.Show("수정 하시겠습니까?", "", MessageBoxButtons.YesNo);
             if (dialogresult == DialogResult.Yes)
             {
