@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace WindowsFormsApp1
         Label date, time;
         Timer mTimer;
         Form close;
+        PrivateFontCollection ft1, ft2, ft3;
+        Font font, font2, font3, font4;
         //Label start = new Label();
 
         public Form_main()
@@ -37,6 +40,8 @@ namespace WindowsFormsApp1
 
         private void Form_main_Load(object sender, EventArgs e)
         {
+            fonts();
+
             logo = new PictureBox();
             logo.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("goodee_logo");
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -57,8 +62,8 @@ namespace WindowsFormsApp1
             mdi_pnl = os.Pnl((ob_Pnl)arr[1]);
             time_pnl = os.Pnl((ob_Pnl)arr[2]);
             time_pnl2 = os.Pnl((ob_Pnl)arr[3]);
-            time = os.Lbl((ob_Lbl)arr[4]);
-            date = os.Lbl((ob_Lbl)arr[5]);
+            date = os.Lbl((ob_Lbl)arr[4]);
+            time = os.Lbl((ob_Lbl)arr[5]);
             logout = os.Btn((ob_Btn)arr[6]);
             logout.Click += Logout_Click;
             logout.Cursor = Cursors.Hand;
@@ -70,8 +75,8 @@ namespace WindowsFormsApp1
             menu_pnl.Controls.Add(logo);
             menu_pnl.Controls.Add(time_pnl);
             time_pnl.Controls.Add(time_pnl2);
-            time_pnl2.Controls.Add(date);
             time_pnl2.Controls.Add(time);
+            time_pnl2.Controls.Add(date);
             menu_pnl.Controls.Add(logout);
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(mdi_pnl);
@@ -93,7 +98,7 @@ namespace WindowsFormsApp1
                 menu_pnl.Controls.Add(menu_btn);
                 menu_btn.Click += Menu_btn_Click;
                 menu_btn.Cursor = Cursors.Hand;
-
+                menu_btn.Font = font3;
                 if (menu_btn.Name == "btn1")
                 {
                     menu_btn.Text = "회원 목록";
@@ -114,6 +119,20 @@ namespace WindowsFormsApp1
             option();
         }
 
+        private void fonts()
+        {
+            ft1 = new PrivateFontCollection();
+            ft2 = new PrivateFontCollection();
+            ft3 = new PrivateFontCollection();
+            ft1.AddFontFile("Font\\Digit.ttf");
+            ft2.AddFontFile("Font\\야놀자_Regular.ttf");
+            ft3.AddFontFile("Font\\야놀자_Bold.ttf");
+            font = new Font(ft1.Families[0], 40); // 년/월
+            font2 = new Font(ft1.Families[0], 25); // 시간
+            font3 = new Font(ft2.Families[0], 35); // 메뉴
+            font4 = new Font(ft3.Families[0], 35); // 로그아웃
+        }
+
         private void option()
         {
             menu_pnl.BackColor = Color.FromArgb(13, 49, 123);
@@ -125,7 +144,10 @@ namespace WindowsFormsApp1
             logout.TabStop = false; // 탭방지
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
-            logout.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
+            logout.Font = font4;
+            date.Font = font2;
+            time.Font = font;
+            //logout.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
             //start.ForeColor = Color.Black;
             //start.Font = new Font("휴먼편지체", 30, FontStyle.Bold);
             //start.Parent = bg;
@@ -144,14 +166,14 @@ namespace WindowsFormsApp1
 
         private void MTimer_Tick(object sender, EventArgs e)
         {
-            time.Text = string.Format("{0:yyyy.MM.dd(ddd)}", DateTime.Now);
-            time.ForeColor = Color.White;
-            time.BackColor = Color.Transparent;
-            time.Font = new Font("나눔 고딕", 19, FontStyle.Bold);
-            date.Text = string.Format("{0:HH:mm:ss}", DateTime.Now);
+            date.Text = string.Format("{0:yyyy.MM.dd(ddd)}", DateTime.Now);
             date.ForeColor = Color.White;
             date.BackColor = Color.Transparent;
-            date.Font = new Font("나눔 고딕", 33, FontStyle.Bold);
+            //time.Font = new Font("나눔 고딕", 19, FontStyle.Bold);
+            time.Text = string.Format("{0:HH:mm:ss}", DateTime.Now);
+            time.ForeColor = Color.White;
+            time.BackColor = Color.Transparent;
+            //date.Font = new Font("나눔 고딕", 33, FontStyle.Bold);
         }
 
         private void Menu_btn_Click(object sender, EventArgs e)

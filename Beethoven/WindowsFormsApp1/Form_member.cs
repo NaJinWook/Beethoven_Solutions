@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         private string temp;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker from member;";
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mStart, now()) < 0 then 0 else DATEDIFF(mStart, now()) end, '일') from member;";
 
         public Form_member()
         {
@@ -185,21 +185,21 @@ namespace WindowsFormsApp1
             //------------------------------------------------패널 2번
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 45));
-            hashtable.Add("point", new Point(1230, 0));
+            hashtable.Add("point", new Point(1120, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn1");
-            hashtable.Add("text", "수정");
+            hashtable.Add("text", "추가");
             hashtable.Add("click", (EventHandler)btn_click);
             btn1 = cmm.getButton(hashtable, pnl2);
 
-            //hashtable = new Hashtable();
-            //hashtable.Add("size", new Size(100, 70));
-            //hashtable.Add("point", new Point(1240, 0));
-            //hashtable.Add("color", Color.White);
-            //hashtable.Add("name", "btn2");
-            //hashtable.Add("text", "저장");
-            //hashtable.Add("click", (EventHandler)btn_click);
-            //btn2 = cmm.getButton(hashtable, pnl2);
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 45));
+            hashtable.Add("point", new Point(1230, 0));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "btn2");
+            hashtable.Add("text", "수정");
+            hashtable.Add("click", (EventHandler)btn_click);
+            btn2 = cmm.getButton(hashtable, pnl2);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 45));
@@ -236,6 +236,9 @@ namespace WindowsFormsApp1
             switch (btn.Name)
             {
                 case "btn1":
+                    Add();
+                    break;
+                case "btn2":
                     Update();
                     break;
                 case "btn3":
@@ -306,8 +309,9 @@ namespace WindowsFormsApp1
             lv.Columns.Add("나이", 80, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 80, HorizontalAlignment.Center);
             lv.Columns.Add("전화번호", 400, HorizontalAlignment.Center);
-            lv.Columns.Add("주소", 580, HorizontalAlignment.Center);
+            lv.Columns.Add("주소", 530, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
+            lv.Columns.Add("잔여일", 120, HorizontalAlignment.Center);
             lv.Font = new Font("돋움체", 15, FontStyle.Regular);
             
             MySqlDataReader sdr = db.Reader(sql);
@@ -317,7 +321,9 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < sdr.FieldCount; i++)
                 {
                     arr[i] = sdr.GetValue(i).ToString();
+
                 }
+                
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
@@ -352,6 +358,11 @@ namespace WindowsFormsApp1
             {
                 return;
             }
+        }
+
+        private void Add()
+        {
+            MessageBox.Show("ㅎㅇ");
         }
 
         private void option()

@@ -124,6 +124,21 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Font\Christmas_font.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Font\Digit.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Font\gabia_solmee.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Font\야놀자_Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Font\야놀자_Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -144,11 +159,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="goodee.ico" />
+    <None Include="Resources\login_bg.png" />
     <None Include="Resources\locker_img.png" />
     <None Include="Resources\cal_img.png" />
     <None Include="Resources\btv_logo.png" />
     <None Include="Resources\bg2.jpg" />
     <None Include="Resources\goodee_logo.PNG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
