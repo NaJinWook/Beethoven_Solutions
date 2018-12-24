@@ -24,10 +24,24 @@ namespace WindowsFormsApp1
         Form close;
         PrivateFontCollection ft1, ft2, ft3;
         Font font, font2, font3, font4;
-        //Label start = new Label();
+        Form_login fl;
 
         public Form_main()
         {
+            InitializeComponent();
+            Load += Form_main_Load;
+            ClientSize = new Size(1500, 772);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Text = "Beethoven Management System ver 0.1";
+            this.IsMdiContainer = true;
+            Control_Init();
+        }
+    
+
+        public Form_main(Form form)
+        {
+            fl = (Form_login)form;
             InitializeComponent();
             Load += Form_main_Load;
             ClientSize = new Size(1500, 772);
@@ -43,17 +57,17 @@ namespace WindowsFormsApp1
             fonts();
 
             logo = new PictureBox();
-            logo.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("goodee_logo");
+            logo.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("goodee_logo3");
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
-            logo.Size = new Size(282, 100);
-            logo.Location = new Point(1015, 0);
+            logo.Size = new Size(294, 100);
+            logo.Location = new Point(0, 0);
 
             arr.Add(new ob_Pnl(this, "", "", 1500, 100, 0, 0));
             arr.Add(new ob_Pnl(this, "", "", 1460, 632, 20, 25));
-            arr.Add(new ob_Pnl(this, "", "", 200, 200, 813, 0));
+            arr.Add(new ob_Pnl(this, "", "", 200, 200, 1100, 0)); // 시간 패널
             arr.Add(new ob_Pnl(this, "", "", 190, 90, 5, 5));
-            arr.Add(new ob_Lbl(this, "", "", 200, 200, 3, 5));
-            arr.Add(new ob_Lbl(this, "", "", 200, 200, -3, 35));
+            arr.Add(new ob_Lbl(this, "", "", 200, 200, 5, 5)); // 년월
+            arr.Add(new ob_Lbl(this, "", "", 200, 200, -3, 35)); // 시간
             arr.Add(new ob_Btn(this, "logout", "로그아웃", 200, 100, 1300, 0));
             //arr.Add(new ob_Lbl(this, "", "안녕하세요", 300, 300, 20, 24));
             arr.Add(new ob_Pnl(this, "", "", 15000, 677, 0, 95));
@@ -87,8 +101,9 @@ namespace WindowsFormsApp1
             {
                 menu_btn = new Button();
                 menu_btn.Size = new Size(200, 100);
-                menu_btn.Location = new Point((203 * i) + 0, 0);
-                menu_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
+                menu_btn.Location = new Point((202 * i) + 294, 0);
+                //menu_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
+                menu_btn.BackColor = Color.Black;
                 menu_btn.ForeColor = Color.White;
                 menu_btn.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
                 menu_btn.Name = string.Format("btn{0}", i + 1);
@@ -125,21 +140,21 @@ namespace WindowsFormsApp1
             ft2 = new PrivateFontCollection();
             ft3 = new PrivateFontCollection();
             ft1.AddFontFile("Font\\Digit.ttf");
-            ft2.AddFontFile("Font\\야놀자_Regular.ttf");
-            ft3.AddFontFile("Font\\야놀자_Bold.ttf");
-            font = new Font(ft1.Families[0], 40); // 년/월
-            font2 = new Font(ft1.Families[0], 25); // 시간
-            font3 = new Font(ft2.Families[0], 35); // 메뉴
-            font4 = new Font(ft3.Families[0], 35); // 로그아웃
+            ft2.AddFontFile("Font\\HANYGO230.ttf");
+            ft3.AddFontFile("Font\\HANYGO240.ttf");
+            font = new Font(ft1.Families[0], 38); // 시간
+            font2 = new Font(ft1.Families[0], 20); // 년/월
+            font3 = new Font(ft2.Families[0], 30); // 메뉴
+            font4 = new Font(ft3.Families[0], 30); // 로그아웃
         }
 
         private void option()
         {
-            menu_pnl.BackColor = Color.FromArgb(13, 49, 123);
+            menu_pnl.BackColor = Color.FromArgb(45, 35, 135);
             mdi_pnl.BackColor = Color.White;
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
-            logout.BackColor = Color.FromArgb(5, 68, 173);
+            logout.BackColor = Color.DarkBlue;
             logout.ForeColor = Color.White;
             logout.TabStop = false; // 탭방지
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
@@ -147,14 +162,9 @@ namespace WindowsFormsApp1
             logout.Font = font4;
             date.Font = font2;
             time.Font = font;
-            //logout.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
-            //start.ForeColor = Color.Black;
-            //start.Font = new Font("휴먼편지체", 30, FontStyle.Bold);
-            //start.Parent = bg;
-            //start.BackColor = Color.Transparent;
-            time_pnl.BackColor = Color.FromArgb(9, 31, 79);
-            time_pnl2.BackColor = Color.FromArgb(30, 100, 130, 20);
-            main_pnl.BackColor = Color.FromArgb(13, 49, 123);
+            time_pnl.BackColor = Color.DarkBlue;
+            time_pnl2.BackColor = Color.FromArgb(45, 35, 135);
+            main_pnl.BackColor = Color.FromArgb(45, 35, 155);
         }
 
         private void Control_Init()
@@ -166,14 +176,12 @@ namespace WindowsFormsApp1
 
         private void MTimer_Tick(object sender, EventArgs e)
         {
-            date.Text = string.Format("{0:yyyy.MM.dd(ddd)}", DateTime.Now);
+            date.Text = string.Format("{0:yyyy.MM.dd dddd}", DateTime.Now);
             date.ForeColor = Color.White;
             date.BackColor = Color.Transparent;
-            //time.Font = new Font("나눔 고딕", 19, FontStyle.Bold);
             time.Text = string.Format("{0:HH:mm:ss}", DateTime.Now);
             time.ForeColor = Color.White;
             time.BackColor = Color.Transparent;
-            //date.Font = new Font("나눔 고딕", 33, FontStyle.Bold);
         }
 
         private void Menu_btn_Click(object sender, EventArgs e)
@@ -224,8 +232,7 @@ namespace WindowsFormsApp1
         }
         private void Logout_Click(object sender, EventArgs e)
         {
-            Form_login login = new Form_login();
-            login.Visible = true;
+            fl.Visible = true;
             this.Close();
         }
     }

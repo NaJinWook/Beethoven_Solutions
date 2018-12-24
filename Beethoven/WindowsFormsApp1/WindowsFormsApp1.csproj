@@ -96,6 +96,13 @@
     <Compile Include="Form_stats.Designer.cs">
       <DependentUpon>Form_stats.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_update.Designer.cs">
+      <DependentUpon>Form_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs" />
     <Compile Include="NewFolder1\Form_User.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,13 +131,19 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Font\Christmas_font.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Font\Digit.TTF">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Font\gabia_solmee.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Font\HANYGO230.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Font\HANYGO240.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Font\HANYGO250.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Font\야놀자_Bold.ttf">
@@ -159,6 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="goodee.ico" />
+    <None Include="Resources\goodee_logo3.png" />
+    <None Include="Resources\goodee_logo2.png" />
+    <None Include="Resources\login_background.PNG" />
     <None Include="Resources\login_bg.png" />
     <None Include="Resources\locker_img.png" />
     <None Include="Resources\cal_img.png" />

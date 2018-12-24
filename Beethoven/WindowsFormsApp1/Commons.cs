@@ -134,6 +134,21 @@ namespace WindowsFormsApp1
             return listView;
         }
 
+        public ListView getListView2(Hashtable hashtable, Control parentDomain)
+        {
+            ListView listView = new ListView();
+            listView.Dock = DockStyle.Fill;
+            listView.View = View.Details;
+
+            listView.GridLines = true;
+            listView.FullRowSelect = true;
+            listView.BackColor = (Color)hashtable["color"];
+            listView.Name = hashtable["name"].ToString();
+            listView.MouseDoubleClick += (MouseEventHandler)hashtable["double_click"];
+            parentDomain.Controls.Add(listView);
+            return listView;
+        }
+
         public RadioButton getRadioButton(Hashtable hashtable, Control parentDomain)
         {
             RadioButton RadioButton = new RadioButton();
