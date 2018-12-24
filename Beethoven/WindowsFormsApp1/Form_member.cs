@@ -33,7 +33,9 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             Load += Form_member_Load;
+            
         }
+
 
         private void Form_member_Load(object sender, EventArgs e)
         {
