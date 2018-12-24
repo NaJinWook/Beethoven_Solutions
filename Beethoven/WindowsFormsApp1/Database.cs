@@ -27,12 +27,13 @@ namespace WindowsFormsApp1
 
         private bool Connection()
         {
-            string host = "192.168.3.36";
-            string user = "root";
-            string password = "1234";
-            string db = "test";
+            string host = "gudi.kr";
+            string user = "gdc3";
+            string password = "gdc3";
+            string db = "gdc3_4";
+            string port = "5002";
 
-            string connStr = string.Format("server={0};uid={1};password={2};database={3}", host, user, password, db);
+            string connStr = string.Format("server={0};uid={1};password={2};database={3};port={4};", host, user, password, db, port);
             MySqlConnection conn = new MySqlConnection(connStr);
 
             try
@@ -154,13 +155,10 @@ namespace WindowsFormsApp1
                 string resultstr = Encoding.UTF8.GetString(result);
                 if ("1" == resultstr)
                 {
-                    MessageBox.Show("성공");
                 }
                 else
                 {
-                    MessageBox.Show("실패");
                 }
-
                 return true;
             }
             catch

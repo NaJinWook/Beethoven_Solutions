@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
         Commons cmm = new Commons();
         private string sql = "select count(*) from member where sex = '남성';";
         private string sql2 = "select count(*) from member where sex = '여성';";
-        private string sql3 = "select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '2018%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;";
+        //private string sql3 = "select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '2018%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;";
         private string cbyear = "select DATE_FORMAT(mStart, '%Y')as '년' from member group by DATE_FORMAT(mStart, '%Y');";
 
         public Form_stats()
@@ -128,7 +128,7 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("name", "listView");
             lv = cmm.getListView(hashtable, pn2);
-            month_cost2(sql3);
+            //month_cost2(sql3);
             lv.Columns.Add("월", 100, HorizontalAlignment.Center);
             lv.Columns.Add("매출액", 96, HorizontalAlignment.Center);
             lv.Font = new Font("돋움체", 10, FontStyle.Regular);

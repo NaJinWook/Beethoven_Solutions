@@ -268,8 +268,7 @@ namespace WindowsFormsApp1
 
         private void search(object o, EventArgs e)
         {
-            //MessageBox.Show(cb1.Text);
-            //tb
+            
             if (cb1.Text == "회원번호")
             {
                 Select(string.Format("select * from member where mNo like'%{0}%'; ", tb.Text));
@@ -309,7 +308,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("주소", 580, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
             lv.Font = new Font("돋움체", 15, FontStyle.Regular);
-            
+           
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
             {
