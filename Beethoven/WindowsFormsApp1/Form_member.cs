@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
         private MYsql db = new MYsql();
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
-        Panel main_pnl;
+        Panel main_pnl, mdi_pnl;
         Panel pnl1, pnl2;
         Button btn1, btn2;
         TextBox tb1;
@@ -28,6 +28,9 @@ namespace WindowsFormsApp1
         ListView lv = new ListView();
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
+        Form close;
+        Form_main fm;
+        Form_register fr;
 
         private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member;";
 
@@ -105,7 +108,6 @@ namespace WindowsFormsApp1
         private void listView_click(object o, EventArgs a)
         {
             ListView lv = (ListView)o;
-
             ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
             ListViewItem item = itemGroup[0];
             Member member = new Member();
@@ -120,6 +122,7 @@ namespace WindowsFormsApp1
             fu.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
             fu.ShowDialog();
             Select(printAll);
+
         }
 
         private void search(object o, EventArgs e)
