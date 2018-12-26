@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
         Commons cmm = new Commons();
         TextBox tb1, tb2, tb3, tb4, tb5, tb6,tb7,tb8;
         Label lb1;
-        Button btn1, btn2, btn3,btn4,btn5;
+        Button btn1, btn2, btn3,btn4,btn5,btn6;
         Panel pn1,pn2,pn3,pn4,main_pnl;
         Hashtable hashtable;
         ListView lv;
@@ -158,9 +158,9 @@ namespace WindowsFormsApp1
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "삭제");
-            hashtable.Add("click", (EventHandler)btn2_click);
+            //hashtable.Add("click", (EventHandler)btn2_click);
             btn3 = cmm.getButton(hashtable, pn2);
-
+            
             //=========================================여기까지 패널2번
             //--------------------------------------여기부터 패널3번부분
             hashtable = new Hashtable();
@@ -202,7 +202,6 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "lb5");
             hashtable.Add("text", "수량");
             lb1 = cmm.getLabel(hashtable, pn3);
-
             //--------------------------------------------------------------------
             hashtable = new Hashtable();
             hashtable.Add("width", "100");
@@ -243,14 +242,28 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "tb5");
             hashtable.Add("enabled", true);
             tb5 = cmm.getTextBox(hashtable, pn3);
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 30));
+            hashtable.Add("point", new Point(820, 8));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "btn6");
+            hashtable.Add("text", "이미지 첨부");
+            hashtable.Add("click", (EventHandler)imageupload);
+            btn3 = cmm.getButton(hashtable, pn3);
             //=============================================================
-            
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "listView");
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv = cmm.getListView(hashtable, pn1);
-            Select("select hName, cpName, pdNo, weight, EA, bNow from tools;");
+            lv.Columns.Add("제품명", 120, HorizontalAlignment.Center);
+            lv.Columns.Add("회사명", 150, HorizontalAlignment.Center);
+            lv.Columns.Add("제품번호", 150, HorizontalAlignment.Center);
+            lv.Columns.Add("무게", 50, HorizontalAlignment.Center);
+            lv.Columns.Add("수량", 50, HorizontalAlignment.Center);
+            lv.Columns.Add("구매일", 195, HorizontalAlignment.Center);
+            WebDB();
             option();
         }
 
@@ -268,10 +281,10 @@ namespace WindowsFormsApp1
 
         private void btn_click(object o,EventArgs e)
         {
-
+            WebDB();
         }
 
-        private void btn2_click(object o,EventArgs e)
+      /* private void btn2_click(object o,EventArgs e)
         {
             DialogResult dialogresult = MessageBox.Show("저장 하시겠습니까?", "", MessageBoxButtons.YesNo);
             if (dialogresult == DialogResult.Yes)
@@ -286,8 +299,9 @@ namespace WindowsFormsApp1
             }
             //insert into tools(hName, cpName, pdNo, weight, EA) values('바벨', '바벨컴퍼니', '#123ddqcq3', 100, 20);
         }
+        */
 
-        private void imageupload()
+        private void imageupload(object o ,EventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();//파일을 띄운다
             of.Filter = "Images only.|*.jpg;*.jpeg;*.png;*.gif";//해당 확장명의 파일만 보이도록 필터
@@ -331,35 +345,40 @@ namespace WindowsFormsApp1
                 pc1.Load(resultstr);
             }
         }
-
-        private void Select(string sql)
+        
+        private void WebDB()
         {
+            WebAPI api = new WebAPI();
+            Hashtable ht = new Hashtable();
+            Button btn = new Button();
             tb1.Text = "";
             tb2.Text = "";
             tb3.Text = "";
             tb4.Text = "";
             tb5.Text = "";
-            lv.Clear();
-            lv.Columns.Add("제품명", 120, HorizontalAlignment.Center);
-            lv.Columns.Add("회사명", 150, HorizontalAlignment.Center);
-            lv.Columns.Add("제품번호", 150, HorizontalAlignment.Center);
-            lv.Columns.Add("무게", 50, HorizontalAlignment.Center);
-            lv.Columns.Add("수량", 50, HorizontalAlignment.Center);
-            lv.Columns.Add("구매일", 200, HorizontalAlignment.Center);
 
-            MySqlDataReader sdr = db.Reader(sql);
-            while (sdr.Read())
+            api.SelectListView("http://localhost:5000/select", lv);
+
+            if (btn.Text == "수정")
             {
-                string[] arr = new string[sdr.FieldCount];
-                for (int i = 0; i < sdr.FieldCount; i++)
-                {
-                    arr[i] = sdr.GetValue(i).ToString();
-                }
-                lv.Items.Add(new ListViewItem(arr));
+                //ht.Add("hNo", hNo);
+                ht.Add("hName", tb1.Text);
+                ht.Add("cpName", tb2.Text);
+                ht.Add("pdNo", tb3.Text);
+                ht.Add("hUrl", tb8.Text);
+                ht.Add("weight", tb4.Text);
+                ht.Add("EA", tb5.Text);
+                
+                api.Post("http://localhost:5000/update", ht);
+                api.SelectListView("http://localhost:5000/select", lv);
             }
-            db.ReaderClose(sdr);
+            else if(btn.Text == "저장")
+            {
+                api.Post("http://localhost:5000/insert", ht);
+                api.SelectListView("http://localhost:5000/select", lv);
+            }
         }
-        
+
         private void option()
         {
             pn1.BackColor = Color.White;
