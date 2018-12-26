@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +32,7 @@ namespace WindowsFormsApp1
         PictureBox pc1;
         WebAPI api;
         private string hNo, filename;
+        public int hNum;
 
         MYsql db = new MYsql();
         public Form_infoAdd()
@@ -83,6 +86,7 @@ namespace WindowsFormsApp1
             hashtable.Add("point", new Point(0, 0));
             hashtable.Add("pictureboxsizemode", PictureBoxSizeMode.StretchImage);
             pc1 = cmm.getPictureBox(hashtable, pn4);
+            
 
             //pn1 = os.Pnl((ob_Pnl)arr[0]);
             hashtable = new Hashtable();
@@ -264,12 +268,16 @@ namespace WindowsFormsApp1
             lv.Columns.Add("무게(kg)", 80, HorizontalAlignment.Center);
             lv.Columns.Add("수량", 80, HorizontalAlignment.Center);
             lv.Columns.Add("구매일", 195, HorizontalAlignment.Center);
-            api.SelectListView("http://localhost:5000/select", lv);
             option();
+            api.SelectListView("http://localhost:5000/select", lv);
         }
 
+       
         private void listView_click(object sender, MouseEventArgs e)
         {
+            //Hashtable ht = new Hashtable();
+            int index;
+            
             ListView lv = (ListView)sender;
             ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
             ListViewItem item = itemGroup[0];
@@ -278,17 +286,52 @@ namespace WindowsFormsApp1
             tb3.Text = item.SubItems[2].Text;
             tb4.Text = item.SubItems[3].Text;
             tb5.Text = item.SubItems[4].Text;
+            index = lv.FocusedItem.Index;
+            
+            //api.SelectListView("http://localhost:5000/select", lv);
+            hNum = Convert.ToInt32(lv.Items[index].SubItems[0].Text);
+            Selectpic("http://localhost:5000/select_img",pc1);
         }
 
+        public bool Selectpic(string url, PictureBox picture)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                Stream stream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(stream);
+                string result = sr.ReadToEnd();
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray j = (JArray)list[i];
+                    string[] arr = new string[j.Count];
+                    for (int k = 0; k < j.Count; k++)
+                    {
+                        if (k == 2)
+                        {
+                            arr[k] = j[k].ToString();
+                            MessageBox.Show(arr[k]);
+                            picture.Load(arr[k]);
+                        }
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         private void btn_click(object o, EventArgs e)
         {
             Button btn = (Button)o;
-            //MessageBox.Show(btn.Name);
             WebDB(btn.Name);
         }
 
         private void upload_click(object o, EventArgs e)
         {
+            
             OpenFileDialog of = new OpenFileDialog();//파일을 띄운다
             of.Filter = "Images only.|*.jpg;*.jpeg;*.png;*.gif";//해당 확장명의 파일만 보이도록 필터
 
@@ -297,34 +340,35 @@ namespace WindowsFormsApp1
                 string filePath = of.FileName;//파일의 경로
                 tb8.Text = filePath;
 
-                Image img = Image.FromFile(filePath);
+                /*Image img = Image.FromFile(filePath);
                 int start = filePath.LastIndexOf("\\") + 1;
                 int len = filePath.Length - start;
                 filename = filePath.Substring(start, len);// 파일의 경로에 string 값의 마지막 파일명을 잘라서 사용
 
                 WebClient wc = new WebClient();
-                NameValueCollection param = new NameValueCollection();
-                param.Add("filename", filename);
+                //NameValueCollection param = new NameValueCollection();
+                //param.Add("filename", filename);
 
                 MemoryStream ms = new MemoryStream();//스트림을 바이트단위로 바로 바뀌지 않아서 메모리 스트림 생성
                 img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 byte[] imgData = ms.ToArray();
-                string filedata = Convert.ToBase64String(imgData);//바이트 스트링으로 변환
-                param.Add("filedata", filedata);
 
+                string filedata = Convert.ToBase64String(imgData);//바이트 스트링으로 변환
+                //param.Add("filedata", filedata);
+                
                 byte[] result = wc.UploadValues("http://localhost:5000/insert", "POST", param);
                 string resultstr = Encoding.UTF8.GetString(result);
                 MessageBox.Show(resultstr);
                 pc1.Load(resultstr);
-
+                */
             }
         }
 
         private void WebDB(string name)
         {
             Hashtable ht = new Hashtable();
+            
             api.SelectListView("http://localhost:5000/select", lv);
-
             if (name == "update")
             {
                 ht.Add("hNo", hNo);
@@ -339,17 +383,29 @@ namespace WindowsFormsApp1
 
             else if (name == "insert")
             {
-                
+                Image img = Image.FromFile(tb8.Text);
+                int start = tb8.Text.LastIndexOf("\\") + 1;
+                int len = tb8.Text.Length - start;
+                filename = tb8.Text.Substring(start, len);// 파일의 경로에 string 값의 마지막 파일명을 잘라서 사용
+
+                WebClient wc = new WebClient();
+
+                MemoryStream ms = new MemoryStream();//스트림을 바이트단위로 바로 바뀌지 않아서 메모리 스트림 생성
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] imgData = ms.ToArray();
+
+                string filedata = Convert.ToBase64String(imgData);//바이트 스트링으로 변환
 
                 ht.Add("hName", tb2.Text);
                 ht.Add("cpName", tb3.Text);
-                //ht.Add("hUrl", tb8.Text);
                 ht.Add("weight", tb4.Text);
                 ht.Add("EA", tb5.Text);
-
+                ht.Add("filename", filename);
+                ht.Add("filedata", filedata);
                 api.Post("http://localhost:5000/insert", ht);
                 api.SelectListView("http://localhost:5000/select", lv);
             }
+
             tb2.Text = "";
             tb3.Text = "";
             tb4.Text = "";

@@ -37,7 +37,6 @@ namespace WindowsFormsApp1
             this.IsMdiContainer = true;
             Control_Init();
         }
-    
 
         public Form_main(Form form)
         {

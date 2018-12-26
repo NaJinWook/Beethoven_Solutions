@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
         ListView lv = new ListView();
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
-
+        
         private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member;";
 
         public Form_member()
