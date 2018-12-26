@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Text;
 
 namespace WindowsFormsApp1
 {
@@ -17,49 +18,41 @@ namespace WindowsFormsApp1
         private static string pwd = "1234"; // 관리자 로그인 비밀번호
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
-        Label BMS_lbl = new Label();
         PictureBox logo = new PictureBox();
-        Label call_lbl = new Label();
-        Panel pnl = new Panel();
-        Label pw_lbl = new Label();
-        TextBox pw_input = new TextBox();
-        Button num_btn = new Button();
+        PrivateFontCollection ft1, ft2;
+        Font font1, font2;
+        Panel pnl;
+        Label BMS_lbl, call_lbl, pw_lbl;
+        TextBox pw_input;
+        Button num_btn;
 
         public Form_login()
         {
             InitializeComponent();
             Load += Form_login_Load;
-            ClientSize = new Size(600, 400);
-            this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("bg2");
+            ClientSize = new Size(685, 748);
+            this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("login_background");
             this.MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.Text = "Beethoven Management System ver 0.1";
+            this.Text = "Beethoven Management System ver 0.1";  
         }
 
         private void Form_login_Load(object sender, EventArgs e)
         {
-            logo.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("btv_logo");
-            logo.SizeMode = PictureBoxSizeMode.StretchImage;
-            logo.BackColor = Color.Transparent;
-            logo.Size = new Size(250, 250);
-            logo.Location = new Point(20, 70);
+            fonts();
 
-            arr.Add(new ob_Lbl(this, "", "BMS Solutions", 290, 60, 10, 10));
-            arr.Add(new ob_Lbl(this, "", "프로그램 문의 전화) 010-1234-5678", 280, 50, 10, 330));
-            arr.Add(new ob_Pnl(this, "", "", 280, 360, 300, 20));
+            arr.Add(new ob_Lbl(this, "", "BMS\nSOUTIONS", 290, 200, 10, 10));
+            arr.Add(new ob_Lbl(this, "", "SSS프로그램 문의 전화) 010-1234-5678", 280, 50, 10, 330));
+            arr.Add(new ob_Pnl(this, "", "", 290, 385, 375, 315));
             arr.Add(new ob_Lbl(this, "", "비밀번호를 입력해주세요.", 280, 30, 23, 5));
-            arr.Add(new ob_Tbx(this, "", "", 240, 100, 20, 35));
+            arr.Add(new ob_Tbx(this, "", "", 240, 100, 25, 42));
 
             BMS_lbl = os.Lbl((ob_Lbl)arr[0]);
             call_lbl = os.Lbl((ob_Lbl)arr[1]);
             pnl = os.Pnl((ob_Pnl)arr[2]);
             pw_lbl = os.Lbl((ob_Lbl)arr[3]);
             pw_input = os.Tbx((ob_Tbx)arr[4]);
-            // 버튼 이벤트
 
-            Controls.Add(BMS_lbl);
-            Controls.Add(logo);
-            Controls.Add(call_lbl);
             Controls.Add(pnl);
             pnl.Controls.Add(pw_lbl);
             pnl.Controls.Add(pw_input);
@@ -71,16 +64,16 @@ namespace WindowsFormsApp1
                 {
                     Button num_btn = new Button();
                     num_btn.Size = new Size(60, 60);
-                    num_btn.Location = new Point((70 * j) + 38, (70 * i) + 80);
+                    num_btn.Location = new Point((70 * j) + 44, (70 * i) + 95);
                     num_btn.Name = string.Format("btn{0}", count++);
-                    num_btn.Font = new Font("나눔 고딕", 15, FontStyle.Bold);
                     num_btn.ForeColor = Color.White;
                     num_btn.TabStop = false; // 탭방지
                     num_btn.FlatStyle = FlatStyle.Flat; // 테두리 제거
                     num_btn.FlatAppearance.BorderSize = 0; // 테두리 제거
-                    num_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
+                    num_btn.BackColor = Color.Black;
                     pnl.Controls.Add(num_btn);
                     num_btn.Click += Btn_Click;
+                    num_btn.Font = font1;
 
                     for (int k = 1; k <= 9; k++)
                     {
@@ -109,20 +102,31 @@ namespace WindowsFormsApp1
         private void option()
         {
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            BMS_lbl.Font = new Font("Sitka Small", 25, FontStyle.Bold);
             BMS_lbl.ForeColor = Color.White;
             BMS_lbl.BackColor = Color.Transparent;
-            call_lbl.Font = new Font("나눔 고딕", 15, FontStyle.Bold);
-            call_lbl.ForeColor = Color.White;
-            call_lbl.BackColor = Color.Transparent;
-            pnl.BackColor = Color.FromArgb(220, 9, 29, 81);
-            pw_lbl.Font = new Font("나눔 고딕", 18, FontStyle.Bold);
+            pnl.BackColor = Color.FromArgb(255 ,45, 35, 155);
+            pw_lbl.Font = font2;
             pw_lbl.ForeColor = Color.White;
             pw_lbl.BackColor = Color.Transparent;
-            pw_input.Font = new Font("나눔 고딕", 20, FontStyle.Regular);
+            pw_input.Font = new Font("나눔 고딕", 20, FontStyle.Bold);
             pw_input.PasswordChar = '●';
             pw_input.Enabled = false;
             pw_input.BackColor = Color.White;
+
+        }
+
+        private void fonts()
+        {
+            ft1 = new PrivateFontCollection();
+            ft2 = new PrivateFontCollection();
+
+            ft1.AddFontFile("Font\\HANYGO250.ttf");
+            ft2.AddFontFile("Font\\HANYGO230.ttf");
+
+            font1 = new Font(ft1.Families[0], 15);
+            font2 = new Font(ft2.Families[0], 16);
+
+            
         }
 
         private void Btn_Click(object sender, EventArgs e)
@@ -137,16 +141,22 @@ namespace WindowsFormsApp1
                     pw_input.Text += result.Text;
                 }
             }
-
             else if (num_btn.Name == "btn10" && pw_input.Text == pwd)
             {
                 pw_input.Text = "";
-                Form_main main = new Form_main();
+                Form_main main = new Form_main(this);
+                main.StartPosition = FormStartPosition.CenterParent;
                 this.Visible = false;
                 main.Show();
             }
-            else if (num_btn.Name == "btn10" && pw_input.Text != pwd) MessageBox.Show("비밀번호를 잘못 입력하셨습니다.", "로그인 실패");
-
+            else if (num_btn.Name == "btn10" && pw_input.Text != pwd && pw_input.Text != "")
+            {
+                MessageBox.Show("비밀번호를 잘못 입력하셨습니다.", "로그인 실패");
+            }
+            else if(num_btn.Name == "btn10" && pw_input.Text == "")
+            {
+                MessageBox.Show("비밀번호를 입력해주세요.", "로그인 실패");
+            }
             else if (num_btn.Name == "btn12")
             {
                 if (pw_input.Text == "")

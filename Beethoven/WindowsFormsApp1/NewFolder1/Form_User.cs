@@ -208,8 +208,6 @@ namespace WindowsFormsApp1
 
         }
 
-
-
         private void btn_graph(object o, EventArgs e)
         {
             lv.Visible = false;
@@ -267,7 +265,6 @@ namespace WindowsFormsApp1
 
         }
 
-
         private void Tb_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back)))    //숫자와 백스페이스를 제외한 나머지를 바로 처리
@@ -276,13 +273,5 @@ namespace WindowsFormsApp1
                 MessageBox.Show("숫자만 입력해주세요.");
             }
         }
-
-
-
     }
-
 }
-
-
-
-

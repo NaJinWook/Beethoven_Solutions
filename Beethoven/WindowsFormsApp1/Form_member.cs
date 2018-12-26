@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,210 +19,79 @@ namespace WindowsFormsApp1
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
         Panel main_pnl;
-        Panel pnl1, pnl2, pnl3, pnl4;
-        Button btn1, btn2, btn3, btn4, btn5;
-        TextBox tb, tb1, tb2, tb3, tb4, tb5, tb6;
-        Label lb1;
+        Panel pnl1, pnl2;
+        Button btn1, btn2;
+        TextBox tb1;
         ComboBox cb1;
+        PrivateFontCollection ft1, ft2;
+        Font font1, font2;
         ListView lv = new ListView();
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
-        private string temp;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker from member;";
+
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member;";
 
         public Form_member()
         {
             InitializeComponent();
-            Load += Form_member_Load;
-            
+            Load += Form_member_Load;  
         }
-
 
         private void Form_member_Load(object sender, EventArgs e)
         {
+            fonts();
             arr.Add(new ob_Pnl(this, "", "", 1441, 613, 10, 10));
-            arr.Add(new ob_Pnl(this, "", "", 1441, 460, 0, 54));
-            arr.Add(new ob_Pnl(this, "", "", 1461, 45, 0, 520));
-            arr.Add(new ob_Pnl(this, "", "", 1461, 65, 0, 570));
+            arr.Add(new ob_Pnl(this, "", "", 1441, 562, 0, 54));
             arr.Add(new ob_Pnl(this, "", "", 1441, 50, 0, 0));
-            arr.Add(new ob_Tbx(this, "", "", 500, 20, 500, 25));
-            arr.Add(new ob_Btn(this, "btn4", "검색", 40, 23, 1010, 25));
-            arr.Add(new ob_Btn(this, "btn5", "전체보기", 70, 23, 1060, 25));
-
+            arr.Add(new ob_Tbx(this, "", "", 960, 20, 110, 8));
+            arr.Add(new ob_Btn(this, "btn1", "검색", 175, 40, 1080, 5));
+            arr.Add(new ob_Btn(this, "btn2", "전체보기", 175, 40, 1260, 5));
+            
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
             pnl2 = os.Pnl((ob_Pnl)arr[2]);
-            pnl3 = os.Pnl((ob_Pnl)arr[3]);
-            pnl4 = os.Pnl((ob_Pnl)arr[4]);
-            tb = os.Tbx((ob_Tbx)arr[5]);
-            btn4 = os.Btn((ob_Btn)arr[6]);
-            btn5 = os.Btn((ob_Btn)arr[7]);
+            tb1 = os.Tbx((ob_Tbx)arr[3]);
+            btn1 = os.Btn((ob_Btn)arr[4]);
+            btn2 = os.Btn((ob_Btn)arr[5]);
 
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(pnl1);
             main_pnl.Controls.Add(pnl2);
-            main_pnl.Controls.Add(pnl3);
-            main_pnl.Controls.Add(pnl4);
-            pnl4.Controls.Add(tb);//검색 텍스트박스
-            pnl4.Controls.Add(btn4);//검색 버튼
-            pnl4.Controls.Add(btn5);
-            btn4.Click += search;
-            btn5.Click += btn_click;
+            pnl2.Controls.Add(tb1);//검색 텍스트박스
+            pnl2.Controls.Add(btn1);//검색 버튼
+            pnl2.Controls.Add(btn2);
+            btn1.Click += search;
+            btn2.Click += All_view;
+
 
             option();
             hashtable = new Hashtable();
-            hashtable.Add("width", "80");
-            hashtable.Add("point", new Point(10, 25));
+            hashtable.Add("width", "90");
+            hashtable.Add("point", new Point(10, 8));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
             hashtable.Add("text", "이름");
             hashtable.Add("value", "이름");
             hashtable.Add("key", "1");
-            cb1 = cmm.getComboBox(hashtable, pnl4);
+            cb1 = cmm.getComboBox(hashtable, pnl2);
             cb1.Items.Add("이름");
             cb1.Items.Add("회원번호");
             cb1.Items.Add("전화번호");
+            
+            cb1.Font = font1;
             cb1.DropDownStyle = ComboBoxStyle.DropDownList; // 콤보박스 변경 방지
-
-            //--------------------------------------여기부터 패널3번부분
-
-            hashtable = new Hashtable();
-            hashtable.Add("width", "80");
-            hashtable.Add("point", new Point(61, 10));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "tb1");
-            hashtable.Add("enabled", true);
-            tb1 = cmm.getTextBox(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("width", "65");
-            hashtable.Add("point", new Point(181, 10));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "tb2");
-            hashtable.Add("enabled", true);
-            tb2 = cmm.getTextBox(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(281, 10));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "tb3");
-            hashtable.Add("enabled", true);
-            tb3 = cmm.getTextBox(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("width", "280");
-            hashtable.Add("point", new Point(411, 10));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "tb4");
-            hashtable.Add("enabled", true);
-            tb4 = cmm.getTextBox(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("width", "510");
-            hashtable.Add("point", new Point(731, 10));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "tb5");
-            hashtable.Add("enabled", true);
-            tb5 = cmm.getTextBox(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(1310, 10));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "tb6");
-            hashtable.Add("enabled", true);
-            tb6 = cmm.getTextBox(hashtable, pnl3);
-
-            //=============================================================
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(30, 15));
-            hashtable.Add("point", new Point(30, 15));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "lb1");
-            hashtable.Add("text", "이름");
-            lb1 = cmm.getLabel(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(30, 15));
-            hashtable.Add("point", new Point(150, 15));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "lb2");
-            hashtable.Add("text", "나이");
-            lb1 = cmm.getLabel(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(30, 15));
-            hashtable.Add("point", new Point(250, 15));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "lb3");
-            hashtable.Add("text", "성별");
-            lb1 = cmm.getLabel(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(60, 15));
-            hashtable.Add("point", new Point(350, 15));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "lb4");
-            hashtable.Add("text", "전화번호");
-            lb1 = cmm.getLabel(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(30, 15));
-            hashtable.Add("point", new Point(700, 15));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "lb5");
-            hashtable.Add("text", "주소");
-            lb1 = cmm.getLabel(hashtable, pnl3);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(60, 15));
-            hashtable.Add("point", new Point(1250, 15));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "lb6");
-            hashtable.Add("text", "라커 번호");
-            lb1 = cmm.getLabel(hashtable, pnl3);
-
-            //================================================여기까지 패널 3번
-            //------------------------------------------------패널 2번
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 45));
-            hashtable.Add("point", new Point(1230, 0));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "btn1");
-            hashtable.Add("text", "수정");
-            hashtable.Add("click", (EventHandler)btn_click);
-            btn1 = cmm.getButton(hashtable, pnl2);
-
-            //hashtable = new Hashtable();
-            //hashtable.Add("size", new Size(100, 70));
-            //hashtable.Add("point", new Point(1240, 0));
-            //hashtable.Add("color", Color.White);
-            //hashtable.Add("name", "btn2");
-            //hashtable.Add("text", "저장");
-            //hashtable.Add("click", (EventHandler)btn_click);
-            //btn2 = cmm.getButton(hashtable, pnl2);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 45));
-            hashtable.Add("point", new Point(1340, 0));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "btn3");
-            hashtable.Add("text", "삭제");
-            hashtable.Add("click", (EventHandler)btn_click);
-            btn3 = cmm.getButton(hashtable, pnl2);
-
-            //=========================================여기까지 패널2번
 
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "listView");
-            hashtable.Add("click", (MouseEventHandler)listView_click);
+            hashtable.Add("double_click", (MouseEventHandler)listView_click);
             lv.FullRowSelect = true;
-            lv = cmm.getListView(hashtable, pnl1);
             lv.Dock = DockStyle.Fill;
+            lv.View = View.Details;
+            lv = cmm.getListView2(hashtable, pnl1);
             lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
+            lv.Font = font1;
+            
             Select(printAll);
         }
 
@@ -232,85 +102,67 @@ namespace WindowsFormsApp1
             e.Cancel = true;
         }
 
-        private void btn_click(object o, EventArgs a)
-        {
-            Button btn = (Button)o;
-            switch (btn.Name)
-            {
-                case "btn1":
-                    Update();
-                    break;
-                case "btn3":
-                    Delete();
-                    break;
-                case "btn5":
-                    Select(printAll);
-                    break;
-            }
-        }
-
         private void listView_click(object o, EventArgs a)
         {
             ListView lv = (ListView)o;
+
             ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
             ListViewItem item = itemGroup[0];
-            temp = item.SubItems[0].Text;
-            tb1.Text = item.SubItems[1].Text;
-            tb2.Text = item.SubItems[2].Text;
-            tb3.Text = item.SubItems[3].Text;
-            tb4.Text = item.SubItems[4].Text;
-            tb5.Text = item.SubItems[5].Text;
-            tb6.Text = item.SubItems[6].Text;
-        }
-
-        private void Delete()
-        {
-
+            Member member = new Member();
+            member.mNo = item.SubItems[0].Text;
+            member.mName = item.SubItems[1].Text;
+            member.Age = item.SubItems[2].Text;
+            member.Sex = item.SubItems[3].Text;
+            member.phone = item.SubItems[4].Text;
+            member.address = item.SubItems[5].Text;
+            member.locker = item.SubItems[6].Text;
+            Form_update fu = new Form_update(member);
+            fu.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
+            fu.ShowDialog();
+            Select(printAll);
         }
 
         private void search(object o, EventArgs e)
         {
-            //MessageBox.Show(cb1.Text);
-            //tb
             if (cb1.Text == "회원번호")
             {
-                Select(string.Format("select * from member where mNo like'%{0}%'; ", tb.Text));
+                Select(string.Format("select * from member where mNo like'%{0}%'; ", tb1.Text));
             }
             else if (cb1.Text == "이름")
             {
-                Select(string.Format("select * from member where mName like'%{0}%'; ", tb.Text));
+                Select(string.Format("select * from member where mName like'%{0}%'; ", tb1.Text));
             }
             else if (cb1.Text == "전화번호")
             {
-                Select(string.Format("select * from member where phone like'%{0}%'; ", tb.Text));
+                Select(string.Format("select * from member where phone like'%{0}%'; ", tb1.Text));
             }
-            else if (tb.Text == "")
+            else if (tb1.Text == "")
             {
                 lv.Items.Clear();
             }
             else
             {
-                Select(string.Format("select * from member where mName like'%{0}%'; ", tb.Text));
+                Select(string.Format("select * from member where mName like'%{0}%'; ", tb1.Text));
             }
+        }
+
+        private void All_view(object o, EventArgs e) // 전체보기 버튼 클릭 이벤트
+        {
+            Select(printAll);
         }
 
         private void Select(string sql)
         {
-            tb1.Text = "";
-            tb2.Text = "";
-            tb3.Text = "";
-            tb4.Text = "";
-            tb5.Text = "";
-            tb6.Text = "";
             lv.Clear();
             lv.Columns.Add("번호", 60, HorizontalAlignment.Center);
             lv.Columns.Add("이름", 100, HorizontalAlignment.Center);
             lv.Columns.Add("나이", 80, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 80, HorizontalAlignment.Center);
-            lv.Columns.Add("전화번호", 400, HorizontalAlignment.Center);
-            lv.Columns.Add("주소", 580, HorizontalAlignment.Center);
+            lv.Columns.Add("전화번호", 200, HorizontalAlignment.Center);
+            lv.Columns.Add("주소", 730, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
-            lv.Font = new Font("돋움체", 15, FontStyle.Regular);
+            lv.Columns.Add("잔여일", 107, HorizontalAlignment.Center);
+            //lv.BackColor = Color.FromArgb(214, 230, 245);
             
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
@@ -320,7 +172,9 @@ namespace WindowsFormsApp1
                 {
                     arr[i] = sdr.GetValue(i).ToString();
                 }
+                
                 lv.Items.Add(new ListViewItem(arr));
+                
             }
             db.ReaderClose(sdr);
         }
@@ -339,30 +193,36 @@ namespace WindowsFormsApp1
             db.ReaderClose(sdr);
         }
 
-        private void Update()
+        private void fonts()
         {
-            locker("select locker from member;");
-            
-            DialogResult dialogresult = MessageBox.Show("수정 하시겠습니까?", "", MessageBoxButtons.YesNo);
-            if (dialogresult == DialogResult.Yes)
-            {
-                string sql = string.Format("update member set mName='{0}',Age={1},Sex='{2}',phone='{3}',address='{4}',locker={5} where mNo={6};", tb1.Text, tb2.Text, tb3.Text, tb4.Text, tb5.Text, tb6.Text, temp);
-                if (db.NonQuery(sql))
-                    Select(printAll);
-            }
-            else
-            {
-                return;
-            }
+            ft1 = new PrivateFontCollection();
+            ft2 = new PrivateFontCollection();
+
+            ft1.AddFontFile("Font\\HANYGO230.ttf");
+            ft2.AddFontFile("Font\\HANYGO250.ttf");
+
+            font1 = new Font(ft1.Families[0], 13);
+            font2 = new Font(ft2.Families[0], 50);
+
         }
 
         private void option()
         {
+            this.BackColor = Color.White;
             main_pnl.BackColor = Color.White;
-            pnl1.BackColor = Color.Blue;
-            pnl2.BackColor = Color.Yellow;
-            pnl3.BackColor = Color.Red;
-            pnl4.BackColor = Color.Pink;
+            pnl2.BackColor = Color.FromArgb(45, 35, 135);
+            btn1.BackColor = Color.Black;
+            btn1.ForeColor = Color.White;
+            btn1.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
+            btn1.Font = font1;
+            btn2.BackColor = Color.Black;
+            btn2.ForeColor = Color.White;
+            btn2.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
+            btn2.Font = font1;
+            tb1.Font = font1;
+
         }
     }
 }
