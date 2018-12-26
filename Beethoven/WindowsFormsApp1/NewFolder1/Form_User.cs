@@ -56,7 +56,7 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "회원번호");
             lb1 = cmm.getLabel(hashtable, this);
             lb1.ForeColor = Color.Black;
-              lb1.BackColor = Color.Gray;
+            lb1.BackColor = Color.Gray;
             lb1.Font = new Font("맑은 고딕", 12, FontStyle.Bold);
 
             /*       몸무게부분         */
@@ -174,7 +174,7 @@ namespace WindowsFormsApp1
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
-            
+
         }
         private void Lv_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
@@ -186,7 +186,7 @@ namespace WindowsFormsApp1
         {
             //MessageBox.Show("gd");
             //string sql = string.Format("insert into weight(mNo,rNum,kg) select '{0}',  case when  max(rNum) is null then 1 else  max(rNum) +1 end as rNum,'{1}' from weight where mNo = '{2}';", tb1.Text, tb2.Text, tb1.Text);
-            
+
             sql = string.Format("call User_insert('{0}','{1}');", tb1.Text, tb2.Text);
             db.NonQuery(sql);
             tb2.Text = "";
@@ -205,7 +205,7 @@ namespace WindowsFormsApp1
             }
             db.ReaderClose(sdr);
 
-            
+
         }
 
 
@@ -230,7 +230,7 @@ namespace WindowsFormsApp1
             chart2.Name = "chart2";
 
             chart2.Dock = DockStyle.Fill;
-            
+
             chart2.Text = "chart2";
             chart2.BackColor = Color.Silver;
             chart2.ChartAreas.Add(chartArea2);
@@ -257,7 +257,7 @@ namespace WindowsFormsApp1
 
             pnl1.Controls.Add(chart2);
 
-            
+
         }
 
         private void btn_list(object o, EventArgs e)
