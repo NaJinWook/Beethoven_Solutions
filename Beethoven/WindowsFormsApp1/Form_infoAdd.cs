@@ -286,9 +286,7 @@ namespace WindowsFormsApp1
             //MessageBox.Show(btn.Name);
             WebDB(btn.Name);
         }
-
-  
-
+        
         private void upload_click(object o ,EventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();//파일을 띄운다
@@ -346,17 +344,16 @@ namespace WindowsFormsApp1
                 ht.Add("cpName", tb3.Text);
                 ht.Add("weight", tb4.Text);
                 ht.Add("EA", tb5.Text);
-                ht.Add("hUrl", tb8.Text);
+                //ht.Add("hUrl", tb8.Text);
                 api.Post("http://localhost:5000/update", ht);
                 api.SelectListView("http://localhost:5000/select", lv);
             }
 
             else if(name == "insert")
             {
-                MessageBox.Show("넣다");
                 ht.Add("hName", tb2.Text);
                 ht.Add("cpName", tb3.Text);
-                ht.Add("hUrl", tb8.Text);
+                //ht.Add("hUrl", tb8.Text);
                 ht.Add("weight", tb4.Text);
                 ht.Add("EA", tb5.Text);
                 api.Post("http://localhost:5000/insert", ht);
