@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
         public int money;
         private MonthCalendar monthCalendar1;
 
-        public Form_calender(TextBox tb5, TextBox tb6, TextBox tb7, string start, string end)
+        public Form_calender(TextBox tb5, TextBox tb6, TextBox tb7)
         {
             InitializeComponent();
             Load += Form_calender_Load;

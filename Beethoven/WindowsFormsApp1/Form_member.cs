@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
         private MYsql db = new MYsql();
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
-        Panel main_pnl, mdi_pnl;
+        Panel main_pnl;
         Panel pnl1, pnl2;
         Button btn1, btn2;
         TextBox tb1;
@@ -28,16 +28,23 @@ namespace WindowsFormsApp1
         ListView lv = new ListView();
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
-        Form close;
+        private Panel panel;
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일'), delYn from member;";
+        Form fr;
+        Panel mdi_pnl;
         Form_main fm;
-        Form_register fr;
-
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member;";
-
         public Form_member()
         {
             InitializeComponent();
             Load += Form_member_Load;  
+        }
+
+        public Form_member(Form_main fm, Panel mdi_pnl)
+        {
+            InitializeComponent();
+            Load += Form_member_Load;
+            this.fm = fm;
+            this.mdi_pnl = mdi_pnl;
         }
 
         private void Form_member_Load(object sender, EventArgs e)
@@ -108,8 +115,10 @@ namespace WindowsFormsApp1
         private void listView_click(object o, EventArgs a)
         {
             ListView lv = (ListView)o;
+
             ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
             ListViewItem item = itemGroup[0];
+
             Member member = new Member();
             member.mNo = item.SubItems[0].Text;
             member.mName = item.SubItems[1].Text;
@@ -118,11 +127,26 @@ namespace WindowsFormsApp1
             member.phone = item.SubItems[4].Text;
             member.address = item.SubItems[5].Text;
             member.locker = item.SubItems[6].Text;
-            Form_update fu = new Form_update(member);
-            fu.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
-            fu.ShowDialog();
-            Select(printAll);
+            //Form_register fr = new Form_register(member);
+            //fr.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
+            //fr.ShowDialog();
+            //Select(printAll);
 
+            this.Visible = false;
+            fr = new Form_register(true, member);
+            fr.WindowState = FormWindowState.Maximized;
+            fr.FormBorderStyle = FormBorderStyle.None;
+            fr.MdiParent = fm;
+            fr.Dock = DockStyle.Fill;
+            mdi_pnl.Controls.Add(fr);
+            fr.FormClosed += fr_FormClosed;
+            fr.Show();
+        }
+
+        private void fr_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("석훈아 공부하자!");
+            this.Visible = true;
         }
 
         private void search(object o, EventArgs e)
@@ -162,11 +186,12 @@ namespace WindowsFormsApp1
             lv.Columns.Add("나이", 80, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 80, HorizontalAlignment.Center);
             lv.Columns.Add("전화번호", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("주소", 730, HorizontalAlignment.Center);
+            lv.Columns.Add("주소", 623, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
             lv.Columns.Add("잔여일", 107, HorizontalAlignment.Center);
+            lv.Columns.Add("삭제여부", 107, HorizontalAlignment.Center);
             //lv.BackColor = Color.FromArgb(214, 230, 245);
-            
+
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
             {
@@ -227,7 +252,5 @@ namespace WindowsFormsApp1
             tb1.Font = font1;
 
         }
-
-        
     }
 }
