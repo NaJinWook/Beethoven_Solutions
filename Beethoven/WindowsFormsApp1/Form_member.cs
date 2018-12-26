@@ -227,5 +227,7 @@ namespace WindowsFormsApp1
             tb1.Font = font1;
 
         }
+
+        
     }
 }
