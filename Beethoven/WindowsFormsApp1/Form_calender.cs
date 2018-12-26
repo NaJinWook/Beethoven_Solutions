@@ -63,16 +63,18 @@ namespace WindowsFormsApp1
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(455, 305));
             hashtable.Add("point", new Point(0, 0));
-            hashtable.Add("color", Color.FromArgb(231, 235, 254));
+            hashtable.Add("color", Color.FromArgb(214, 230, 245));
             hashtable.Add("name", "Calender_pnl");
             Calendar_pnl = cmm.getPanel(hashtable, this);
+            Calendar_pnl.BorderStyle = BorderStyle.FixedSingle;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(455, 305));
             hashtable.Add("point", new Point(0, 310));
-            hashtable.Add("color", Color.FromArgb(231, 235, 254));
+            hashtable.Add("color", Color.FromArgb(214, 230, 245));
             hashtable.Add("name", "Locker_pnl");
             Locker_pnl = cmm.getPanel(hashtable, this);
+            Locker_pnl.BorderStyle = BorderStyle.FixedSingle;
         }
 
         private void Calender()
