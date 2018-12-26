@@ -199,7 +199,6 @@ namespace WindowsFormsApp1
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
 
-
         }
 
         private void option()
