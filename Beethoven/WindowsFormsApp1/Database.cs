@@ -125,7 +125,7 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < list.Count; i++)
                 {
                     JArray j = (JArray)list[i];//JArray로 형변환을 시켜야 제대로된 값이 나온다.
-                    string[] arr = new string[6];
+                    string[] arr = new string[j.Count];
                     for (int k = 0; k < j.Count; k++)
                     {
                         arr[k] = j[k].ToString();
