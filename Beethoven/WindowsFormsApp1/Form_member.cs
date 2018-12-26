@@ -43,9 +43,9 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Pnl(this, "", "", 1441, 613, 10, 10));
             arr.Add(new ob_Pnl(this, "", "", 1441, 562, 0, 54));
             arr.Add(new ob_Pnl(this, "", "", 1441, 50, 0, 0));
-            arr.Add(new ob_Tbx(this, "", "", 500, 20, 500, 25));
-            arr.Add(new ob_Btn(this, "btn1", "검색", 40, 23, 1010, 25));
-            arr.Add(new ob_Btn(this, "btn2", "전체보기", 70, 23, 1060, 25));
+            arr.Add(new ob_Tbx(this, "", "", 960, 20, 110, 8));
+            arr.Add(new ob_Btn(this, "btn1", "검색", 175, 40, 1080, 5));
+            arr.Add(new ob_Btn(this, "btn2", "전체보기", 175, 40, 1260, 5));
             
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
@@ -61,11 +61,13 @@ namespace WindowsFormsApp1
             pnl2.Controls.Add(btn1);//검색 버튼
             pnl2.Controls.Add(btn2);
             btn1.Click += search;
+            btn2.Click += All_view;
+
 
             option();
             hashtable = new Hashtable();
-            hashtable.Add("width", "80");
-            hashtable.Add("point", new Point(10, 25));
+            hashtable.Add("width", "90");
+            hashtable.Add("point", new Point(10, 8));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
             hashtable.Add("text", "이름");
@@ -75,6 +77,8 @@ namespace WindowsFormsApp1
             cb1.Items.Add("이름");
             cb1.Items.Add("회원번호");
             cb1.Items.Add("전화번호");
+            
+            cb1.Font = font1;
             cb1.DropDownStyle = ComboBoxStyle.DropDownList; // 콤보박스 변경 방지
 
             hashtable = new Hashtable();
@@ -118,11 +122,6 @@ namespace WindowsFormsApp1
             Select(printAll);
         }
 
-        private void Delete()
-        {
-
-        }
-
         private void search(object o, EventArgs e)
         {
             if (cb1.Text == "회원번호")
@@ -147,6 +146,11 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void All_view(object o, EventArgs e) // 전체보기 버튼 클릭 이벤트
+        {
+            Select(printAll);
+        }
+
         private void Select(string sql)
         {
             lv.Clear();
@@ -154,10 +158,11 @@ namespace WindowsFormsApp1
             lv.Columns.Add("이름", 100, HorizontalAlignment.Center);
             lv.Columns.Add("나이", 80, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 80, HorizontalAlignment.Center);
-            lv.Columns.Add("전화번호", 400, HorizontalAlignment.Center);
-            lv.Columns.Add("주소", 530, HorizontalAlignment.Center);
+            lv.Columns.Add("전화번호", 200, HorizontalAlignment.Center);
+            lv.Columns.Add("주소", 730, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
             lv.Columns.Add("잔여일", 107, HorizontalAlignment.Center);
+            //lv.BackColor = Color.FromArgb(214, 230, 245);
             
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
@@ -166,10 +171,10 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < sdr.FieldCount; i++)
                 {
                     arr[i] = sdr.GetValue(i).ToString();
-
                 }
                 
                 lv.Items.Add(new ListViewItem(arr));
+                
             }
             db.ReaderClose(sdr);
         }
@@ -199,15 +204,25 @@ namespace WindowsFormsApp1
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
 
-
         }
 
         private void option()
         {
             this.BackColor = Color.White;
             main_pnl.BackColor = Color.White;
-            pnl1.BackColor = Color.Blue;
-            pnl2.BackColor = Color.Pink;
+            pnl2.BackColor = Color.FromArgb(45, 35, 135);
+            btn1.BackColor = Color.Black;
+            btn1.ForeColor = Color.White;
+            btn1.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
+            btn1.Font = font1;
+            btn2.BackColor = Color.Black;
+            btn2.ForeColor = Color.White;
+            btn2.FlatStyle = FlatStyle.Flat; // 테두리 제거
+            btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
+            btn2.Font = font1;
+            tb1.Font = font1;
+
         }
     }
 }
