@@ -103,6 +103,12 @@
       <DependentUpon>Form_update.cs</DependentUpon>
     </Compile>
     <Compile Include="Member.cs" />
+    <Compile Include="NewFolder1\Form_select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFolder1\Form_select.Designer.cs">
+      <DependentUpon>Form_select.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewFolder1\Form_User.cs">
       <SubType>Form</SubType>
     </Compile>

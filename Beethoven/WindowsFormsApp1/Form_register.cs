@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,9 @@ namespace WindowsFormsApp1
         Commons cmm = new Commons();
         RadioButton rb1, rb2;
         Button btn1, btn2;
-        PictureBox pb1, pb2;
         Form_calender fc;
+        PrivateFontCollection ft1;
+        Font font1;
 
         public string start;
         public string end;
@@ -53,21 +55,22 @@ namespace WindowsFormsApp1
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(pnl1);
             main_pnl.Controls.Add(pnl2);
-            pnl2.BackColor = Color.Black;
 
+            fonts();
             Label();
             Textbox();
             Button();
             Radiobutton();
             Pass();
-            Image();
             option();
+            
         }
 
         private void option()
         {
             main_pnl.BackColor = Color.White;
-            pnl1.BackColor = Color.FromArgb(220, 235, 254);
+            //pnl1.BackColor = Color.FromArgb(214, 230, 245);
+            pnl1.BorderStyle = BorderStyle.FixedSingle;
         }
 
 
@@ -83,8 +86,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "이름");
             lb1 = cmm.getLabel(hashtable, pnl1);
             lb1.ForeColor = Color.Black;
-            lb1.BackColor = Color.Gray;
-            lb1.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb1.BackColor = Color.Transparent;
+            lb1.Font = font1;
 
             /*       나이부분         */
             hashtable = new Hashtable();
@@ -95,8 +98,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "나이");
             lb2 = cmm.getLabel(hashtable, pnl1);
             lb2.ForeColor = Color.Black;
-            lb2.BackColor = Color.Gray;
-            lb2.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb2.BackColor = Color.Transparent;
+            lb2.Font = font1;
 
             /*       성별부분         */
             hashtable = new Hashtable();
@@ -107,8 +110,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "성별");
             lb3 = cmm.getLabel(hashtable, pnl1);
             lb3.ForeColor = Color.Black;
-            lb3.BackColor = Color.Gray;
-            lb3.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb3.BackColor = Color.Transparent;
+            lb3.Font = font1;
 
             /*       전화번호부분         */
             hashtable = new Hashtable();
@@ -119,8 +122,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "전화번호");
             lb5 = cmm.getLabel(hashtable, pnl1);
             lb5.ForeColor = Color.Black;
-            lb5.BackColor = Color.Gray;
-            lb5.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb5.BackColor = Color.Transparent;
+            lb5.Font = font1;
 
             /*       주소부분         */
             hashtable = new Hashtable();
@@ -131,8 +134,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "주소");
             lb4 = cmm.getLabel(hashtable, pnl1);
             lb4.ForeColor = Color.Black;
-            lb4.BackColor = Color.Gray;
-            lb4.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb4.BackColor = Color.Transparent;
+            lb4.Font = font1;
 
             /*       라커부분          */
             hashtable = new Hashtable();
@@ -143,8 +146,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "라커");
             lb6 = cmm.getLabel(hashtable, pnl1);
             lb6.ForeColor = Color.Black;
-            lb6.BackColor = Color.Gray;
-            lb6.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb6.BackColor = Color.Transparent;
+            lb6.Font = font1;
 
             /*       달력부분              */
             hashtable = new Hashtable();
@@ -155,8 +158,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "기간");
             lb7 = cmm.getLabel(hashtable, pnl1);
             lb7.ForeColor = Color.Black;
-            lb7.BackColor = Color.Gray;
-            lb7.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb7.BackColor = Color.Transparent;
+            lb7.Font = font1;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(40, 40));
@@ -166,8 +169,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "~");
             lb8 = cmm.getLabel(hashtable, pnl1);
             lb8.ForeColor = Color.Black;
-            lb8.BackColor = Color.Gray;
-            lb8.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb8.BackColor = Color.Transparent;
+            lb8.Font = font1;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(650, 50));
@@ -177,10 +180,9 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "테스트입니다. 설명같은거 아무거나 적기");
             lb9 = cmm.getLabel(hashtable, pnl1);
             lb9.ForeColor = Color.Black;
-            lb9.BackColor = Color.Gray;
-            lb9.Font = new Font("나눔 고딕", 25, FontStyle.Bold);
+            lb9.BackColor = Color.Transparent;
+            lb9.Font = font1;
         }
-
 
         /*     텍박     */
         private void Textbox()
@@ -310,7 +312,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "남성");
             hashtable.Add("click", (EventHandler)rdb_click);
             rb1 = cmm.getRadioButton(hashtable, pnl1);
-            rb1.Font = new Font("Impact", 25);
+            rb1.Font = font1;
+            rb1.ForeColor = Color.Blue;
 
             /* 여성부분 */
             hashtable = new Hashtable();
@@ -320,7 +323,8 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "여성");
             hashtable.Add("click", (EventHandler)rdb_click);
             rb2 = cmm.getRadioButton(hashtable, pnl1);
-            rb2.Font = new Font("Impact", 25);
+            rb2.Font = font1;
+            rb2.ForeColor = Color.Red;
         }
 
         /*calender 폼에서 받아온 출력*/
@@ -366,30 +370,8 @@ namespace WindowsFormsApp1
             }
         }
 
-        /*           라커, 달력 이미지          */
-        private void Image()
-        {
-            pb1 = new PictureBox();
-            pb2 = new PictureBox();
-
-            pb1.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("locker_img");
-            pb1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb1.BackColor = Color.Transparent;
-            pb1.Size = new Size(80, 80);
-            pb1.Location = new Point(120, 450);
-
-            pb2.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("cal_img");
-            pb2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb2.BackColor = Color.Transparent;
-            pb2.Size = new Size(70, 70);
-            pb2.Location = new Point(420, 450);
-
-            pnl1.Controls.Add(pb1);
-            pnl1.Controls.Add(pb2);
-        }
-
         /*        값 전달        */
-        public void Pass()
+        private void Pass()
         {
             fc = new Form_calender(tb5, tb6, tb7, start, end);
 
@@ -432,6 +414,14 @@ namespace WindowsFormsApp1
             tb5.Text = "";
             tb6.Text = "";
             tb7.Text = "";
+        }
+
+        private void fonts()
+        {
+            ft1 = new PrivateFontCollection();
+            ft1.AddFontFile("Font\\HANYGO230.ttf");
+            font1 = new Font(ft1.Families[0], 25);
+
         }
     }
 }

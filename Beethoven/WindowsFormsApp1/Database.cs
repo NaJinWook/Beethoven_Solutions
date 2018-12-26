@@ -27,12 +27,13 @@ namespace WindowsFormsApp1
 
         private bool Connection()
         {
-            string host = "192.168.3.36";
-            string user = "root";
-            string password = "1234";
-            string db = "test";
+            string host = "gudi.kr";
+            string user = "gdc3";
+            string password = "gdc3";
+            string port = "5002";
+            string db = "gdc3_4";
 
-            string connStr = string.Format("server={0};uid={1};password={2};database={3}", host, user, password, db);
+            string connStr = string.Format("server={0};uid={1};password={2};port={3};database={4}", host, user, password, port, db);
             MySqlConnection conn = new MySqlConnection(connStr);
 
             try
@@ -124,7 +125,7 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < list.Count; i++)
                 {
                     JArray j = (JArray)list[i];//JArray로 형변환을 시켜야 제대로된 값이 나온다.
-                    string[] arr = new string[6];
+                    string[] arr = new string[j.Count];
                     for (int k = 0; k < j.Count; k++)
                     {
                         arr[k] = j[k].ToString();
