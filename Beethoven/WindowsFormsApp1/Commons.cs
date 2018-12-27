@@ -125,7 +125,6 @@ namespace WindowsFormsApp1
             ListView listView = new ListView();
             listView.Dock = DockStyle.Fill;
             listView.View = View.Details;
-
             listView.GridLines = true;
             listView.FullRowSelect = true;
             listView.BackColor = (Color)hashtable["color"];
@@ -140,7 +139,6 @@ namespace WindowsFormsApp1
             ListView listView = new ListView();
             listView.Dock = DockStyle.Fill;
             listView.View = View.Details;
-
             listView.GridLines = true;
             listView.FullRowSelect = true;
             listView.BackColor = (Color)hashtable["color"];

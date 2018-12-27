@@ -141,7 +141,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        /*public bool Selectpic(string url,PictureBox picture)
+        public bool Selectpic(string url, int hNum, PictureBox pictureBox, string tb8)
         {
             try
             {
@@ -150,18 +150,17 @@ namespace WindowsFormsApp1
                 StreamReader sr = new StreamReader(stream);
                 string result = sr.ReadToEnd();
                 ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);
-                for (int i = 0; i < list.Count; i++)
+                for (int i = hNum - 1; i < hNum; i++)
                 {
                     JArray j = (JArray)list[i];
                     string[] arr = new string[j.Count];
                     for (int k = 0; k < j.Count; k++)
                     {
-                        
-                        arr[k] = j[k].ToString();
                         if (k == 2)
                         {
-                            MessageBox.Show(arr[k]);
-                            picture.Load();
+                            arr[k] = j[k].ToString();
+                            tb8 = arr[k];
+                            pictureBox.Load(arr[k]);
                         }
                     }
                 }
@@ -171,7 +170,7 @@ namespace WindowsFormsApp1
             {
                 return false;
             }
-        }*/
+        }
 
         public bool Post(string url, Hashtable ht)
         {
@@ -189,11 +188,11 @@ namespace WindowsFormsApp1
                 string resultstr = Encoding.UTF8.GetString(result);
                 if ("1" == resultstr)
                 {
-                    MessageBox.Show("성공");
+                   // MessageBox.Show("성공");
                 }
                 else
                 {
-                    MessageBox.Show("실패");
+                   // MessageBox.Show("실패");
                 }
 
                 return true;

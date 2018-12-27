@@ -34,7 +34,7 @@ namespace WindowsFormsApp1
         public Form_member()
         {
             InitializeComponent();
-            Load += Form_member_Load;  
+            Load += Form_member_Load;
         }
 
         private void Form_member_Load(object sender, EventArgs e)
@@ -62,7 +62,6 @@ namespace WindowsFormsApp1
             pnl2.Controls.Add(btn2);
             btn1.Click += search;
             btn2.Click += All_view;
-
 
             option();
             hashtable = new Hashtable();
@@ -203,7 +202,6 @@ namespace WindowsFormsApp1
 
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
-
         }
 
         private void option()
@@ -222,7 +220,6 @@ namespace WindowsFormsApp1
             btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
             btn2.Font = font1;
             tb1.Font = font1;
-
         }
     }
 }

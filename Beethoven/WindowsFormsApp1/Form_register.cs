@@ -38,7 +38,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             Load += Form_register_Load;
-
         }
 
         private void Form_register_Load(object sender, EventArgs e)

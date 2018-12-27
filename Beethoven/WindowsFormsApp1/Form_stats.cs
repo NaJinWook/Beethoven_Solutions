@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,11 @@ namespace WindowsFormsApp1
     public partial class Form_stats : Form
     {
         Hashtable hashtable;
-        Panel pn1,pn2,pn3,pn4;
+        Panel pn1,pn2,pn3,pn4,pn5;
         ListView lv;
+        PrivateFontCollection ft1, ft2;
+        Font font1, font2;
+        
         ComboBox cb1;
         Chart chart1,chart2;
         //ImageList il = new ImageList();
@@ -37,48 +41,58 @@ namespace WindowsFormsApp1
         private void Form_stats_Load(object sender, EventArgs e)
         {
             this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
-            
+            fonts();
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(1461, 633));
             hashtable.Add("point", new Point(0, 0));
             hashtable.Add("color", Color.White);
-            hashtable.Add("name", "BackgroundPN1");
+            hashtable.Add("name", "BackgroundPN4");
             pn4 = cmm.getPanel2(hashtable, this);
-            
+
             hashtable = new Hashtable();
-            hashtable.Add("size",new Size(200,200));
-            hashtable.Add("point", new Point(1225,430));
+            hashtable.Add("size", new Size(305, 623));
+            hashtable.Add("point", new Point(5, 5));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "BackgroundPN5");
+            pn5 = cmm.getPanel(hashtable, pn4);
+            pn5.BorderStyle = BorderStyle.FixedSingle;
+
+            hashtable = new Hashtable();
+            hashtable.Add("size",new Size(220,180));
+            hashtable.Add("point", new Point(42,435));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "BackgroundPN1");
-            pn1=cmm.getPanel(hashtable,pn4);
+            pn1=cmm.getPanel(hashtable, pn5);
+            pn1.BorderStyle = BorderStyle.FixedSingle;
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(200, 350));
-            hashtable.Add("point", new Point(1225, 75));
+            hashtable.Add("size", new Size(220, 375));
+            hashtable.Add("point", new Point(42,55));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "BackgroundPN2");
-            pn2 = cmm.getPanel(hashtable, pn4);
+            pn2 = cmm.getPanel(hashtable, pn5);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(1150, 550));
-            hashtable.Add("point", new Point(20, 75));
+            hashtable.Add("size", new Size(1130, 623));
+            hashtable.Add("point", new Point(326, 5));
             hashtable.Add("color", Color.White);
-            hashtable.Add("name", "BackgroundPN2");
+            hashtable.Add("name", "BackgroundPN3");
             pn3 = cmm.getPanel(hashtable, pn4);
+            pn3.BorderStyle = BorderStyle.FixedSingle;
 
             hashtable = new Hashtable();
             hashtable.Add("width", "80");
-            hashtable.Add("point", new Point(10, 25));
+            hashtable.Add("point", new Point(42, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
             hashtable.Add("text", "이름");
             hashtable.Add("value", "이름");
             hashtable.Add("key", "1");
-            cb1 = cmm.getComboBox(hashtable, pn4);
-            cb1.Items.Add("전체보기");
+            cb1 = cmm.getComboBox(hashtable, pn5);
             cb_year(cbyear);
             cb1.DropDownStyle = ComboBoxStyle.DropDownList;
             cb1.SelectedIndexChanged += Cb1_SelectedIndexChanged;
+            cb1.Font = font1;
 
             chart1 = new Chart();
             ChartArea chartArea1 = new ChartArea();
@@ -115,7 +129,7 @@ namespace WindowsFormsApp1
             chart2.Name = "chart2";
             chart2.Dock = DockStyle.Fill;
             chart2.Text = "chart2";
-            chart2.BackColor = Color.Pink;
+            chart2.BackColor = Color.White;
             chart2.ChartAreas.Add(chartArea2);
             chart2.Legends.Add(legend2);
             chart2.Series.Add(series2);
@@ -129,9 +143,9 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "listView");
             lv = cmm.getListView(hashtable, pn2);
             month_cost2(sql3);
-            lv.Columns.Add("월", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("월", 120, HorizontalAlignment.Center);
             lv.Columns.Add("매출액", 96, HorizontalAlignment.Center);
-            lv.Font = new Font("돋움체", 10, FontStyle.Regular);
+            lv.Font = font1;
         }
 
         private void Cb1_SelectedIndexChanged(object sender, EventArgs e)
@@ -213,5 +227,17 @@ namespace WindowsFormsApp1
             }
             db.ReaderClose(sdr);
         }//여자
+
+        private void fonts()
+        {
+            ft1 = new PrivateFontCollection();
+            ft2 = new PrivateFontCollection();
+
+            ft1.AddFontFile("Font\\HANYGO230.ttf");
+            ft2.AddFontFile("Font\\HANYGO250.ttf");
+
+            font1 = new Font(ft1.Families[0], 13);
+            font2 = new Font(ft2.Families[0], 50);
+        }
     }
 }
