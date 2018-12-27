@@ -46,6 +46,7 @@ namespace WindowsFormsApp1
             Load += Form_register_Load;
             this.sub = sub;
             this.member = member;
+            
         }
 
         private void Form_register_Load(object sender, EventArgs e)
@@ -270,17 +271,17 @@ namespace WindowsFormsApp1
             tb7 = cmm.getTextBox(hashtable, pnl1);
             tb7.TextAlign = HorizontalAlignment.Center;
             tb7.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
-            tb7.Enabled = false;
+            tb7.Enabled = false;  
 
 
-            if (sub)
-            {
-                tb1.Text = member.mName;
-                tb2.Text = member.Age;
-                tb3.Text = member.phone;
-                tb4.Text = member.address;
-                tb5.Text = member.locker;
-            }
+            //if (sub)
+            //{
+            //    tb1.Text = member.mName;
+            //    tb2.Text = member.Age;
+            //    tb3.Text = member.phone;
+            //    tb4.Text = member.address;
+            //    tb5.Text = member.locker;
+            //}
 
         }
 
@@ -330,6 +331,9 @@ namespace WindowsFormsApp1
                 hashtable.Add("click", (EventHandler)test);
                 btn3 = cmm.getButton(hashtable, pnl1);
             }
+
+
+
         }
 
         /*     라디오버튼    */
@@ -345,7 +349,7 @@ namespace WindowsFormsApp1
             rb1 = cmm.getRadioButton(hashtable, pnl1);
             rb1.Font = font1;
             rb1.ForeColor = Color.Blue;
-            rb1.Checked = true;
+            
             /* 여성부분 */
             hashtable = new Hashtable();
             hashtable.Add("point", new Point(340, 165));

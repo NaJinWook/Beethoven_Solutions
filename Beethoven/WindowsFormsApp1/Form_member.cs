@@ -29,14 +29,15 @@ namespace WindowsFormsApp1
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         private Panel panel;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일'), delYn from member;";
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, delYn from member;";
         Form fr;
         Panel mdi_pnl;
         Form_main fm;
+
         public Form_member()
         {
             InitializeComponent();
-            Load += Form_member_Load;  
+            Load += Form_member_Load;
         }
 
         public Form_member(Form_main fm, Panel mdi_pnl)
@@ -56,7 +57,7 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Tbx(this, "", "", 960, 20, 110, 8));
             arr.Add(new ob_Btn(this, "btn1", "검색", 175, 40, 1080, 5));
             arr.Add(new ob_Btn(this, "btn2", "전체보기", 175, 40, 1260, 5));
-            
+
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
             pnl2 = os.Pnl((ob_Pnl)arr[2]);
@@ -87,7 +88,7 @@ namespace WindowsFormsApp1
             cb1.Items.Add("이름");
             cb1.Items.Add("회원번호");
             cb1.Items.Add("전화번호");
-            
+
             cb1.Font = font1;
             cb1.DropDownStyle = ComboBoxStyle.DropDownList; // 콤보박스 변경 방지
 
@@ -101,9 +102,17 @@ namespace WindowsFormsApp1
             lv = cmm.getListView2(hashtable, pnl1);
             lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
             lv.Font = font1;
-            
+
+            lv.ColumnClick += Lv_ColumnClick1;
             Select(printAll);
         }
+
+        private void Lv_ColumnClick1(object sender, ColumnClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         /*              리스트뷰 컬럼 크기 고정                     */
         private void Lv_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
@@ -119,6 +128,7 @@ namespace WindowsFormsApp1
             ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
             ListViewItem item = itemGroup[0];
 
+            MessageBox.Show(item.SubItems[0].Text);
             Member member = new Member();
             member.mNo = item.SubItems[0].Text;
             member.mName = item.SubItems[1].Text;
@@ -127,10 +137,10 @@ namespace WindowsFormsApp1
             member.phone = item.SubItems[4].Text;
             member.address = item.SubItems[5].Text;
             member.locker = item.SubItems[6].Text;
-            //Form_register fr = new Form_register(member);
-            //fr.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
-            //fr.ShowDialog();
-            //Select(printAll);
+
+
+
+
 
             this.Visible = false;
             fr = new Form_register(true, member);
@@ -141,6 +151,21 @@ namespace WindowsFormsApp1
             mdi_pnl.Controls.Add(fr);
             fr.FormClosed += fr_FormClosed;
             fr.Show();
+
+            string sql = string.Format("select * from member where mNo = '{0}';", item.SubItems[0].Text);
+            MySqlDataReader sdr = db.Reader(sql);
+            string[] list = new string[11];
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    list[i] = String.Format("{0}", sdr.GetValue(i));
+                }
+
+            }
+            MessageBox.Show(list[3].ToString());
+
         }
 
         private void fr_FormClosed(object sender, FormClosedEventArgs e)
@@ -200,9 +225,9 @@ namespace WindowsFormsApp1
                 {
                     arr[i] = sdr.GetValue(i).ToString();
                 }
-                
+
                 lv.Items.Add(new ListViewItem(arr));
-                
+
             }
             db.ReaderClose(sdr);
         }
@@ -251,6 +276,63 @@ namespace WindowsFormsApp1
             btn2.Font = font1;
             tb1.Font = font1;
 
+        }
+
+        private void Lv_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (this.lv.Sorting == SortOrder.Ascending || lv.Sorting == SortOrder.None)
+            {
+                this.lv.ListViewItemSorter = new ListViewItemComparer(e.Column, "desc");
+                lv.Sorting = SortOrder.Descending;
+            }
+            else
+            {
+                this.lv.ListViewItemSorter = new ListViewItemComparer(e.Column, "asc");
+                lv.Sorting = SortOrder.Ascending;
+
+            }
+            lv.Sort();
+        }
+
+        internal class ListViewItemComparer : IComparer
+        {
+            private int column;
+            private string sort = "asc";
+
+            public ListViewItemComparer()
+            {
+                column = 0;
+            }
+            public ListViewItemComparer(int column, string sort)
+            {
+                this.column = column;
+                this.sort = sort;
+            }
+            public int Compare(object x, object y)
+            {
+
+                int chk = 1;
+                try
+                {
+                    if (sort == "asc")
+                        chk = 1;
+                    else
+                        chk = -1;
+
+                    if (Convert.ToInt32(((ListViewItem)x).SubItems[column].Text) > Convert.ToInt32(((ListViewItem)y).SubItems[column].Text))
+                        return chk;
+                    else
+                        return -chk;
+
+                }
+                catch (Exception)
+                {
+                    if (sort == "asc")
+                        return String.Compare(((ListViewItem)x).SubItems[column].Text, ((ListViewItem)y).SubItems[column].Text);
+                    else
+                        return String.Compare(((ListViewItem)y).SubItems[column].Text, ((ListViewItem)x).SubItems[column].Text);
+                }
+            }
         }
     }
 }
