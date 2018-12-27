@@ -205,7 +205,7 @@ namespace WindowsFormsApp1
                     close = new Form_register();
                     close.WindowState = FormWindowState.Maximized;
                     close.FormBorderStyle = FormBorderStyle.None;
-                    close.MdiParent = this;
+                    close.MdiParent = this; 
                     close.Dock = DockStyle.Fill;
                     mdi_pnl.Controls.Add(close);
                     close.Show();

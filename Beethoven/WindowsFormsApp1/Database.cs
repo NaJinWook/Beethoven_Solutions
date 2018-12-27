@@ -114,22 +114,23 @@ namespace WindowsFormsApp1
     {
         public bool SelectListView(string url, ListView listView)
         {
+            listView.Items.Clear();
             try
             {
                 WebClient wc = new WebClient();
                 Stream stream = wc.OpenRead(url);
                 StreamReader sr = new StreamReader(stream);
                 string result = sr.ReadToEnd();
-                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);//스트링값의 제이슨오브젝트를 어레이리스트로 변환하여받는다.
-                listView.Items.Clear();
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);
                 for (int i = 0; i < list.Count; i++)
                 {
-                    JArray j = (JArray)list[i];//JArray로 형변환을 시켜야 제대로된 값이 나온다.
+                    JArray j = (JArray)list[i];
                     string[] arr = new string[j.Count];
                     for (int k = 0; k < j.Count; k++)
                     {
                         arr[k] = j[k].ToString();
                     }
+                    
                     listView.Items.Add(new ListViewItem(arr));
                 }
                 return true;
@@ -139,6 +140,38 @@ namespace WindowsFormsApp1
                 return false;
             }
         }
+
+        public bool Selectpic(string url, int hNum, PictureBox pictureBox, string tb8)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                Stream stream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(stream);
+                string result = sr.ReadToEnd();
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);
+                for (int i = hNum - 1; i < hNum; i++)
+                {
+                    JArray j = (JArray)list[i];
+                    string[] arr = new string[j.Count];
+                    for (int k = 0; k < j.Count; k++)
+                    {
+                        if (k == 2)
+                        {
+                            arr[k] = j[k].ToString();
+                            tb8 = arr[k];
+                            pictureBox.Load(arr[k]);
+                        }
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Post(string url, Hashtable ht)
         {
             try
@@ -155,11 +188,11 @@ namespace WindowsFormsApp1
                 string resultstr = Encoding.UTF8.GetString(result);
                 if ("1" == resultstr)
                 {
-                    MessageBox.Show("성공");
+                   // MessageBox.Show("성공");
                 }
                 else
                 {
-                    MessageBox.Show("실패");
+                   // MessageBox.Show("실패");
                 }
 
                 return true;
