@@ -114,6 +114,7 @@ namespace WindowsFormsApp1
     {
         public bool SelectListView(string url, ListView listView)
         {
+            listView.Items.Clear();
             try
             {
                 WebClient wc = new WebClient();

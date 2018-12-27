@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
             pictureBox.Size = (Size)hashtable["size"];
             pictureBox.Location = (Point)hashtable["point"];
             pictureBox.SizeMode = (PictureBoxSizeMode)hashtable["pictureboxsizemode"];
+            tergat.Controls.Add(pictureBox);
             return pictureBox;
         }
 
