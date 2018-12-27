@@ -23,21 +23,29 @@ namespace WindowsFormsApp1
         Hashtable hashtable = new Hashtable();
         Commons cmm = new Commons();
         RadioButton rb1, rb2;
-        Button btn1, btn2;
+        Button btn1, btn2, btn3;
         Form_calender fc;
         PrivateFontCollection ft1;
         Font font1;
 
-        public string start;
-        public string end;
         public string gender;
         public TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
-
+        bool sub = false;
+        Member member;
 
         public Form_register()
         {
             InitializeComponent();
             Load += Form_register_Load;
+        }
+
+        public Form_register(bool sub, Member member)
+        {
+            InitializeComponent();
+            Load += Form_register_Load;
+            this.sub = sub;
+            this.member = member;
+            
         }
 
         private void Form_register_Load(object sender, EventArgs e)
@@ -194,7 +202,7 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "tb1");
             hashtable.Add("enabled", true);
             tb1 = cmm.getTextBox(hashtable, pnl1);
-            tb1.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
+            tb1.Font = new Font("나눔 고딕", 25, FontStyle.Regular);         
 
             /*       나이부분         */
             hashtable = new Hashtable();
@@ -262,7 +270,18 @@ namespace WindowsFormsApp1
             tb7 = cmm.getTextBox(hashtable, pnl1);
             tb7.TextAlign = HorizontalAlignment.Center;
             tb7.Font = new Font("나눔 고딕", 25, FontStyle.Regular);
-            tb7.Enabled = false;
+            tb7.Enabled = false;  
+
+
+            //if (sub)
+            //{
+            //    tb1.Text = member.mName;
+            //    tb2.Text = member.Age;
+            //    tb3.Text = member.phone;
+            //    tb4.Text = member.address;
+            //    tb5.Text = member.locker;
+            //}
+
         }
 
         /*          텍스트박스에 숫자만 입력 받게           */
@@ -298,6 +317,22 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "초기화");
             hashtable.Add("click", (EventHandler)btn_reset);
             btn2 = cmm.getButton(hashtable, pnl1);
+
+            if (sub)
+            {
+                /*    닫기부분     */
+                hashtable = new Hashtable();
+                hashtable.Add("size", new Size(100, 70));
+                hashtable.Add("point", new Point(300, 530));
+                hashtable.Add("color", Color.White);
+                hashtable.Add("name", "btn3");
+                hashtable.Add("text", "닫기");
+                hashtable.Add("click", (EventHandler)test);
+                btn3 = cmm.getButton(hashtable, pnl1);
+            }
+
+
+
         }
 
         /*     라디오버튼    */
@@ -313,7 +348,7 @@ namespace WindowsFormsApp1
             rb1 = cmm.getRadioButton(hashtable, pnl1);
             rb1.Font = font1;
             rb1.ForeColor = Color.Blue;
-
+            
             /* 여성부분 */
             hashtable = new Hashtable();
             hashtable.Add("point", new Point(340, 165));
@@ -352,6 +387,11 @@ namespace WindowsFormsApp1
             //tb7.Text = Date2;
         }
 
+        private void test(object o, EventArgs e)
+        {
+            this.Close();
+        }
+
         /*        라디오버튼 이벤트        */
         private void rdb_click(object o, EventArgs a)
         {
@@ -372,8 +412,7 @@ namespace WindowsFormsApp1
         /*        값 전달        */
         private void Pass()
         {
-            fc = new Form_calender(tb5, tb6, tb7, start, end);
-
+            fc = new Form_calender(tb5, tb6, tb7);
             fc.MdiParent = this.ParentForm;
             fc.WindowState = FormWindowState.Maximized;
             fc.FormBorderStyle = FormBorderStyle.None;

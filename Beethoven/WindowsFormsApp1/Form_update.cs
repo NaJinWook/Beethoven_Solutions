@@ -22,8 +22,9 @@ namespace WindowsFormsApp1
         TextBox tb1, tb2, tb3, tb4, tb5, tb6;
         Label lb1, lb2, lb3, lb4, lb5, lb6;
         Button btn1, btn2, btn3;
-        //string pass1, pass2, pass3, pass4, pass5, pass6, pass7;
+        Form_calender fc;
         Member member;
+        public TextBox Start_tb, End_tb, Loker_tb;
 
         public Form_update()
         {
@@ -35,15 +36,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             this.member = member;
-            /*
-            pass1 = test1;
-            pass2 = test2;
-            pass3 = test3;
-            pass4 = test4;
-            pass5 = test5;
-            pass6 = test6;
-            pass7 = temp;
-            */
             Load += Form_test_Load;
         }
 
@@ -162,7 +154,7 @@ namespace WindowsFormsApp1
             hashtable.Add("point", new Point(30, 250));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn1");
-            hashtable.Add("text", "추가");
+            hashtable.Add("text", "연장");
             hashtable.Add("click", (EventHandler)btn_click);
             btn1 = cmm.getButton(hashtable, this);
 
@@ -209,20 +201,30 @@ namespace WindowsFormsApp1
 
         private void Add()
         {
-            MessageBox.Show("추가");
+            Form_register fr = new Form_register();
+            fr.Show();
         }
 
         private void Update()
         {
             string sql = string.Format("update member set mName='{0}',Age='{1}',Sex='{2}',phone='{3}',address='{4}',locker='{5}' where mNo={6};", tb1.Text, tb2.Text, tb3.Text, tb4.Text, tb5.Text, tb6.Text, member.mNo);
-            MessageBox.Show(sql);
-            db.NonQuery(sql);
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show("선택한 사용자를 수정하시겠습니까?", "경고", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                db.NonQuery(sql);
+                this.Close();
+            }
         }
 
         private void Delete()
         {
-            MessageBox.Show("삭제");
+            string sql = string.Format("update member set delYn = 'Y' where mNo = {0}", member.mNo);
+            DialogResult dialogResult = MessageBox.Show("선택한 사용자를 삭제하시겠습니까?", "경고", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                db.NonQuery(sql);
+                this.Close();
+            }
         }
     }
 }

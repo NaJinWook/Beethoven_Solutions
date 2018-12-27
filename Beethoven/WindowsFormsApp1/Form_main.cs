@@ -70,7 +70,7 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Btn(this, "logout", "로그아웃", 200, 100, 1300, 0));
             //arr.Add(new ob_Lbl(this, "", "안녕하세요", 300, 300, 20, 24));
             arr.Add(new ob_Pnl(this, "", "", 15000, 677, 0, 95));
-
+            
             menu_pnl = os.Pnl((ob_Pnl)arr[0]);
             mdi_pnl = os.Pnl((ob_Pnl)arr[1]);
             time_pnl = os.Pnl((ob_Pnl)arr[2]);
@@ -93,6 +93,7 @@ namespace WindowsFormsApp1
             menu_pnl.Controls.Add(logout);
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(mdi_pnl);
+
 
 
 
@@ -192,7 +193,7 @@ namespace WindowsFormsApp1
             {
                 case "btn1":
                     Form_member fm = new Form_member();
-                    close = new Form_member();
+                    close = new Form_member(this, mdi_pnl);
                     close.WindowState = FormWindowState.Maximized;
                     close.FormBorderStyle = FormBorderStyle.None;
                     close.MdiParent = this;
@@ -204,7 +205,7 @@ namespace WindowsFormsApp1
                     close = new Form_register();
                     close.WindowState = FormWindowState.Maximized;
                     close.FormBorderStyle = FormBorderStyle.None;
-                    close.MdiParent = this;
+                    close.MdiParent = this; 
                     close.Dock = DockStyle.Fill;
                     mdi_pnl.Controls.Add(close);
                     close.Show();
