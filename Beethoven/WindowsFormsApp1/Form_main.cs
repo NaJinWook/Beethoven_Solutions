@@ -58,16 +58,16 @@ namespace WindowsFormsApp1
             logo = new PictureBox();
             logo.Image = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("goodee_logo3");
             logo.SizeMode = PictureBoxSizeMode.StretchImage;
-            logo.Size = new Size(294, 100);
+            logo.Size = new Size(290, 100);
             logo.Location = new Point(0, 0);
 
             arr.Add(new ob_Pnl(this, "", "", 1500, 100, 0, 0));
             arr.Add(new ob_Pnl(this, "", "", 1460, 632, 20, 25));
-            arr.Add(new ob_Pnl(this, "", "", 200, 200, 1100, 0)); // 시간 패널
+            arr.Add(new ob_Pnl(this, "", "", 200, 200, 1096, 0)); // 시간 패널
             arr.Add(new ob_Pnl(this, "", "", 190, 90, 5, 5));
             arr.Add(new ob_Lbl(this, "", "", 200, 200, 5, 5)); // 년월
             arr.Add(new ob_Lbl(this, "", "", 200, 200, -3, 35)); // 시간
-            arr.Add(new ob_Btn(this, "logout", "로그아웃", 200, 100, 1300, 0));
+            arr.Add(new ob_Btn(this, "logout", "로그아웃", 204, 100, 1296, 0));
             //arr.Add(new ob_Lbl(this, "", "안녕하세요", 300, 300, 20, 24));
             arr.Add(new ob_Pnl(this, "", "", 15000, 677, 0, 95));
             
@@ -101,7 +101,7 @@ namespace WindowsFormsApp1
             {
                 menu_btn = new Button();
                 menu_btn.Size = new Size(200, 100);
-                menu_btn.Location = new Point((202 * i) + 294, 0);
+                menu_btn.Location = new Point((202 * i) + 290, 0);
                 //menu_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
                 menu_btn.BackColor = Color.Black;
                 menu_btn.ForeColor = Color.White;
@@ -150,7 +150,7 @@ namespace WindowsFormsApp1
 
         private void option()
         {
-            menu_pnl.BackColor = Color.FromArgb(45, 35, 135);
+            menu_pnl.BackColor = Color.White;
             mdi_pnl.BackColor = Color.White;
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거

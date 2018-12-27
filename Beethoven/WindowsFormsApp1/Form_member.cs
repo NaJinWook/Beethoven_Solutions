@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace WindowsFormsApp1
 {
     public partial class Form_member : Form
@@ -18,21 +19,20 @@ namespace WindowsFormsApp1
         private MYsql db = new MYsql();
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
-        Panel main_pnl;
-        Panel pnl1, pnl2;
+        Hashtable hashtable = new Hashtable();
+        Commons cmm = new Commons();
+        ListView lv = new ListView();
+        Panel main_pnl, mdi_pnl, pnl1, pnl2;
+        PrivateFontCollection ft1, ft2;
+        Font font1, font2;
         Button btn1, btn2;
         TextBox tb1;
         ComboBox cb1;
-        PrivateFontCollection ft1, ft2;
-        Font font1, font2;
-        ListView lv = new ListView();
-        Hashtable hashtable = new Hashtable();
-        Commons cmm = new Commons();
         private Panel panel;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일'), delYn from member;";
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member;";
         Form fr;
-        Panel mdi_pnl;
         Form_main fm;
+
         public Form_member()
         {
             InitializeComponent();
@@ -99,10 +99,27 @@ namespace WindowsFormsApp1
             lv.Dock = DockStyle.Fill;
             lv.View = View.Details;
             lv = cmm.getListView2(hashtable, pnl1);
+            lv.ColumnClick += Lv_ColumnClick;
             lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
             lv.Font = font1;
-            
             Select(printAll);
+        }
+
+        /*               리스트뷰 컬럼 클릭 이벤트                   */
+        private void Lv_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (this.lv.Sorting == SortOrder.Ascending || lv.Sorting == SortOrder.None)
+            {
+                this.lv.ListViewItemSorter = new ListViewItemComparer(e.Column, "desc");
+                lv.Sorting = SortOrder.Descending;
+            }
+            else
+            {
+                this.lv.ListViewItemSorter = new ListViewItemComparer(e.Column, "asc");
+                lv.Sorting = SortOrder.Ascending;
+
+            }
+            lv.Sort();
         }
 
         /*              리스트뷰 컬럼 크기 고정                     */
@@ -112,7 +129,7 @@ namespace WindowsFormsApp1
             e.Cancel = true;
         }
 
-        private void listView_click(object o, EventArgs a)
+        private void listView_click(object o, EventArgs a) // 리스트뷰 더블클릭 이벤트
         {
             ListView lv = (ListView)o;
 
@@ -132,20 +149,43 @@ namespace WindowsFormsApp1
             //fr.ShowDialog();
             //Select(printAll);
 
-            this.Visible = false;
-            fr = new Form_register(true, member);
-            fr.WindowState = FormWindowState.Maximized;
-            fr.FormBorderStyle = FormBorderStyle.None;
-            fr.MdiParent = fm;
-            fr.Dock = DockStyle.Fill;
-            mdi_pnl.Controls.Add(fr);
-            fr.FormClosed += fr_FormClosed;
-            fr.Show();
+            string sql = string.Format("select delYn from member where mNo = {0};",member.mNo);
+            MySqlDataReader sdr = db.Reader(sql);
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                    if(arr[0] == "Y")
+                    {
+                        MessageBox.Show("이미 삭제된 컨텐츠입니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show(String.Format("{0}님 회원정보를 수정하시겠습니까?", member.mName), "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            this.Visible = false;
+                            fr = new Form_register(true, member);
+                            fr.WindowState = FormWindowState.Maximized;
+                            fr.FormBorderStyle = FormBorderStyle.None;
+                            fr.MdiParent = fm;
+                            fr.Dock = DockStyle.Fill;
+                            mdi_pnl.Controls.Add(fr);
+                            fr.FormClosed += fr_FormClosed;
+                            fr.Show();
+                        }
+                    }
+                }
+            }
+            db.ReaderClose(sdr);
         }
 
-        private void fr_FormClosed(object sender, FormClosedEventArgs e)
+        private void fr_FormClosed(object sender, FormClosedEventArgs e) // 레지스터폼이 Close되면 이벤트 발생
         {
-            MessageBox.Show("석훈아 공부하자!");
+            lv.Items.Clear();
+            Select(printAll);
             this.Visible = true;
         }
 
@@ -153,15 +193,15 @@ namespace WindowsFormsApp1
         {
             if (cb1.Text == "회원번호")
             {
-                Select(string.Format("select * from member where mNo like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where mNo like'%{0}%'; ", tb1.Text));
             }
             else if (cb1.Text == "이름")
             {
-                Select(string.Format("select * from member where mName like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where mName like'%{0}%'; ", tb1.Text));
             }
             else if (cb1.Text == "전화번호")
             {
-                Select(string.Format("select * from member where phone like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where phone like'%{0}%'; ", tb1.Text));
             }
             else if (tb1.Text == "")
             {
@@ -169,7 +209,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Select(string.Format("select * from member where mName like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where mName like'%{0}%'; ", tb1.Text));
             }
         }
 
@@ -190,7 +230,6 @@ namespace WindowsFormsApp1
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
             lv.Columns.Add("잔여일", 107, HorizontalAlignment.Center);
             lv.Columns.Add("삭제여부", 107, HorizontalAlignment.Center);
-            //lv.BackColor = Color.FromArgb(214, 230, 245);
 
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
@@ -200,9 +239,7 @@ namespace WindowsFormsApp1
                 {
                     arr[i] = sdr.GetValue(i).ToString();
                 }
-                
                 lv.Items.Add(new ListViewItem(arr));
-                
             }
             db.ReaderClose(sdr);
         }
@@ -231,7 +268,6 @@ namespace WindowsFormsApp1
 
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
-
         }
 
         private void option()
@@ -250,7 +286,44 @@ namespace WindowsFormsApp1
             btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
             btn2.Font = font1;
             tb1.Font = font1;
+        }
+    }
 
+    internal class ListViewItemComparer : IComparer // 리스트뷰 컬럼 클릭 정렬 클래스
+    {
+        private int column;
+        private string sort = "asc";
+
+        public ListViewItemComparer()
+        {
+            column = 0;
+        }
+        public ListViewItemComparer(int column, string sort)
+        {
+            this.column = column;
+            this.sort = sort;
+        }
+        public int Compare(object x, object y)
+        {
+            int chk = 1;
+            try
+            {
+                if (sort == "asc")
+                    chk = 1;
+                else
+                    chk = -1;
+                if (Convert.ToInt32(((ListViewItem)x).SubItems[column].Text) > Convert.ToInt32(((ListViewItem)y).SubItems[column].Text))
+                    return chk;
+                else
+                    return -chk;
+            }
+            catch (Exception)
+            {
+                if (sort == "asc")
+                    return String.Compare(((ListViewItem)x).SubItems[column].Text, ((ListViewItem)y).SubItems[column].Text);
+                else
+                    return String.Compare(((ListViewItem)y).SubItems[column].Text, ((ListViewItem)x).SubItems[column].Text);
+            }
         }
     }
 }

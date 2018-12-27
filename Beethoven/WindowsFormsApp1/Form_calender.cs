@@ -63,7 +63,7 @@ namespace WindowsFormsApp1
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(455, 305));
             hashtable.Add("point", new Point(0, 0));
-            hashtable.Add("color", Color.FromArgb(214, 230, 245));
+            hashtable.Add("color", Color.White);
             hashtable.Add("name", "Calender_pnl");
             Calendar_pnl = cmm.getPanel(hashtable, this);
             Calendar_pnl.BorderStyle = BorderStyle.FixedSingle;
@@ -71,7 +71,7 @@ namespace WindowsFormsApp1
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(455, 305));
             hashtable.Add("point", new Point(0, 310));
-            hashtable.Add("color", Color.FromArgb(214, 230, 245));
+            hashtable.Add("color", Color.White);
             hashtable.Add("name", "Locker_pnl");
             Locker_pnl = cmm.getPanel(hashtable, this);
             Locker_pnl.BorderStyle = BorderStyle.FixedSingle;
@@ -242,7 +242,7 @@ namespace WindowsFormsApp1
         private void No_lock_Click(object o, EventArgs e)
         {
             Button lk_btn = (Button)o;
-            tb5.Text = "X";
+            tb5.Text = "사용안함";
             for (int i = 0; i < btn_array.Count; i++)
             {
                 Button clear = (Button)btn_array[i];
@@ -287,26 +287,25 @@ namespace WindowsFormsApp1
                     Date2 = endDate.ToShortDateString();
                     tb6.Text = Date;
                     tb7.Text = Date2;
-                    money = 100000;
+                    money = 140000;
                     break;
                 case "btn3":
                     endDate = startDate.AddDays(180);
                     Date2 = endDate.ToShortDateString();
                     tb6.Text = Date;
                     tb7.Text = Date2;
-                    money = 150000;
+                    money = 250000;
                     break;
                 case "btn4":
                     endDate = startDate.AddDays(365);
                     Date2 = endDate.ToShortDateString();
                     tb6.Text = Date;
                     tb7.Text = Date2;
-                    money = 200000;
+                    money = 500000;
                     break;
                 default:
                     break;
             }
-            //this.Visible = false;
         }
 
         /*             라커              */
