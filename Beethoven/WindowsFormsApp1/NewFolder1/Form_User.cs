@@ -216,7 +216,7 @@ namespace WindowsFormsApp1
             lv.Sort();
         }
 
-       
+
 
         /*        검색 이벤트        */
         private void btn_search(object o, EventArgs e)
@@ -312,7 +312,7 @@ namespace WindowsFormsApp1
             chart2.Series["몸무게"].IsValueShownAsLabel = false;
 
             sql = (string.Format("call Day_select('{0}')", tb1.Text));
-            
+
 
             //MessageBox.Show(sql);
             MySqlDataReader sdr = db.Reader(sql);
@@ -387,16 +387,26 @@ namespace WindowsFormsApp1
             }
             public int Compare(object x, object y)
             {
-
-                if (sort == "asc")
-
-                    return String.Compare(((ListViewItem)x).SubItems[column].Text, ((ListViewItem)y).SubItems[column].Text);
-
-                else
-
-                    return String.Compare(((ListViewItem)y).SubItems[column].Text, ((ListViewItem)x).SubItems[column].Text);
+                int chk = 1;
+                try
+                {
+                    if (sort == "asc")
+                        chk = 1;
+                    else
+                        chk = -1;
+                    if (Convert.ToInt32(((ListViewItem)x).SubItems[column].Text) > Convert.ToInt32(((ListViewItem)y).SubItems[column].Text))
+                        return chk;
+                    else
+                        return -chk;
+                }
+                catch (Exception)
+                {
+                    if (sort == "asc")
+                        return String.Compare(((ListViewItem)x).SubItems[column].Text, ((ListViewItem)y).SubItems[column].Text);
+                    else
+                        return String.Compare(((ListViewItem)y).SubItems[column].Text, ((ListViewItem)x).SubItems[column].Text);
+                }
             }
         }
-    }
-    
+    }   
 }
