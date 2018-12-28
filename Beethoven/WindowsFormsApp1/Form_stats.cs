@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -27,8 +28,8 @@ namespace WindowsFormsApp1
         //ImageList il = new ImageList();
         private MYsql db = new MYsql();
         Commons cmm = new Commons();
-        private string sql = "select count(*) from member where sex = '남성';";
-        private string sql2 = "select count(*) from member where sex = '여성';";
+        private string sql = "select  count(DATEDIFF(mEnd, now())) from member where sex = '남성' and DATEDIFF(mEnd, now())>0;";
+        private string sql2 = "select  count(DATEDIFF(mEnd, now())) from member where sex = '여성' and DATEDIFF(mEnd, now())>0;";
         private string sql3 = "select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '2018%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;";
         private string cbyear = "select DATE_FORMAT(mStart, '%Y')as '년' from member group by DATE_FORMAT(mStart, '%Y');";
 
@@ -110,9 +111,9 @@ namespace WindowsFormsApp1
             chart1.Titles.Add("현 성별 정보");
             chart1.Series.Add(series1);
             chart1.Series["Series1"].IsValueShownAsLabel = false;
+            pn1.Controls.Add(chart1);
             value_search(sql);
             value_search2(sql2);
-            pn1.Controls.Add(chart1);
             //===============================================================
             chart2 = new Chart();
             ChartArea chartArea2 = new ChartArea();
@@ -225,11 +226,12 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < sdr.FieldCount; i++)
                 {
                     arr[i] = sdr.GetValue(i).ToString();
-                    chart1.Series["Series1"].Points.AddXY(string.Format("남자 {0}",arr[i]), string.Format("{0}",arr[i]));
+                    chart1.Series["Series1"].Points.AddXY(string.Format("남성 {0}", arr[i]), arr[i]);
                 }
             }
             db.ReaderClose(sdr);
         }//남자
+
         private void value_search2(string sql2)
         {
             MySqlDataReader sdr = db.Reader(sql2);
@@ -239,7 +241,7 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < sdr.FieldCount; i++)
                 {
                     arr[i] = sdr.GetValue(i).ToString();
-                    chart1.Series["Series1"].Points.AddXY(string.Format("여자 {0}", arr[i]), string.Format("{0}", arr[i]));
+                    chart1.Series["Series1"].Points.AddXY(string.Format("여성 {0}", arr[i]), arr[i]);
                 }
             }
             db.ReaderClose(sdr);
