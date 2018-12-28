@@ -265,6 +265,8 @@ namespace WindowsFormsApp1
 
             ft1.AddFontFile("Font\\HANYGO230.ttf");
             ft2.AddFontFile("Font\\HANYGO250.ttf");
+              
+
 
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
