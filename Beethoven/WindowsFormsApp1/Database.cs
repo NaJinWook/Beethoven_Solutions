@@ -130,7 +130,6 @@ namespace WindowsFormsApp1
                     {
                         arr[k] = j[k].ToString();
                     }
-                    
                     listView.Items.Add(new ListViewItem(arr));
                 }
                 return true;
