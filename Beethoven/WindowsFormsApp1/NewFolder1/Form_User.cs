@@ -106,6 +106,7 @@ namespace WindowsFormsApp1
             tb1.Font = new Font("맑은 고딕", 14, FontStyle.Regular);
             tb1.KeyPress += Tb_KeyPress;
             tb1.Font = font1;
+            
             /*       몸무게등록       */
             hashtable = new Hashtable();
             hashtable.Add("point", new Point(105, 60));
@@ -132,8 +133,10 @@ namespace WindowsFormsApp1
             btn1.BackColor = Color.Black;
             btn1.ForeColor = Color.White;
             btn1.FlatStyle = FlatStyle.Flat; // 테두리 제거
-            //btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
             btn1.Font = font1;
+            //btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
+            
+
             /*    등록부분     */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 35));
@@ -148,6 +151,7 @@ namespace WindowsFormsApp1
             btn2.FlatStyle = FlatStyle.Flat; // 테두리 제거
             btn2.Font = font1;
             //btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
+
 
             /*    그래프부분     */
             hashtable = new Hashtable();
@@ -177,9 +181,10 @@ namespace WindowsFormsApp1
             btn4.BackColor = Color.Black;
             btn4.ForeColor = Color.White;
             btn4.FlatStyle = FlatStyle.Flat; // 테두리 제거
-            //btn4.FlatAppearance.BorderSize = 0; // 테두리 제거
             btn4.Font = font1;
+            //btn4.FlatAppearance.BorderSize = 0; // 테두리 제거
         }
+
         private void Listview()
         {
             hashtable = new Hashtable();
@@ -211,7 +216,6 @@ namespace WindowsFormsApp1
             {
                 this.lv.ListViewItemSorter = new ListViewItemComparer(e.Column, "asc");
                 lv.Sorting = SortOrder.Ascending;
-
             }
             lv.Sort();
         }
@@ -221,7 +225,6 @@ namespace WindowsFormsApp1
         /*        검색 이벤트        */
         private void btn_search(object o, EventArgs e)
         {
-
             if (tb1.Text == "")
             {
                 lv.Items.Clear();
@@ -241,15 +244,14 @@ namespace WindowsFormsApp1
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
-
-
-
         }
+
         private void Lv_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
             e.NewWidth = lv.Columns[e.ColumnIndex].Width;
             e.Cancel = true;
         }
+
         /*        등록 이벤트        */
         private void btn_register(object o, EventArgs e)
         {
@@ -260,12 +262,9 @@ namespace WindowsFormsApp1
             db.NonQuery(sql);
             tb2.Text = "";
 
-
             sql = string.Format("call User_select('{0}')", tb1.Text);
             MySqlDataReader sdr = db.Reader(sql);
-
             lv.Items.Clear();
-
             while (sdr.Read())
             {
                 string[] arr = new string[sdr.FieldCount];
@@ -276,17 +275,12 @@ namespace WindowsFormsApp1
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
-
-
         }
 
         /*        그래프 이벤트        */
         private void btn_graph(object o, EventArgs e)
         {
             lv.Visible = false;
-
-            //pnl1.BackColor = Color.Black;
-
             chart2 = new Chart();
             ChartArea chartArea2 = new ChartArea();
             Legend legend2 = new Legend();
@@ -300,19 +294,15 @@ namespace WindowsFormsApp1
             series2.Name = "몸무게";
 
             chart2.Name = "chart2";
-
             chart2.Dock = DockStyle.Fill;
-
             chart2.Text = "chart2";
             chart2.BackColor = Color.Silver;
             chart2.ChartAreas.Add(chartArea2);
             chart2.Legends.Add(legend2);
             chart2.Series.Add(series2);
-
             chart2.Series["몸무게"].IsValueShownAsLabel = false;
 
             sql = (string.Format("call Day_select('{0}')", tb1.Text));
-
 
             //MessageBox.Show(sql);
             MySqlDataReader sdr = db.Reader(sql);
@@ -327,16 +317,9 @@ namespace WindowsFormsApp1
                 chart2.Series["몸무게"].Points.AddXY(arr[0], arr[1]);
             }
             db.ReaderClose(sdr);
-
             pnl1.Controls.Add(chart2);
-
-
-
-
-
-
-
         }
+
         /*        리스트 이벤트        */
         private void btn_list(object o, EventArgs e)
         {
@@ -356,7 +339,6 @@ namespace WindowsFormsApp1
                 MessageBox.Show("숫자만 입력해주세요.");
             }
         }
-
 
         private void fonts()
         {
@@ -408,5 +390,5 @@ namespace WindowsFormsApp1
                 }
             }
         }
-    }   
+    }
 }
