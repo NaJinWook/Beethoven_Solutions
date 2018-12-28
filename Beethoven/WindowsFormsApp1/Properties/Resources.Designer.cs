@@ -93,6 +93,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap file_img {
+            get {
+                object obj = ResourceManager.GetObject("file_img", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap goodee_logo {
             get {
                 object obj = ResourceManager.GetObject("goodee_logo", resourceCulture);
@@ -146,6 +156,16 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap login_bg {
             get {
                 object obj = ResourceManager.GetObject("login_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap normal_img {
+            get {
+                object obj = ResourceManager.GetObject("normal_img", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

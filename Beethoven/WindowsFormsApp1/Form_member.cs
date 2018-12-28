@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
         TextBox tb1;
         ComboBox cb1;
         private Panel panel;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member;";
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member;";
         Form fr;
         Form_main fm;
 
@@ -193,15 +193,15 @@ namespace WindowsFormsApp1
         {
             if (cb1.Text == "회원번호")
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where mNo like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mNo like'%{0}%'; ", tb1.Text));
             }
             else if (cb1.Text == "이름")
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where mName like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mName like'%{0}%'; ", tb1.Text));
             }
             else if (cb1.Text == "전화번호")
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where phone like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where phone like'%{0}%'; ", tb1.Text));
             }
             else if (tb1.Text == "")
             {
@@ -209,7 +209,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end, delYn from member where mName like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mName like'%{0}%'; ", tb1.Text));
             }
         }
 
@@ -226,10 +226,9 @@ namespace WindowsFormsApp1
             lv.Columns.Add("나이", 80, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 80, HorizontalAlignment.Center);
             lv.Columns.Add("전화번호", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("주소", 623, HorizontalAlignment.Center);
+            lv.Columns.Add("주소", 713, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
             lv.Columns.Add("잔여일", 107, HorizontalAlignment.Center);
-            lv.Columns.Add("삭제여부", 107, HorizontalAlignment.Center);
 
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())

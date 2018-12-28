@@ -25,6 +25,7 @@ namespace WindowsFormsApp1
         PrivateFontCollection ft1, ft2, ft3;
         Font font, font2, font3, font4;
         Form_login fl;
+        MYsql db = new MYsql();
 
         public Form_main()
         {
@@ -36,8 +37,6 @@ namespace WindowsFormsApp1
             this.Text = "Beethoven Management System ver 0.1";
             this.IsMdiContainer = true;
             Control_Init();
-
-
         }
 
         public Form_main(Form form)
@@ -95,9 +94,6 @@ namespace WindowsFormsApp1
             menu_pnl.Controls.Add(logout);
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(mdi_pnl);
-
-
-
 
             for (int i = 0; i < 4; i++)
             {
