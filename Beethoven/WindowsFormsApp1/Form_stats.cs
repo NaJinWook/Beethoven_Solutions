@@ -147,6 +147,23 @@ namespace WindowsFormsApp1
             lv.Columns.Add("월", 120, HorizontalAlignment.Center);
             lv.Columns.Add("매출액", 96, HorizontalAlignment.Center);
             lv.Font = font1;
+            lv.ColumnClick += Lv_ColumnClick;
+        }
+
+        private void Lv_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (this.lv.Sorting == SortOrder.Ascending || lv.Sorting == SortOrder.None)
+            {
+                this.lv.ListViewItemSorter = new ListViewItemComparer(e.Column, "desc");
+                lv.Sorting = SortOrder.Descending;
+            }
+            else
+            {
+                this.lv.ListViewItemSorter = new ListViewItemComparer(e.Column, "asc");
+                lv.Sorting = SortOrder.Ascending;
+
+            }
+            lv.Sort();
         }
 
         private void Cb1_SelectedIndexChanged(object sender, EventArgs e)
@@ -240,6 +257,44 @@ namespace WindowsFormsApp1
 
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
+        }
+
+        internal class ListViewItemComparer : IComparer
+        {
+            private int column;
+            private string sort = "asc";
+
+            public ListViewItemComparer()
+            {
+                column = 0;
+            }
+            public ListViewItemComparer(int column, string sort)
+            {
+                this.column = column;
+                this.sort = sort;
+            }
+            public int Compare(object x, object y)
+            {
+                int chk = 1;
+                try
+                {
+                    if (sort == "asc")
+                        chk = 1;
+                    else
+                        chk = -1;
+                    if (Convert.ToInt32(((ListViewItem)x).SubItems[column].Text) > Convert.ToInt32(((ListViewItem)y).SubItems[column].Text))
+                        return chk;
+                    else
+                        return -chk;
+                }
+                catch (Exception)
+                {
+                    if (sort == "asc")
+                        return String.Compare(((ListViewItem)x).SubItems[column].Text, ((ListViewItem)y).SubItems[column].Text);
+                    else
+                        return String.Compare(((ListViewItem)y).SubItems[column].Text, ((ListViewItem)x).SubItems[column].Text);
+                }
+            }
         }
     }
 }
