@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
         Timer mTimer;
         Form close;
         PrivateFontCollection ft1, ft2, ft3;
-        Font font, font2, font3, font4;
+        Font font1, font2, font3, font4;
         Form_login fl;
         MYsql db = new MYsql();
 
@@ -102,13 +102,12 @@ namespace WindowsFormsApp1
                 menu_btn = new Button();
                 menu_btn.Size = new Size(200, 100);
                 menu_btn.Location = new Point((202 * i) + 290, 0);
-                //menu_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
                 menu_btn.BackColor = Color.Black;
                 menu_btn.ForeColor = Color.White;
-                menu_btn.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
+                menu_btn.Font = font3;
                 menu_btn.Name = string.Format("btn{0}", i + 1);
                 menu_btn.TabStop = false; // 탭방지
-                menu_btn.FlatStyle = FlatStyle.Flat; // 테두리 제거
+                menu_btn.FlatStyle = FlatStyle.Popup; // 테두리 제거
                 menu_btn.FlatAppearance.BorderSize = 0; // 테두리 제거
                 menu_pnl.Controls.Add(menu_btn);
                 menu_btn.Click += Menu_btn_Click;
@@ -142,7 +141,7 @@ namespace WindowsFormsApp1
             ft1.AddFontFile("Font\\Digit.ttf");
             ft2.AddFontFile("Font\\HANYGO230.ttf");
             ft3.AddFontFile("Font\\HANYGO240.ttf");
-            font = new Font(ft1.Families[0], 38); // 시간
+            font1 = new Font(ft1.Families[0], 38); // 시간
             font2 = new Font(ft1.Families[0], 20); // 년/월
             font3 = new Font(ft2.Families[0], 30); // 메뉴
             font4 = new Font(ft3.Families[0], 30); // 로그아웃
@@ -150,7 +149,7 @@ namespace WindowsFormsApp1
 
         private void option()
         {
-            menu_pnl.BackColor = Color.White;
+            menu_pnl.BackColor = Color.FromArgb(45, 35, 135);
             mdi_pnl.BackColor = Color.White;
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
@@ -161,7 +160,7 @@ namespace WindowsFormsApp1
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
             logout.Font = font4;
             date.Font = font2;
-            time.Font = font;
+            time.Font = font1;
             time_pnl.BackColor = Color.DarkBlue;
             time_pnl2.BackColor = Color.FromArgb(45, 35, 135);
             main_pnl.BackColor = Color.FromArgb(45, 35, 155);
