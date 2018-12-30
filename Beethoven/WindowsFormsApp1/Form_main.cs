@@ -37,8 +37,6 @@ namespace WindowsFormsApp1
             this.Text = "Beethoven Management System ver 1.04";
             this.IsMdiContainer = true;
             Control_Init();
-
-
         }
 
         public Form_main(Form form)
