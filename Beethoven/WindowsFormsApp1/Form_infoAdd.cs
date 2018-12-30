@@ -46,7 +46,6 @@ namespace WindowsFormsApp1
 
         private void Form_infoAdd_Load(object sender, EventArgs e)
         {
-            this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
             api = new WebAPI();
             fonts();
 
@@ -214,7 +213,7 @@ namespace WindowsFormsApp1
             hashtable.Add("text", "");
             hashtable.Add("click", (EventHandler)upload_click);
             btn6 = cmm.getButton(hashtable, pn2);
-            btn6.Image= Properties.Resources.file_img;
+            //btn6.Image= Properties.Resources.file_img;
             btn6.ForeColor = Color.White;
             btn6.FlatStyle = FlatStyle.Flat;
             btn6.FlatAppearance.BorderSize = 0;

@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
 
         Hashtable hashtable = new Hashtable();
         Button btn1, btn2, btn3, btn4, btn5, lk_btn;
-        Label lb1, lb2, lb3;
+        Label lb1, lb2;
         Panel Calendar_pnl, Locker_pnl, Calender_title, Locker_title;
         private TextBox tb1, tb5, tb6, tb7;
         private string start, end;
@@ -99,7 +99,6 @@ namespace WindowsFormsApp1
 
         private void Calender()
         {
-
             // Create the calendar.
             monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             // Set the calendar location.

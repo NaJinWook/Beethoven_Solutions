@@ -54,7 +54,7 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Pnl(this, "", "", 1461, 633, 0, 0));
             arr.Add(new ob_Pnl(this, "", "", 975, 613, 10, 10));
             arr.Add(new ob_Pnl(this, "", "", 455, 613, 995, 10));
-            arr.Add(new ob_Pnl(this, "", "", 975, 53, 0, 0));
+            arr.Add(new ob_Pnl(this, "", "", 974, 53, 0, 0));
 
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
@@ -185,7 +185,7 @@ namespace WindowsFormsApp1
             hashtable.Add("point", new Point(380, 5));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb9");
-            hashtable.Add("text", "회     원    가    입");
+            hashtable.Add("text", "회     원    등    록");
             lb9 = cmm.getLabel(hashtable, register_title);
             lb9.ForeColor = Color.Black;
             lb9.BackColor = Color.Transparent;
@@ -364,7 +364,7 @@ namespace WindowsFormsApp1
             rb1 = cmm.getRadioButton(hashtable, pnl1);
             rb1.BackColor = Color.Transparent;
             rb1.Font = font1;
-            rb1.ForeColor = Color.Blue;
+            rb1.ForeColor = Color.FromArgb(45, 35, 135);
 
             /* 여성부분 */
             hashtable = new Hashtable();
@@ -376,13 +376,8 @@ namespace WindowsFormsApp1
             rb2 = cmm.getRadioButton(hashtable, pnl1);
             rb2.BackColor = Color.Transparent;
             rb2.Font = font1;
-            rb2.ForeColor = Color.Red;
+            rb2.ForeColor = Color.OrangeRed;
         }
-
-        //private void test(object o, EventArgs e)
-        //{
-        //    this.Close();
-        //}
 
         private void option()
         {
@@ -491,7 +486,7 @@ namespace WindowsFormsApp1
             DialogResult dialogResult = MessageBox.Show(string.Format("{0}님 회원 정보를 저장하시겠습니까?", member.mName), "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("회원 정보가 저장되었습니다.", "저장 완료");
+                MessageBox.Show("회원 정보 저장이 완료되었습니다.", "저장 완료");
                 db.NonQuery(sql);
                 this.Close();
             }
@@ -529,7 +524,7 @@ namespace WindowsFormsApp1
                 {
                     tb5.Text = "사용 안함";
 
-                    MessageBox.Show("회원이 등록되었습니다.", "등록 완료");
+                    MessageBox.Show("회원 등록이 완료되었습니다.", "등록 완료");
                     db.NonQuery(sql);
                     tb1.Text = "";
                     tb2.Text = "";
@@ -545,7 +540,6 @@ namespace WindowsFormsApp1
 
         private void Reset(object o, EventArgs a) // 텍스트박스값 초기화
         {
-            //MessageBox.Show("초기화");
             tb1.Text = "";
             tb2.Text = "";
             tb3.Text = "";

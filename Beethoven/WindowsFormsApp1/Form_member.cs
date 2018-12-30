@@ -144,10 +144,6 @@ namespace WindowsFormsApp1
             member.phone = item.SubItems[4].Text;
             member.address = item.SubItems[5].Text;
             member.locker = item.SubItems[6].Text;
-            //Form_register fr = new Form_register(member);
-            //fr.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
-            //fr.ShowDialog();
-            //Select(printAll);
 
             string sql = string.Format("select delYn from member where mNo = {0};",member.mNo);
             MySqlDataReader sdr = db.Reader(sql);
