@@ -248,6 +248,8 @@ namespace WindowsFormsApp1
         /*        등록 이벤트        */
         private void btn_register(object o, EventArgs e)
         {
+            
+
             sql = string.Format("call User_insert('{0}','{1}');", tb1.Text, tb2.Text);
             db.NonQuery(sql);
             tb2.Text = "";
@@ -327,6 +329,10 @@ namespace WindowsFormsApp1
         /*        리스트 이벤트        */
         private void btn_list(object o, EventArgs e)
         {
+            if (tb1.Text == "")
+            {
+                MessageBox.Show("회원 번호를 입력해주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             if (lv.Visible == false)
             {
                 chart2.Visible = false;

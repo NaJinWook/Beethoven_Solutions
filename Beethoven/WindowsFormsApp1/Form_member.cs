@@ -176,6 +176,7 @@ namespace WindowsFormsApp1
                 }
             }
             db.ReaderClose(sdr);
+            db.ConnectionClose();
         }
 
         private void fr_FormClosed(object sender, FormClosedEventArgs e) // 레지스터폼이 Close되면 이벤트 발생
@@ -251,6 +252,7 @@ namespace WindowsFormsApp1
                 }
             }
             db.ReaderClose(sdr);
+            db.ConnectionClose();
         }
 
         private void fonts()
@@ -260,6 +262,8 @@ namespace WindowsFormsApp1
 
             ft1.AddFontFile("Font\\HANYGO230.ttf");
             ft2.AddFontFile("Font\\HANYGO250.ttf");
+              
+
 
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
