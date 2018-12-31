@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
         Form fr;
         Form_main fm;
         private Panel panel;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member;";
+        private string printAll = "select mNo, mName, Age, Sex, phone, address, locker, concat(case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member where delYn='N';";
 
         public Form_member()
         {

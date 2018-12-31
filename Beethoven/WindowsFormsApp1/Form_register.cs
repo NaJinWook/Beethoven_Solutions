@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
         Button btn1, btn2, btn3, btn4;
         Form_calender fc;
         ListView lv;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일'), delYn from member;";
+        private string printAll = "select mNo, mName, Age, Sex, phone, address, locker, concat(case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member where delYn='N';";
         public string gender;
         public TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
         bool sub = false;
