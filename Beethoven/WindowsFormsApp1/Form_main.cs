@@ -16,6 +16,7 @@ namespace WindowsFormsApp1
     {
         ob_Set os = new ob_Set();
         ArrayList arr = new ArrayList();
+        ArrayList btn_array = new ArrayList(); // 클릭한 버튼 색깔 바꾸기위해
         Panel main_pnl, menu_pnl, mdi_pnl, time_pnl, time_pnl2;
         Button logout, menu_btn;
         PictureBox logo, home;
@@ -98,7 +99,8 @@ namespace WindowsFormsApp1
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(mdi_pnl);
             mdi_pnl.Controls.Add(home);
-            
+
+
             for (int i = 0; i < 4; i++)
             {
                 menu_btn = new Button();
@@ -114,6 +116,8 @@ namespace WindowsFormsApp1
                 menu_btn.Click += Menu_btn_Click;
                 menu_btn.Cursor = Cursors.Hand;
                 menu_btn.Font = font3;
+                btn_array.Add(menu_btn);
+
                 if (menu_btn.Name == "btn1")
                 {
                     menu_btn.Text = "회원 목록";
@@ -150,7 +154,7 @@ namespace WindowsFormsApp1
 
         private void option()
         {
-            menu_pnl.BackColor = Color.White;
+            menu_pnl.BackColor = Color.FromArgb(45, 35, 155);
             mdi_pnl.BackColor = Color.White;
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
@@ -188,6 +192,13 @@ namespace WindowsFormsApp1
             if (close != null) close.Dispose();
 
             menu_btn = (Button)sender;
+            for (int i = 0; i < btn_array.Count; i++)
+            {
+                Button clear = (Button)btn_array[i];
+                if (clear.BackColor != Color.Black) clear.BackColor = Color.Black;
+            }
+            menu_btn.BackColor = Color.Red;
+
             switch (menu_btn.Name)
             {
                 case "btn1":
@@ -205,7 +216,7 @@ namespace WindowsFormsApp1
                     close = new Form_register();
                     close.WindowState = FormWindowState.Maximized;
                     close.FormBorderStyle = FormBorderStyle.None;
-                    close.MdiParent = this; 
+                    close.MdiParent = this;
                     close.Dock = DockStyle.Fill;
                     home.Dispose();
                     mdi_pnl.Controls.Add(close);
@@ -232,7 +243,6 @@ namespace WindowsFormsApp1
                     close.Show();
                     break;
             }
-            if (menu_btn.BackColor != Color.Black) menu_btn.BackColor = Color.Red;
         }
 
         private void Logout_Click(object sender, EventArgs e)

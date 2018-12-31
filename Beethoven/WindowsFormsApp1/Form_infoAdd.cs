@@ -26,9 +26,9 @@ namespace WindowsFormsApp1
         PrivateFontCollection ft1, ft2;
         Font font1, font2;
         TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
-        Label lb1,lb2,lb3,lb4;
+        Label lb1, lb2, lb3, lb4;
         Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
-        Panel pn1, pn2, pn3, pn4, main_pnl,pn5;
+        Panel pn1, pn2, pn3, pn4, main_pnl, pn5;
         Hashtable hashtable;
         ListView lv;
         ComboBox cb1;
@@ -80,14 +80,14 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "pn4");
             pn4 = cmm.getPanel(hashtable, main_pnl);
             pn4.BorderStyle = BorderStyle.FixedSingle;
-            
+
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(650, 540));
             hashtable.Add("point", new Point(0, 0));
             hashtable.Add("pictureboxsizemode", PictureBoxSizeMode.CenterImage);
             pc1 = cmm.getPictureBox(hashtable, pn4);
             pc1.Image = Properties.Resources.normal_img;
-            
+
             //------------------------------------------------패널 2번
 
             hashtable = new Hashtable();
@@ -115,7 +115,7 @@ namespace WindowsFormsApp1
             btn2.ForeColor = Color.White;
             btn2.FlatStyle = FlatStyle.Flat;
             btn2.FlatAppearance.BorderSize = 0;
-            
+
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
             hashtable.Add("point", new Point(1332, 5));
@@ -280,10 +280,10 @@ namespace WindowsFormsApp1
 
             index = lv.FocusedItem.Index;
             hNum = Convert.ToInt32(lv.Items[index].SubItems[0].Text);
-            api.Selectpic("http://192.168.3.12:5000/select_img", hNum,pc1, urlstr);
+            api.Selectpic("http://192.168.3.12:5000/select_img", hNum, pc1, urlstr);
         }
-       
-        private void btn_clear(object o,EventArgs e)
+
+        private void btn_clear(object o, EventArgs e)
         {
             Button btn = (Button)o;
             tb2.Text = "";
@@ -299,7 +299,7 @@ namespace WindowsFormsApp1
         private void btn_click(object o, EventArgs e)
         {
             Button btn = (Button)o;
-            if(tb2.Text == ""&&tb3.Text == ""&&tb4.Text == ""&&tb5.Text == ""&& urlstr == ""&&hNo=="")
+            if (tb2.Text == "" && tb3.Text == "" && tb4.Text == "" && tb5.Text == "" && urlstr == "" && hNo == "")
             {
                 MessageBox.Show("값을 입력해주세요.");
             }
@@ -369,7 +369,7 @@ namespace WindowsFormsApp1
                     api.Post("http://192.168.3.12:5000/update", ht);
                     api.SelectListView("http://192.168.3.12:5000/select", lv);
                 }
-                
+
             }
 
             else if (name == "insert")
@@ -405,7 +405,7 @@ namespace WindowsFormsApp1
             }
             else if (name == "delete")
             {
-                ht.Add("hNo",hNo);
+                ht.Add("hNo", hNo);
                 api.Post("http://192.168.3.12:5000/delete", ht);
                 api.SelectListView("http://192.168.3.12:5000/select", lv);
             }

@@ -172,8 +172,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="goodee.ico" />
-    <None Include="Resources\normal_img.PNG" />
     <None Include="Resources\file_img.png" />
+    <None Include="Resources\normal_img.PNG" />
     <None Include="Resources\home.PNG" />
     <None Include="Resources\goodee_logo3.png" />
     <None Include="Resources\goodee_logo2.png" />
