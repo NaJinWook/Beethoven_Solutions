@@ -18,13 +18,13 @@ namespace WindowsFormsApp1
     public partial class Form_stats : Form
     {
         Hashtable hashtable;
-        Panel pn1,pn2,pn3,pn4,pn5;
+        Panel pn1, pn2, pn3, pn4, pn5, title;
         ListView lv;
         PrivateFontCollection ft1, ft2;
         Font font1, font2;
-        
+        Label title_lb;
         ComboBox cb1;
-        Chart chart1,chart2;
+        Chart chart1, chart2;
         //ImageList il = new ImageList();
         private MYsql db = new MYsql();
         Commons cmm = new Commons();
@@ -41,8 +41,8 @@ namespace WindowsFormsApp1
         //1461,633
         private void Form_stats_Load(object sender, EventArgs e)
         {
-            this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("Sky");
             fonts();
+            /* 전체 패널 */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(1461, 633));
             hashtable.Add("point", new Point(0, 0));
@@ -50,40 +50,65 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "BackgroundPN4");
             pn4 = cmm.getPanel2(hashtable, this);
 
+            /* 왼쪽 패널 */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(305, 623));
-            hashtable.Add("point", new Point(5, 5));
+            hashtable.Add("size", new Size(318, 613));
+            hashtable.Add("point", new Point(10, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "BackgroundPN5");
             pn5 = cmm.getPanel(hashtable, pn4);
             pn5.BorderStyle = BorderStyle.FixedSingle;
 
+            /* 왼쪽 타이틀 패널 */
             hashtable = new Hashtable();
-            hashtable.Add("size",new Size(220,180));
-            hashtable.Add("point", new Point(42,435));
+            hashtable.Add("size", new Size(317, 53));
+            hashtable.Add("point", new Point(0, 0));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "title");
+            title = cmm.getPanel(hashtable, pn5);
+            title.BorderStyle = BorderStyle.FixedSingle;
+
+            /* 타이틀 라벨 */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(300, 40));
+            hashtable.Add("point", new Point(10, 5));
+            hashtable.Add("color", Color.Black);
+            hashtable.Add("name", "title_lb");
+            hashtable.Add("text", "매출 정보 및 남여 구성 비율");
+            title_lb = cmm.getLabel(hashtable, title);
+            title_lb.ForeColor = Color.Black;
+            title_lb.BackColor = Color.Transparent;
+            title_lb.Font = font2;
+
+            /* 원형 차트 */
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(220, 180));
+            hashtable.Add("point", new Point(89, 423));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "BackgroundPN1");
-            pn1=cmm.getPanel(hashtable, pn5);
+            pn1 = cmm.getPanel(hashtable, pn5);
             pn1.BorderStyle = BorderStyle.FixedSingle;
 
+            /* 통계 차트 */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(220, 375));
-            hashtable.Add("point", new Point(42,55));
+            hashtable.Add("size", new Size(220, 356));
+            hashtable.Add("point", new Point(89, 60));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "BackgroundPN2");
             pn2 = cmm.getPanel(hashtable, pn5);
 
+            /* 막대 차트 패널 */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(1130, 623));
-            hashtable.Add("point", new Point(326, 5));
+            hashtable.Add("size", new Size(1114, 613));
+            hashtable.Add("point", new Point(336, 10));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "BackgroundPN3");
             pn3 = cmm.getPanel(hashtable, pn4);
             pn3.BorderStyle = BorderStyle.FixedSingle;
 
             hashtable = new Hashtable();
-            hashtable.Add("width", "80");
-            hashtable.Add("point", new Point(42, 10));
+            hashtable.Add("width", "70");
+            hashtable.Add("point", new Point(10, 60));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
             hashtable.Add("text", "이름");
@@ -103,12 +128,12 @@ namespace WindowsFormsApp1
             series1.ChartArea = "ChartArea1";
             series1.ChartType = SeriesChartType.Doughnut;
             series1.Name = "Series1";
-            
+
             chart1.Name = "chart1";
             chart1.Dock = DockStyle.Fill;
             chart1.Text = "chart1";
             chart1.ChartAreas.Add(chartArea1);
-            chart1.Titles.Add("현 성별 정보");
+            chart1.Titles.Add("현 성별 구성 비율");
             chart1.Series.Add(series1);
             chart1.Series["Series1"].IsValueShownAsLabel = false;
             pn1.Controls.Add(chart1);
@@ -132,22 +157,30 @@ namespace WindowsFormsApp1
             chart2.Text = "chart2";
             chart2.BackColor = Color.White;
             chart2.ChartAreas.Add(chartArea2);
+            
             chart2.Legends.Add(legend2);
             chart2.Series.Add(series2);
 
             chart2.Series["매출액"].IsValueShownAsLabel = false;
-            month_cost(string.Format("select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '{0}%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;",cb1.Text));
+            month_cost(string.Format("select DATE_FORMAT(mStart, '%Y년 %m월') as '일자',sum(cost) as '월 매출' from member where mstart Like '{0}%' group by DATE_FORMAT(mStart, '%Y%m') order by 1;", cb1.Text));
             pn3.Controls.Add(chart2);
-            
+
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("name", "listView");
             lv = cmm.getListView(hashtable, pn2);
             month_cost2(sql3);
-            lv.Columns.Add("월", 120, HorizontalAlignment.Center);
-            lv.Columns.Add("매출액", 96, HorizontalAlignment.Center);
+            lv.Columns.Add("기간", 110, HorizontalAlignment.Center);
+            lv.Columns.Add("매출액", 106, HorizontalAlignment.Center);
             lv.Font = font1;
+            lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
             lv.ColumnClick += Lv_ColumnClick;
+        }
+
+        private void Lv_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e) // 리스트뷰 크기 고정
+        {
+            e.NewWidth = lv.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
 
         private void Lv_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -181,7 +214,7 @@ namespace WindowsFormsApp1
                 {
                     arr[i] = sdr.GetValue(i).ToString();
                 }
-                cb1.Items.Add(string.Format("{0}",arr));
+                cb1.Items.Add(string.Format("{0}", arr));
             }
             db.ReaderClose(sdr);
         }//콤보박스 년도 자동 생성
@@ -213,7 +246,7 @@ namespace WindowsFormsApp1
                 {
                     arr[i] = sdr.GetValue(i).ToString();
                 }
-                chart2.Series["매출액"].Points.AddXY(arr[0],arr[1]);
+                chart2.Series["매출액"].Points.AddXY(arr[0], arr[1]);
             }
             db.ReaderClose(sdr);
         }// 월별데이터 그래프
@@ -227,6 +260,8 @@ namespace WindowsFormsApp1
                 {
                     arr[i] = sdr.GetValue(i).ToString();
                     chart1.Series["Series1"].Points.AddXY(string.Format("남성 {0}", arr[i]), arr[i]);
+                    chart1.Series["Series1"].Points[0].Color = Color.FromArgb(45, 35, 135);
+                    chart1.Series["Series1"].Points[0].LabelForeColor = Color.White;
                 }
             }
             db.ReaderClose(sdr);
@@ -242,6 +277,8 @@ namespace WindowsFormsApp1
                 {
                     arr[i] = sdr.GetValue(i).ToString();
                     chart1.Series["Series1"].Points.AddXY(string.Format("여성 {0}", arr[i]), arr[i]);
+                    chart1.Series["Series1"].Points[1].Color = Color.OrangeRed;
+                    chart1.Series["Series1"].Points[1].LabelForeColor = Color.White;
                 }
             }
             db.ReaderClose(sdr);
@@ -255,8 +292,8 @@ namespace WindowsFormsApp1
             ft1.AddFontFile("Font\\HANYGO230.ttf");
             ft2.AddFontFile("Font\\HANYGO250.ttf");
 
-            font1 = new Font(ft1.Families[0], 13);
-            font2 = new Font(ft2.Families[0], 50);
+            font1 = new Font(ft1.Families[0], 12);
+            font2 = new Font(ft2.Families[0], 18);
         }
 
         internal class ListViewItemComparer : IComparer

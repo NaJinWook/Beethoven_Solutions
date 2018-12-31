@@ -22,7 +22,6 @@ namespace WindowsFormsApp1
         TextBox tb1, tb2, tb3, tb4, tb5, tb6;
         Label lb1, lb2, lb3, lb4, lb5, lb6;
         Button btn1, btn2, btn3;
-        Form_calender fc;
         Member member;
         public TextBox Start_tb, End_tb, Loker_tb;
 

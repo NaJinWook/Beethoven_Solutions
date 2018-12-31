@@ -180,7 +180,6 @@ namespace WindowsFormsApp1
 
                 foreach (DictionaryEntry data in ht)
                 {
-                    //MessageBox.Show(string.Format("{0},{1}",data.Key.ToString(), data.Value.ToString()));
                     param.Add(data.Key.ToString(), data.Value.ToString());
                 }
                 byte[] result = wc.UploadValues(url, "POST", param);

@@ -28,15 +28,15 @@ namespace WindowsFormsApp1
         Button btn1, btn2;
         TextBox tb1;
         ComboBox cb1;
-        private Panel panel;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member;";
         Form fr;
         Form_main fm;
+        private Panel panel;
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member;";
 
         public Form_member()
         {
             InitializeComponent();
-            Load += Form_member_Load;  
+            Load += Form_member_Load;
         }
 
         public Form_member(Form_main fm, Panel mdi_pnl)
@@ -56,7 +56,7 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Tbx(this, "", "", 960, 20, 110, 8));
             arr.Add(new ob_Btn(this, "btn1", "검색", 175, 40, 1080, 5));
             arr.Add(new ob_Btn(this, "btn2", "전체보기", 175, 40, 1260, 5));
-            
+
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
             pnl2 = os.Pnl((ob_Pnl)arr[2]);
@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
             cb1.Items.Add("이름");
             cb1.Items.Add("회원번호");
             cb1.Items.Add("전화번호");
-            
+
             cb1.Font = font1;
             cb1.DropDownStyle = ComboBoxStyle.DropDownList; // 콤보박스 변경 방지
 
@@ -144,12 +144,8 @@ namespace WindowsFormsApp1
             member.phone = item.SubItems[4].Text;
             member.address = item.SubItems[5].Text;
             member.locker = item.SubItems[6].Text;
-            //Form_register fr = new Form_register(member);
-            //fr.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
-            //fr.ShowDialog();
-            //Select(printAll);
 
-            string sql = string.Format("select delYn from member where mNo = {0};",member.mNo);
+            string sql = string.Format("select delYn from member where mNo = {0};", member.mNo);
             MySqlDataReader sdr = db.Reader(sql);
             while (sdr.Read())
             {
@@ -157,7 +153,7 @@ namespace WindowsFormsApp1
                 for (int i = 0; i < sdr.FieldCount; i++)
                 {
                     arr[i] = sdr.GetValue(i).ToString();
-                    if(arr[0] == "Y")
+                    if (arr[0] == "Y")
                     {
                         MessageBox.Show("이미 삭제된 컨텐츠입니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
@@ -180,6 +176,7 @@ namespace WindowsFormsApp1
                 }
             }
             db.ReaderClose(sdr);
+            db.ConnectionClose();
         }
 
         private void fr_FormClosed(object sender, FormClosedEventArgs e) // 레지스터폼이 Close되면 이벤트 발생
@@ -226,7 +223,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("나이", 80, HorizontalAlignment.Center);
             lv.Columns.Add("성별", 80, HorizontalAlignment.Center);
             lv.Columns.Add("전화번호", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("주소", 713, HorizontalAlignment.Center);
+            lv.Columns.Add("주소", 730, HorizontalAlignment.Center);
             lv.Columns.Add("라커", 80, HorizontalAlignment.Center);
             lv.Columns.Add("잔여일", 107, HorizontalAlignment.Center);
 
@@ -255,6 +252,7 @@ namespace WindowsFormsApp1
                 }
             }
             db.ReaderClose(sdr);
+            db.ConnectionClose();
         }
 
         private void fonts()
