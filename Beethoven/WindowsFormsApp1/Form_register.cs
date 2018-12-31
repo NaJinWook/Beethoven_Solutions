@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
         Button btn1, btn2, btn3, btn4;
         Form_calender fc;
         ListView lv;
-        private string printAll = "select mNo, mName, Age, Sex, phone, address, locker, concat(case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member where delYn='N';";
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, concat( case when DATEDIFF(mEnd, now()) < 0 then 0 else DATEDIFF(mEnd, now()) end, '일') from member;";
         public string gender;
         public TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
         bool sub = false;
@@ -190,7 +190,7 @@ namespace WindowsFormsApp1
             lb9.ForeColor = Color.Black;
             lb9.BackColor = Color.Transparent;
             lb9.Font = font3;
-            if(sub)
+            if (sub)
             {
                 lb9.Text = "회     원    수    정";
             }
@@ -288,12 +288,12 @@ namespace WindowsFormsApp1
         /*     버튼     */
         private void Button()
         {
-            if(sub)
+            if (sub)
             {
                 /*    수정부분     */
                 hashtable = new Hashtable();
                 hashtable.Add("size", new Size(100, 70));
-                hashtable.Add("point", new Point(700, 530));
+                hashtable.Add("point", new Point(757, 532));
                 hashtable.Add("color", Color.Black);
                 hashtable.Add("name", "btn3");
                 hashtable.Add("text", "저장");
@@ -307,7 +307,7 @@ namespace WindowsFormsApp1
                 /*    삭제부분     */
                 hashtable = new Hashtable();
                 hashtable.Add("size", new Size(100, 70));
-                hashtable.Add("point", new Point(830, 530));
+                hashtable.Add("point", new Point(865, 532));
                 hashtable.Add("color", Color.Black);
                 hashtable.Add("name", "btn4");
                 hashtable.Add("text", "삭제");
@@ -330,7 +330,7 @@ namespace WindowsFormsApp1
                 hashtable.Add("click", (EventHandler)Register);
                 btn1 = cmm.getButton(hashtable, pnl1);
                 btn1.ForeColor = Color.White;
-                btn1.FlatStyle = FlatStyle.Popup; // 테두리 제거
+                btn1.FlatStyle = FlatStyle.Flat; // 테두리 제거
                 btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
                 btn1.Font = font2;
 
@@ -345,7 +345,7 @@ namespace WindowsFormsApp1
                 hashtable.Add("click", (EventHandler)Reset);
                 btn2 = cmm.getButton(hashtable, pnl1);
                 btn2.ForeColor = Color.White;
-                btn2.FlatStyle = FlatStyle.Popup; // 테두리 제거
+                btn2.FlatStyle = FlatStyle.Flat; // 테두리 제거
                 btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
                 btn2.Font = font2;
             }
@@ -418,7 +418,7 @@ namespace WindowsFormsApp1
         private void Pass()
         {
             fc = new Form_calender(tb5, tb6, tb7);
-            
+
             fc.MdiParent = this.ParentForm;
             fc.WindowState = FormWindowState.Maximized;
             fc.FormBorderStyle = FormBorderStyle.None;
@@ -486,7 +486,7 @@ namespace WindowsFormsApp1
             DialogResult dialogResult = MessageBox.Show(string.Format("{0}님 회원 정보를 저장하시겠습니까?", member.mName), "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("회원 정보 저장이 완료되었습니다.", "저장 완료");
+                MessageBox.Show("회원 정보가 저장되었습니다.", "저장 완료");
                 db.NonQuery(sql);
                 this.Close();
             }
@@ -502,12 +502,12 @@ namespace WindowsFormsApp1
                 {
                     if (dialogResult == DialogResult.Yes)
                     {
-                        MessageBox.Show("회원 정보가 삭제되었습니다.","삭제 완료");
+                        MessageBox.Show("회원 정보가 삭제되었습니다.", "삭제 완료");
                         db.NonQuery(sql);
                         this.Close();
                     }
                 }
-            }   
+            }
         }
 
         private void Register(object o, EventArgs a) // 회원등록
@@ -522,10 +522,10 @@ namespace WindowsFormsApp1
                 DialogResult dialogResult = MessageBox.Show("회원 등록을 하시겠습니까?", "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    tb5.Text = "사용 안함";
-
-                    MessageBox.Show("회원 등록이 완료되었습니다.", "등록 완료");
+                    MessageBox.Show("회원이 등록되었습니다.", "등록 완료");
                     db.NonQuery(sql);
+                    rb1.Checked = false;
+                    rb2.Checked = false;
                     tb1.Text = "";
                     tb2.Text = "";
                     tb3.Text = "";
@@ -534,7 +534,7 @@ namespace WindowsFormsApp1
                     tb6.Text = "";
                     tb7.Text = "";
                     Pass();
-                }   
+                }
             }
         }
 
@@ -556,11 +556,11 @@ namespace WindowsFormsApp1
             ft3 = new PrivateFontCollection();
 
             ft1.AddFontFile("Font\\HANYGO230.ttf");
-            ft2.AddFontFile("Font\\HANYGO240.ttf");
+            ft2.AddFontFile("Font\\HANYGO230.ttf");
             ft3.AddFontFile("Font\\HANYGO250.ttf");
 
             font1 = new Font(ft1.Families[0], 25);
-            font2 = new Font(ft1.Families[0], 20);
+            font2 = new Font(ft2.Families[0], 20);
             font3 = new Font(ft3.Families[0], 20);
         }
     }
