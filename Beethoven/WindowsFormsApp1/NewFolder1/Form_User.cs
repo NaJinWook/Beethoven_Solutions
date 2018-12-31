@@ -55,7 +55,7 @@ namespace WindowsFormsApp1
         /*      패널      */
         private void Panel()
         {
-            arr.Add(new ob_Pnl(this, "", "", 500, 128, 20, 30)); //위쪽 버튼 부분
+            arr.Add(new ob_Pnl(this, "", "", 500, 128, 20, 20)); //위쪽 버튼 부분
             arr.Add(new ob_Pnl(this, "", "", 500, 470, 20, 170)); //리스트뷰 and 그래프 밑쪽
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
             pnl2 = os.Pnl((ob_Pnl)arr[0]);
@@ -106,6 +106,7 @@ namespace WindowsFormsApp1
             tb1.Font = new Font("맑은 고딕", 14, FontStyle.Regular);
             tb1.KeyPress += Tb_KeyPress;
             tb1.Font = font1;
+
             /*       몸무게등록       */
             hashtable = new Hashtable();
             hashtable.Add("point", new Point(105, 60));
@@ -132,8 +133,8 @@ namespace WindowsFormsApp1
             btn1.BackColor = Color.Black;
             btn1.ForeColor = Color.White;
             btn1.FlatStyle = FlatStyle.Flat; // 테두리 제거
-            //btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
             btn1.Font = font1;
+
             /*    등록부분     */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 35));
@@ -147,7 +148,6 @@ namespace WindowsFormsApp1
             btn2.ForeColor = Color.White;
             btn2.FlatStyle = FlatStyle.Flat; // 테두리 제거
             btn2.Font = font1;
-            //btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
 
             /*    그래프부분     */
             hashtable = new Hashtable();
@@ -162,7 +162,6 @@ namespace WindowsFormsApp1
             btn3.ForeColor = Color.White;
             btn3.FlatStyle = FlatStyle.Flat; // 테두리 제거
             btn3.Font = font1;
-            //btn3.FlatAppearance.BorderSize = 0; // 테두리 제거
 
 
             /*    리스트부분     */
@@ -177,7 +176,6 @@ namespace WindowsFormsApp1
             btn4.BackColor = Color.Black;
             btn4.ForeColor = Color.White;
             btn4.FlatStyle = FlatStyle.Flat; // 테두리 제거
-            //btn4.FlatAppearance.BorderSize = 0; // 테두리 제거
             btn4.Font = font1;
         }
         private void Listview()
@@ -185,8 +183,6 @@ namespace WindowsFormsApp1
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "listView");
-            //hashtable.Add("click", (MouseEventHandler)listView_click);
-            //lv.FullRowSelect = true;
             lv = cmm.getListView(hashtable, pnl1);
             lv.Dock = DockStyle.Fill;
             lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
@@ -215,8 +211,6 @@ namespace WindowsFormsApp1
             }
             lv.Sort();
         }
-
-
 
         /*        검색 이벤트        */
         private void btn_search(object o, EventArgs e)
@@ -250,12 +244,10 @@ namespace WindowsFormsApp1
             e.NewWidth = lv.Columns[e.ColumnIndex].Width;
             e.Cancel = true;
         }
+
         /*        등록 이벤트        */
         private void btn_register(object o, EventArgs e)
         {
-            //MessageBox.Show("gd");
-            //string sql = string.Format("insert into weight(mNo,rNum,kg) select '{0}',  case when  max(rNum) is null then 1 else  max(rNum) +1 end as rNum,'{1}' from weight where mNo = '{2}';", tb1.Text, tb2.Text, tb1.Text);
-
             sql = string.Format("call User_insert('{0}','{1}');", tb1.Text, tb2.Text);
             db.NonQuery(sql);
             tb2.Text = "";
@@ -276,67 +268,62 @@ namespace WindowsFormsApp1
                 lv.Items.Add(new ListViewItem(arr));
             }
             db.ReaderClose(sdr);
-
-
         }
 
         /*        그래프 이벤트        */
         private void btn_graph(object o, EventArgs e)
         {
-            lv.Visible = false;
-
-            //pnl1.BackColor = Color.Black;
-
-            chart2 = new Chart();
-            ChartArea chartArea2 = new ChartArea();
-            Legend legend2 = new Legend();
-            Series series2 = new Series();
-
-            chartArea2.Name = "ChartArea2";
-            legend2.Name = "Legend2";
-            series2.ChartArea = "ChartArea2";
-            series2.ChartType = SeriesChartType.Line;
-            series2.Legend = "Legend2";
-            series2.Name = "몸무게";
-
-            chart2.Name = "chart2";
-
-            chart2.Dock = DockStyle.Fill;
-
-            chart2.Text = "chart2";
-            chart2.BackColor = Color.Silver;
-            chart2.ChartAreas.Add(chartArea2);
-            chart2.Legends.Add(legend2);
-            chart2.Series.Add(series2);
-
-            chart2.Series["몸무게"].IsValueShownAsLabel = false;
-
-            sql = (string.Format("call Day_select('{0}')", tb1.Text));
-
-
-            //MessageBox.Show(sql);
-            MySqlDataReader sdr = db.Reader(sql);
-            chart2.Series["몸무게"].Points.Clear();
-            while (sdr.Read())
+            if(tb1.Text == "")
             {
-                string[] arr = new string[sdr.FieldCount];
-                for (int i = 0; i < sdr.FieldCount; i++)
-                {
-                    arr[i] = sdr.GetValue(i).ToString();
-                }
-                chart2.Series["몸무게"].Points.AddXY(arr[0], arr[1]);
+                MessageBox.Show("회원 번호를 입력해주세요.","알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            db.ReaderClose(sdr);
+            else
+            {
+                lv.Visible = false;
 
-            pnl1.Controls.Add(chart2);
+                chart2 = new Chart();
+                ChartArea chartArea2 = new ChartArea();
+                Legend legend2 = new Legend();
+                Series series2 = new Series();
 
+                chartArea2.Name = "ChartArea2";
+                legend2.Name = "Legend2";
+                series2.ChartArea = "ChartArea2";
+                series2.ChartType = SeriesChartType.Line;
+                series2.Legend = "Legend2";
+                series2.Name = "몸무게";
 
+                chart2.Name = "chart2";
 
+                chart2.Dock = DockStyle.Fill;
 
+                chart2.Text = "chart2";
+                chart2.BackColor = Color.Silver;
+                chart2.ChartAreas.Add(chartArea2);
+                chart2.Legends.Add(legend2);
+                chart2.Series.Add(series2);
 
+                chart2.Series["몸무게"].IsValueShownAsLabel = false;
 
+                sql = (string.Format("call Day_select('{0}')", tb1.Text));
 
+                MySqlDataReader sdr = db.Reader(sql);
+                chart2.Series["몸무게"].Points.Clear();
+                while (sdr.Read())
+                {
+                    string[] arr = new string[sdr.FieldCount];
+                    for (int i = 0; i < sdr.FieldCount; i++)
+                    {
+                        arr[i] = sdr.GetValue(i).ToString();
+                    }
+                    chart2.Series["몸무게"].Points.AddXY(arr[0], arr[1]);
+                }
+                db.ReaderClose(sdr);
+
+                pnl1.Controls.Add(chart2);
+            }
         }
+
         /*        리스트 이벤트        */
         private void btn_list(object o, EventArgs e)
         {
@@ -356,7 +343,6 @@ namespace WindowsFormsApp1
                 MessageBox.Show("숫자만 입력해주세요.");
             }
         }
-
 
         private void fonts()
         {

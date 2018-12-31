@@ -18,12 +18,12 @@ namespace WindowsFormsApp1
         ArrayList arr = new ArrayList();
         Panel main_pnl, menu_pnl, mdi_pnl, time_pnl, time_pnl2;
         Button logout, menu_btn;
-        PictureBox logo;
+        PictureBox logo, home;
         Label date, time;
         Timer mTimer;
         Form close;
         PrivateFontCollection ft1, ft2, ft3;
-        Font font, font2, font3, font4;
+        Font font1, font2, font3, font4;
         Form_login fl;
         MYsql db = new MYsql();
 
@@ -34,11 +34,9 @@ namespace WindowsFormsApp1
             ClientSize = new Size(1500, 772);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Text = "Beethoven Management System ver 0.1";
+            this.Text = "Beethoven Management System ver 1.04";
             this.IsMdiContainer = true;
             Control_Init();
-
-
         }
 
         public Form_main(Form form)
@@ -49,7 +47,7 @@ namespace WindowsFormsApp1
             ClientSize = new Size(1500, 772);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Text = "Beethoven Management System ver 0.1";
+            this.Text = "Beethoven Management System ver 1.04";
             this.IsMdiContainer = true;
             Control_Init();
         }
@@ -64,6 +62,12 @@ namespace WindowsFormsApp1
             logo.Size = new Size(290, 100);
             logo.Location = new Point(0, 0);
 
+            home = new PictureBox();
+            home.Image = BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("home");
+            home.SizeMode = PictureBoxSizeMode.StretchImage;
+            home.Size = new Size(1460, 632);
+            home.Location = new Point(0, 0);
+
             arr.Add(new ob_Pnl(this, "", "", 1500, 100, 0, 0));
             arr.Add(new ob_Pnl(this, "", "", 1460, 632, 20, 25));
             arr.Add(new ob_Pnl(this, "", "", 200, 200, 1096, 0)); // 시간 패널
@@ -71,9 +75,8 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Lbl(this, "", "", 200, 200, 5, 5)); // 년월
             arr.Add(new ob_Lbl(this, "", "", 200, 200, -3, 35)); // 시간
             arr.Add(new ob_Btn(this, "logout", "로그아웃", 204, 100, 1296, 0));
-            //arr.Add(new ob_Lbl(this, "", "안녕하세요", 300, 300, 20, 24));
-            arr.Add(new ob_Pnl(this, "", "", 15000, 677, 0, 95));
-            
+            arr.Add(new ob_Pnl(this, "", "", 1500, 677, 0, 95));
+
             menu_pnl = os.Pnl((ob_Pnl)arr[0]);
             mdi_pnl = os.Pnl((ob_Pnl)arr[1]);
             time_pnl = os.Pnl((ob_Pnl)arr[2]);
@@ -84,10 +87,8 @@ namespace WindowsFormsApp1
             logout.Click += Logout_Click;
             logout.Cursor = Cursors.Hand;
             main_pnl = os.Pnl((ob_Pnl)arr[7]);
-            //start = os.Lbl((ob_Lbl)arr[7]);
 
             Controls.Add(menu_pnl);
-            //mdi_pnl.Controls.Add(start);
             menu_pnl.Controls.Add(logo);
             menu_pnl.Controls.Add(time_pnl);
             time_pnl.Controls.Add(time_pnl2);
@@ -96,20 +97,19 @@ namespace WindowsFormsApp1
             menu_pnl.Controls.Add(logout);
             Controls.Add(main_pnl);
             main_pnl.Controls.Add(mdi_pnl);
-
+            mdi_pnl.Controls.Add(home);
+            
             for (int i = 0; i < 4; i++)
             {
                 menu_btn = new Button();
                 menu_btn.Size = new Size(200, 100);
                 menu_btn.Location = new Point((202 * i) + 290, 0);
-                //menu_btn.BackColor = Color.FromArgb(200, 100, 130, 200);
                 menu_btn.BackColor = Color.Black;
                 menu_btn.ForeColor = Color.White;
-                menu_btn.Font = new Font("나눔 고딕", 30, FontStyle.Italic);
+                menu_btn.Font = font3;
                 menu_btn.Name = string.Format("btn{0}", i + 1);
                 menu_btn.TabStop = false; // 탭방지
-                menu_btn.FlatStyle = FlatStyle.Flat; // 테두리 제거
-                menu_btn.FlatAppearance.BorderSize = 0; // 테두리 제거
+                menu_btn.FlatStyle = FlatStyle.Popup; // 테두리 제거
                 menu_pnl.Controls.Add(menu_btn);
                 menu_btn.Click += Menu_btn_Click;
                 menu_btn.Cursor = Cursors.Hand;
@@ -139,10 +139,10 @@ namespace WindowsFormsApp1
             ft1 = new PrivateFontCollection();
             ft2 = new PrivateFontCollection();
             ft3 = new PrivateFontCollection();
-            ft1.AddFontFile("Font\\Digit.ttf");
+            ft1.AddFontFile("Font\\DS-DIGIB.ttf");
             ft2.AddFontFile("Font\\HANYGO230.ttf");
             ft3.AddFontFile("Font\\HANYGO240.ttf");
-            font = new Font(ft1.Families[0], 38); // 시간
+            font1 = new Font(ft1.Families[0], 38); // 시간
             font2 = new Font(ft1.Families[0], 20); // 년/월
             font3 = new Font(ft2.Families[0], 30); // 메뉴
             font4 = new Font(ft3.Families[0], 30); // 로그아웃
@@ -154,16 +154,15 @@ namespace WindowsFormsApp1
             mdi_pnl.BackColor = Color.White;
             logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
             logout.FlatAppearance.BorderSize = 0; // 테두리 제거
-            logout.BackColor = Color.DarkBlue;
+            logout.BackColor = Color.FromArgb(30, 30, 30);
             logout.ForeColor = Color.White;
             logout.TabStop = false; // 탭방지
-            logout.FlatStyle = FlatStyle.Flat; // 테두리 제거
-            logout.FlatAppearance.BorderSize = 0; // 테두리 제거
+            logout.FlatStyle = FlatStyle.Popup; // 테두리 제거
             logout.Font = font4;
             date.Font = font2;
-            time.Font = font;
-            time_pnl.BackColor = Color.DarkBlue;
-            time_pnl2.BackColor = Color.FromArgb(45, 35, 135);
+            time.Font = font1;
+            time_pnl.BackColor = Color.FromArgb(30, 30, 30);
+            time_pnl2.BackColor = Color.FromArgb(40, 40, 40);
             main_pnl.BackColor = Color.FromArgb(45, 35, 155);
         }
 
@@ -198,6 +197,7 @@ namespace WindowsFormsApp1
                     close.FormBorderStyle = FormBorderStyle.None;
                     close.MdiParent = this;
                     close.Dock = DockStyle.Fill;
+                    home.Dispose();
                     mdi_pnl.Controls.Add(close);
                     close.Show();
                     break;
@@ -207,6 +207,7 @@ namespace WindowsFormsApp1
                     close.FormBorderStyle = FormBorderStyle.None;
                     close.MdiParent = this; 
                     close.Dock = DockStyle.Fill;
+                    home.Dispose();
                     mdi_pnl.Controls.Add(close);
                     close.Show();
                     break;
@@ -216,6 +217,7 @@ namespace WindowsFormsApp1
                     close.FormBorderStyle = FormBorderStyle.None;
                     close.MdiParent = this;
                     close.Dock = DockStyle.Fill;
+                    home.Dispose();
                     mdi_pnl.Controls.Add(close);
                     close.Show();
                     break;
@@ -225,15 +227,22 @@ namespace WindowsFormsApp1
                     close.FormBorderStyle = FormBorderStyle.None;
                     close.MdiParent = this;
                     close.Dock = DockStyle.Fill;
+                    home.Dispose();
                     mdi_pnl.Controls.Add(close);
                     close.Show();
                     break;
             }
+            if (menu_btn.BackColor != Color.Black) menu_btn.BackColor = Color.Red;
         }
+
         private void Logout_Click(object sender, EventArgs e)
         {
-            fl.Visible = true;
-            this.Close();
+            DialogResult dialogResult = MessageBox.Show("로그아웃 하시겠습니까?", "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                fl.Visible = true;
+                this.Close();
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace WindowsFormsApp1
         PrivateFontCollection ft1, ft2;
         Font font1, font2;
         Panel pnl;
-        Label BMS_lbl, call_lbl, pw_lbl;
+        Label pw_lbl;
         TextBox pw_input;
         Button num_btn;
 
@@ -34,24 +34,19 @@ namespace WindowsFormsApp1
             this.BackgroundImage = (Bitmap)WindowsFormsApp1.Properties.Resources.ResourceManager.GetObject("login_background");
             this.MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.Text = "Beethoven Management System ver 0.1";  
+            this.Text = "Beethoven Management System ver 1.04";  
         }
 
         private void Form_login_Load(object sender, EventArgs e)
         {
             fonts();
-
-            arr.Add(new ob_Lbl(this, "", "BMS\nSOUTIONS", 290, 200, 10, 10));
-            arr.Add(new ob_Lbl(this, "", "SSS프로그램 문의 전화) 010-1234-5678", 280, 50, 10, 330));
             arr.Add(new ob_Pnl(this, "", "", 290, 385, 375, 315));
             arr.Add(new ob_Lbl(this, "", "비밀번호를 입력해주세요.", 280, 30, 23, 5));
             arr.Add(new ob_Tbx(this, "", "", 240, 100, 25, 42));
 
-            BMS_lbl = os.Lbl((ob_Lbl)arr[0]);
-            call_lbl = os.Lbl((ob_Lbl)arr[1]);
-            pnl = os.Pnl((ob_Pnl)arr[2]);
-            pw_lbl = os.Lbl((ob_Lbl)arr[3]);
-            pw_input = os.Tbx((ob_Tbx)arr[4]);
+            pnl = os.Pnl((ob_Pnl)arr[0]);
+            pw_lbl = os.Lbl((ob_Lbl)arr[1]);
+            pw_input = os.Tbx((ob_Tbx)arr[2]);
 
             Controls.Add(pnl);
             pnl.Controls.Add(pw_lbl);
@@ -102,8 +97,6 @@ namespace WindowsFormsApp1
         private void option()
         {
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            BMS_lbl.ForeColor = Color.White;
-            BMS_lbl.BackColor = Color.Transparent;
             pnl.BackColor = Color.FromArgb(255 ,45, 35, 155);
             pw_lbl.Font = font2;
             pw_lbl.ForeColor = Color.White;
@@ -151,11 +144,11 @@ namespace WindowsFormsApp1
             }
             else if (num_btn.Name == "btn10" && pw_input.Text != pwd && pw_input.Text != "")
             {
-                MessageBox.Show("비밀번호를 잘못 입력하셨습니다.", "로그인 실패");
+                MessageBox.Show("비밀번호를 잘못 입력하셨습니다.", "로그인 실패", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else if(num_btn.Name == "btn10" && pw_input.Text == "")
             {
-                MessageBox.Show("비밀번호를 입력해주세요.", "로그인 실패");
+                MessageBox.Show("비밀번호를 입력해주세요.", "로그인 실패", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             else if (num_btn.Name == "btn12")
             {

@@ -54,7 +54,7 @@ namespace WindowsFormsApp1
             arr.Add(new ob_Pnl(this, "", "", 1461, 633, 0, 0));
             arr.Add(new ob_Pnl(this, "", "", 975, 613, 10, 10));
             arr.Add(new ob_Pnl(this, "", "", 455, 613, 995, 10));
-            arr.Add(new ob_Pnl(this, "", "", 975, 53, 0, 0));
+            arr.Add(new ob_Pnl(this, "", "", 974, 53, 0, 0));
 
             main_pnl = os.Pnl((ob_Pnl)arr[0]);
             pnl1 = os.Pnl((ob_Pnl)arr[1]);
@@ -86,7 +86,7 @@ namespace WindowsFormsApp1
             /*       이름부분         */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(20, 70));
+            hashtable.Add("point", new Point(20, 65));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb1");
             hashtable.Add("text", "이름");
@@ -98,7 +98,7 @@ namespace WindowsFormsApp1
             /*       나이부분         */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(20, 150));
+            hashtable.Add("point", new Point(20, 145));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb2");
             hashtable.Add("text", "나이");
@@ -110,7 +110,7 @@ namespace WindowsFormsApp1
             /*       성별부분         */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(20, 230));
+            hashtable.Add("point", new Point(20, 225));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb3");
             hashtable.Add("text", "성별");
@@ -122,7 +122,7 @@ namespace WindowsFormsApp1
             /*       전화번호부분         */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(145, 50));
-            hashtable.Add("point", new Point(20, 310));
+            hashtable.Add("point", new Point(20, 305));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb5");
             hashtable.Add("text", "전화번호");
@@ -134,7 +134,7 @@ namespace WindowsFormsApp1
             /*       주소부분         */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(20, 390));
+            hashtable.Add("point", new Point(20, 385));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb4");
             hashtable.Add("text", "주소");
@@ -146,7 +146,7 @@ namespace WindowsFormsApp1
             /*       라커부분          */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(20, 550));
+            hashtable.Add("point", new Point(20, 547));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb6");
             hashtable.Add("text", "라커");
@@ -158,7 +158,7 @@ namespace WindowsFormsApp1
             /*       달력부분              */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(90, 50));
-            hashtable.Add("point", new Point(20, 470));
+            hashtable.Add("point", new Point(20, 467));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb7");
             hashtable.Add("text", "기간");
@@ -170,7 +170,7 @@ namespace WindowsFormsApp1
             /*        물결          */
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(380, 470));
+            hashtable.Add("point", new Point(380, 465));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "lb8");
             hashtable.Add("text", "~");
@@ -181,15 +181,19 @@ namespace WindowsFormsApp1
 
             /*        회원가입 라벨          */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(200, 40));
-            hashtable.Add("point", new Point(45, 5));
+            hashtable.Add("size", new Size(230, 40));
+            hashtable.Add("point", new Point(380, 5));
             hashtable.Add("color", Color.Black);
-            hashtable.Add("name", "lb8");
-            hashtable.Add("text", "회원가입");
-            lb8 = cmm.getLabel(hashtable, register_title);
-            lb8.ForeColor = Color.Black;
-            lb8.BackColor = Color.Transparent;
-            lb8.Font = font3;
+            hashtable.Add("name", "lb9");
+            hashtable.Add("text", "회     원    등    록");
+            lb9 = cmm.getLabel(hashtable, register_title);
+            lb9.ForeColor = Color.Black;
+            lb9.BackColor = Color.Transparent;
+            lb9.Font = font3;
+            if(sub)
+            {
+                lb9.Text = "회     원    수    정";
+            }
         }
 
         /*     텍박     */
@@ -197,7 +201,7 @@ namespace WindowsFormsApp1
         {
             /*       이름부분       */
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(180, 75));
+            hashtable.Add("point", new Point(180, 70));
             hashtable.Add("width", "700");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb1");
@@ -208,7 +212,7 @@ namespace WindowsFormsApp1
 
             /*       나이부분         */
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(180, 155));
+            hashtable.Add("point", new Point(180, 150));
             hashtable.Add("width", "700");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb2");
@@ -220,7 +224,7 @@ namespace WindowsFormsApp1
 
             /*       전화번호부분         */
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(180, 315));
+            hashtable.Add("point", new Point(180, 310));
             hashtable.Add("width", "700");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb3");
@@ -232,7 +236,7 @@ namespace WindowsFormsApp1
 
             /*       주소부분         */
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(180, 395));
+            hashtable.Add("point", new Point(180, 390));
             hashtable.Add("width", "700");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb4");
@@ -243,7 +247,7 @@ namespace WindowsFormsApp1
 
             /*       라커          */
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(180, 555));
+            hashtable.Add("point", new Point(180, 550));
             hashtable.Add("width", "110");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb5");
@@ -256,7 +260,7 @@ namespace WindowsFormsApp1
 
             /*       달력부분    시작일     */
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(180, 475));
+            hashtable.Add("point", new Point(180, 470));
             hashtable.Add("width", "190");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb6");
@@ -269,7 +273,7 @@ namespace WindowsFormsApp1
 
             /*       달력부분    종료일     */
             hashtable = new Hashtable();
-            hashtable.Add("point", new Point(435, 475));
+            hashtable.Add("point", new Point(435, 470));
             hashtable.Add("width", "190");
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb7");
@@ -319,14 +323,14 @@ namespace WindowsFormsApp1
                 /*    등록부분     */
                 hashtable = new Hashtable();
                 hashtable.Add("size", new Size(100, 70));
-                hashtable.Add("point", new Point(700, 530));
+                hashtable.Add("point", new Point(757, 532));
                 hashtable.Add("color", Color.Black);
                 hashtable.Add("name", "btn1");
                 hashtable.Add("text", "등록");
                 hashtable.Add("click", (EventHandler)Register);
                 btn1 = cmm.getButton(hashtable, pnl1);
                 btn1.ForeColor = Color.White;
-                btn1.FlatStyle = FlatStyle.Flat; // 테두리 제거
+                btn1.FlatStyle = FlatStyle.Popup; // 테두리 제거
                 btn1.FlatAppearance.BorderSize = 0; // 테두리 제거
                 btn1.Font = font2;
 
@@ -334,14 +338,14 @@ namespace WindowsFormsApp1
                 /*    초기화부분     */
                 hashtable = new Hashtable();
                 hashtable.Add("size", new Size(100, 70));
-                hashtable.Add("point", new Point(830, 530));
+                hashtable.Add("point", new Point(865, 532));
                 hashtable.Add("color", Color.Black);
                 hashtable.Add("name", "btn2");
                 hashtable.Add("text", "초기화");
                 hashtable.Add("click", (EventHandler)Reset);
                 btn2 = cmm.getButton(hashtable, pnl1);
                 btn2.ForeColor = Color.White;
-                btn2.FlatStyle = FlatStyle.Flat; // 테두리 제거
+                btn2.FlatStyle = FlatStyle.Popup; // 테두리 제거
                 btn2.FlatAppearance.BorderSize = 0; // 테두리 제거
                 btn2.Font = font2;
             }
@@ -360,7 +364,7 @@ namespace WindowsFormsApp1
             rb1 = cmm.getRadioButton(hashtable, pnl1);
             rb1.BackColor = Color.Transparent;
             rb1.Font = font1;
-            rb1.ForeColor = Color.Blue;
+            rb1.ForeColor = Color.FromArgb(45, 35, 135);
 
             /* 여성부분 */
             hashtable = new Hashtable();
@@ -372,13 +376,8 @@ namespace WindowsFormsApp1
             rb2 = cmm.getRadioButton(hashtable, pnl1);
             rb2.BackColor = Color.Transparent;
             rb2.Font = font1;
-            rb2.ForeColor = Color.Red;
+            rb2.ForeColor = Color.OrangeRed;
         }
-
-        //private void test(object o, EventArgs e)
-        //{
-        //    this.Close();
-        //}
 
         private void option()
         {
@@ -487,7 +486,7 @@ namespace WindowsFormsApp1
             DialogResult dialogResult = MessageBox.Show(string.Format("{0}님 회원 정보를 저장하시겠습니까?", member.mName), "알림", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("회원 정보가 저장되었습니다.", "저장 완료");
+                MessageBox.Show("회원 정보 저장이 완료되었습니다.", "저장 완료");
                 db.NonQuery(sql);
                 this.Close();
             }
@@ -525,7 +524,7 @@ namespace WindowsFormsApp1
                 {
                     tb5.Text = "사용 안함";
 
-                    MessageBox.Show("회원이 등록되었습니다.", "등록 완료");
+                    MessageBox.Show("회원 등록이 완료되었습니다.", "등록 완료");
                     db.NonQuery(sql);
                     tb1.Text = "";
                     tb2.Text = "";
@@ -541,7 +540,6 @@ namespace WindowsFormsApp1
 
         private void Reset(object o, EventArgs a) // 텍스트박스값 초기화
         {
-            //MessageBox.Show("초기화");
             tb1.Text = "";
             tb2.Text = "";
             tb3.Text = "";
@@ -558,12 +556,12 @@ namespace WindowsFormsApp1
             ft3 = new PrivateFontCollection();
 
             ft1.AddFontFile("Font\\HANYGO230.ttf");
-            ft2.AddFontFile("Font\\HANYGO230.ttf");
+            ft2.AddFontFile("Font\\HANYGO240.ttf");
             ft3.AddFontFile("Font\\HANYGO250.ttf");
 
             font1 = new Font(ft1.Families[0], 25);
-            font2 = new Font(ft2.Families[0], 20);
-            font3 = new Font(ft3.Families[0], 18);
+            font2 = new Font(ft1.Families[0], 20);
+            font3 = new Font(ft3.Families[0], 20);
         }
     }
 }
