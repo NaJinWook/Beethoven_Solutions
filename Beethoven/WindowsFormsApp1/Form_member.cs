@@ -28,10 +28,10 @@ namespace WindowsFormsApp1
         Button btn1, btn2;
         TextBox tb1;
         ComboBox cb1;
+        private Panel panel;
+        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where delYn = 'N';";
         Form fr;
         Form_main fm;
-        private Panel panel;
-        private string printAll = "select mNo,mName,Age,Sex,phone,address,locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member;";
 
         public Form_member()
         {
@@ -80,7 +80,7 @@ namespace WindowsFormsApp1
             hashtable.Add("point", new Point(10, 8));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "선택");
-            hashtable.Add("text", "이름");
+            hashtable.Add("text", "2018");
             hashtable.Add("value", "이름");
             hashtable.Add("key", "1");
             cb1 = cmm.getComboBox(hashtable, pnl2);
@@ -144,6 +144,10 @@ namespace WindowsFormsApp1
             member.phone = item.SubItems[4].Text;
             member.address = item.SubItems[5].Text;
             member.locker = item.SubItems[6].Text;
+            //Form_register fr = new Form_register(member);
+            //fr.StartPosition = FormStartPosition.CenterParent; // 부모폼 가운데 포지션 위치
+            //fr.ShowDialog();
+            //Select(printAll);
 
             string sql = string.Format("select delYn from member where mNo = {0};", member.mNo);
             MySqlDataReader sdr = db.Reader(sql);
@@ -176,7 +180,6 @@ namespace WindowsFormsApp1
                 }
             }
             db.ReaderClose(sdr);
-            db.ConnectionClose();
         }
 
         private void fr_FormClosed(object sender, FormClosedEventArgs e) // 레지스터폼이 Close되면 이벤트 발생
@@ -190,15 +193,15 @@ namespace WindowsFormsApp1
         {
             if (cb1.Text == "회원번호")
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mNo like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mNo like'%{0}%' and delYn='N';", tb1.Text));
             }
             else if (cb1.Text == "이름")
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mName like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mName like'%{0}%' and delYn='N';", tb1.Text));
             }
             else if (cb1.Text == "전화번호")
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where phone like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where phone like'%{0}%' and delYn='N';", tb1.Text));
             }
             else if (tb1.Text == "")
             {
@@ -206,7 +209,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mName like'%{0}%'; ", tb1.Text));
+                Select(string.Format("select mNo, mName, Age, Sex, phone, address, locker, case when DATEDIFF(mEnd, now()) < 0 then '기간 만료' else DATEDIFF(mEnd, now()) end from member where mName like'%{0}%' and delYn='N';", tb1.Text));
             }
         }
 
@@ -252,7 +255,6 @@ namespace WindowsFormsApp1
                 }
             }
             db.ReaderClose(sdr);
-            db.ConnectionClose();
         }
 
         private void fonts()
@@ -262,8 +264,6 @@ namespace WindowsFormsApp1
 
             ft1.AddFontFile("Font\\HANYGO230.ttf");
             ft2.AddFontFile("Font\\HANYGO250.ttf");
-              
-
 
             font1 = new Font(ft1.Families[0], 13);
             font2 = new Font(ft2.Families[0], 50);
