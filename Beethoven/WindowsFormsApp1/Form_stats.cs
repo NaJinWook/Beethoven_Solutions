@@ -133,7 +133,7 @@ namespace WindowsFormsApp1
             chart1.Dock = DockStyle.Fill;
             chart1.Text = "chart1";
             chart1.ChartAreas.Add(chartArea1);
-            chart1.Titles.Add("성별 구성 비율");
+            chart1.Titles.Add("현 성별 구성 비율");
             chart1.Series.Add(series1);
             chart1.Series["Series1"].IsValueShownAsLabel = false;
             pn1.Controls.Add(chart1);
