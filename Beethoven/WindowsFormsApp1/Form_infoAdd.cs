@@ -59,7 +59,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(780, 520));
-            hashtable.Add("point", new Point(0, 20));
+            hashtable.Add("point", new Point(0, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn1");
             pn1 = cmm.getPanel(hashtable, main_pnl);
@@ -73,9 +73,9 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(620, 520));
-            hashtable.Add("point", new Point(790, 20));
+            hashtable.Add("point", new Point(790, 0));
             hashtable.Add("color", Color.White);
-            hashtable.Add("name", "pn3");
+            hashtable.Add("name", "pn4");
             pn4 = cmm.getPanel(hashtable, main_pnl);
             pn4.BorderStyle = BorderStyle.FixedSingle;
             
