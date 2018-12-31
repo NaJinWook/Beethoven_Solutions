@@ -26,9 +26,9 @@ namespace WindowsFormsApp1
         PrivateFontCollection ft1, ft2;
         Font font1, font2;
         TextBox tb1, tb2, tb3, tb4, tb5, tb6, tb7;
-        Label lb1,lb2,lb3,lb4;
+        Label lb1, lb2, lb3, lb4;
         Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
-        Panel pn1, pn2, pn3, pn4, main_pnl,pn5;
+        Panel pn1, pn2, pn3, pn4, main_pnl, pn5;
         Hashtable hashtable;
         ListView lv;
         ComboBox cb1;
@@ -37,6 +37,7 @@ namespace WindowsFormsApp1
         WebAPI api;
         private string hNo, filename;
         public int hNum;
+        private bool yn = true;
         MYsql db = new MYsql();
         public Form_infoAdd()
         {
@@ -56,9 +57,10 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "pn1");
             main_pnl = cmm.getPanel2(hashtable, this);
 
+            /* 왼쪽 패널 */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(780, 520));
-            hashtable.Add("point", new Point(0, 20));
+            hashtable.Add("size", new Size(780, 540));
+            hashtable.Add("point", new Point(0, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn1");
             pn1 = cmm.getPanel(hashtable, main_pnl);
@@ -70,26 +72,27 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "pn2");
             pn2 = cmm.getPanel(hashtable, main_pnl);
 
+            /* 오른쪽 패널 */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(620, 520));
-            hashtable.Add("point", new Point(790, 20));
+            hashtable.Add("size", new Size(650, 540));
+            hashtable.Add("point", new Point(790, 0));
             hashtable.Add("color", Color.White);
-            hashtable.Add("name", "pn3");
+            hashtable.Add("name", "pn4");
             pn4 = cmm.getPanel(hashtable, main_pnl);
             pn4.BorderStyle = BorderStyle.FixedSingle;
-            
+
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(620, 520));
+            hashtable.Add("size", new Size(650, 540));
             hashtable.Add("point", new Point(0, 0));
             hashtable.Add("pictureboxsizemode", PictureBoxSizeMode.CenterImage);
             pc1 = cmm.getPictureBox(hashtable, pn4);
             pc1.Image = Properties.Resources.normal_img;
-            
+
             //------------------------------------------------패널 2번
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(1111, 5));
+            hashtable.Add("point", new Point(1114, 5));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "update");
             hashtable.Add("text", "수정");
@@ -102,7 +105,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(1221, 5));
+            hashtable.Add("point", new Point(1223, 5));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "insert");
             hashtable.Add("text", "저장");
@@ -112,25 +115,52 @@ namespace WindowsFormsApp1
             btn2.ForeColor = Color.White;
             btn2.FlatStyle = FlatStyle.Flat;
             btn2.FlatAppearance.BorderSize = 0;
-            
+
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(1331, 5));
+            hashtable.Add("point", new Point(1332, 5));
             hashtable.Add("color", Color.Black);
-            hashtable.Add("name", "btn3");
+            hashtable.Add("name", "delete");
             hashtable.Add("text", "삭제");
+            hashtable.Add("click", (EventHandler)btn_click);
             btn3 = cmm.getButton(hashtable, pn2);
             btn3.Font = font1;
             btn3.ForeColor = Color.White;
             btn3.FlatStyle = FlatStyle.Flat;
             btn3.FlatAppearance.BorderSize = 0;
-            
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(70, 50));
+            hashtable.Add("point", new Point(709, 5));
+            hashtable.Add("color", Color.FromArgb(45, 35, 135));
+            hashtable.Add("name", "btn6");
+            hashtable.Add("text", "");
+            hashtable.Add("click", (EventHandler)upload_click);
+            btn6 = cmm.getButton(hashtable, pn2);
+            btn6.Image = Properties.Resources.file_img;
+            btn6.ForeColor = Color.White;
+            btn6.FlatStyle = FlatStyle.Flat;
+            btn6.FlatAppearance.BorderSize = 0;
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 50));
+            hashtable.Add("point", new Point(1005, 5));
+            hashtable.Add("color", Color.Black);
+            hashtable.Add("name", "btn7");
+            hashtable.Add("text", "초기화");
+            hashtable.Add("click", (EventHandler)btn_clear);
+            btn7 = cmm.getButton(hashtable, pn2);
+            btn7.Font = font1;
+            btn7.ForeColor = Color.White;
+            btn7.FlatStyle = FlatStyle.Flat;
+            btn7.FlatAppearance.BorderSize = 0;
+
             //=========================================여기까지 패널2번
             //--------------------------------------여기부터 패널3번부분
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(67, 30));
-            hashtable.Add("point", new Point(10, 15));
+            hashtable.Add("point", new Point(10, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb1");
             hashtable.Add("text", "제품명");
@@ -140,7 +170,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(67, 30));
-            hashtable.Add("point", new Point(240, 15));
+            hashtable.Add("point", new Point(240, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb2");
             hashtable.Add("text", "회사명");
@@ -150,7 +180,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 30));
-            hashtable.Add("point", new Point(470, 15));
+            hashtable.Add("point", new Point(468, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb3");
             hashtable.Add("text", "무게");
@@ -160,7 +190,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 30));
-            hashtable.Add("point", new Point(610, 15));
+            hashtable.Add("point", new Point(591, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb4");
             hashtable.Add("text", "수량");
@@ -171,7 +201,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "150");
-            hashtable.Add("point", new Point(80, 15));
+            hashtable.Add("point", new Point(77, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb2");
             hashtable.Add("enabled", true);
@@ -180,7 +210,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "150");
-            hashtable.Add("point", new Point(310, 15));
+            hashtable.Add("point", new Point(306, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb3");
             hashtable.Add("enabled", true);
@@ -189,7 +219,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(525, 15));
+            hashtable.Add("point", new Point(518, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb4");
             hashtable.Add("enabled", true);
@@ -198,38 +228,12 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(675, 15));
+            hashtable.Add("point", new Point(641, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb5");
             hashtable.Add("enabled", true);
             tb5 = cmm.getTextBox(hashtable, pn2);
             tb5.Font = font1;
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(70, 50));
-            hashtable.Add("point", new Point(760, 5));
-            hashtable.Add("color", Color.FromArgb(45, 35, 135));
-            hashtable.Add("name", "btn6");
-            hashtable.Add("text", "");
-            hashtable.Add("click", (EventHandler)upload_click);
-            btn6 = cmm.getButton(hashtable, pn2);
-            //btn6.Image= Properties.Resources.file_img;
-            btn6.ForeColor = Color.White;
-            btn6.FlatStyle = FlatStyle.Flat;
-            btn6.FlatAppearance.BorderSize = 0;
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(940, 5));
-            hashtable.Add("color", Color.Black);
-            hashtable.Add("name", "btn7");
-            hashtable.Add("text", "CLEAR");
-            hashtable.Add("click", (EventHandler)btn_clear);
-            btn7 = cmm.getButton(hashtable, pn2);
-            btn7.Font = font1;
-            btn7.ForeColor = Color.White;
-            btn7.FlatStyle = FlatStyle.Flat;
-            btn7.FlatAppearance.BorderSize = 0;
 
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
@@ -243,6 +247,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("수량", 80, HorizontalAlignment.Center);
             lv.Columns.Add("구매일", 235, HorizontalAlignment.Center);
             lv.Font = font1;
+            lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
             option();
             api.SelectListView("http://192.168.3.12:5000/select", lv);
             tb2.Text = "";
@@ -253,6 +258,14 @@ namespace WindowsFormsApp1
             hNo = "";
             filename = "";
         }
+
+        /*              리스트뷰 컬럼 크기 고정                     */
+        private void Lv_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.NewWidth = lv.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
+
         private void listView_click(object sender, MouseEventArgs e)
         {
             int index;
@@ -267,10 +280,10 @@ namespace WindowsFormsApp1
 
             index = lv.FocusedItem.Index;
             hNum = Convert.ToInt32(lv.Items[index].SubItems[0].Text);
-            api.Selectpic("http://192.168.3.12:5000/select_img", hNum,pc1, urlstr);
+            api.Selectpic("http://192.168.3.12:5000/select_img", hNum, pc1, urlstr);
         }
-       
-        private void btn_clear(object o,EventArgs e)
+
+        private void btn_clear(object o, EventArgs e)
         {
             Button btn = (Button)o;
             tb2.Text = "";
@@ -286,7 +299,7 @@ namespace WindowsFormsApp1
         private void btn_click(object o, EventArgs e)
         {
             Button btn = (Button)o;
-            if(tb2.Text == ""&&tb3.Text == ""&&tb4.Text == ""&&tb5.Text == ""&& urlstr == ""&&hNo=="")
+            if (tb2.Text == "" && tb3.Text == "" && tb4.Text == "" && tb5.Text == "" && urlstr == "" && hNo == "")
             {
                 MessageBox.Show("값을 입력해주세요.");
             }
@@ -306,6 +319,7 @@ namespace WindowsFormsApp1
                 string filePath = of.FileName;
                 urlstr = filePath;
             }
+            yn = false;
         }
 
         private void fonts()
@@ -326,52 +340,73 @@ namespace WindowsFormsApp1
             api.SelectListView("http://192.168.3.12:5000/select", lv);
             if (name == "update")
             {
-                Image img = Image.FromFile(urlstr);
-                int start = urlstr.LastIndexOf("\\") + 1;
-                int len = urlstr.Length - start;
-                filename = urlstr.Substring(start, len);// 파일의 경로에 string 값의 마지막 파일명을 잘라서 사용
+                if (yn)
+                {
+                    MessageBox.Show("이미지를 선택해주세요.");
+                }
+                else
+                {
+                    Image img = Image.FromFile(urlstr);
+                    int start = urlstr.LastIndexOf("\\") + 1;
+                    int len = urlstr.Length - start;
+                    filename = urlstr.Substring(start, len);// 파일의 경로에 string 값의 마지막 파일명을 잘라서 사용
 
-                WebClient wc = new WebClient();
+                    WebClient wc = new WebClient();
 
-                MemoryStream ms = new MemoryStream();//스트림을 바이트단위로 바로 바뀌지 않아서 메모리 스트림 생성
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                byte[] imgData = ms.ToArray();
+                    MemoryStream ms = new MemoryStream();//스트림을 바이트단위로 바로 바뀌지 않아서 메모리 스트림 생성
+                    img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] imgData = ms.ToArray();
 
-                string filedata = Convert.ToBase64String(imgData);//바이트 스트링으로 변환
-                
-                ht.Add("hNo", hNo);
-                ht.Add("hName", tb2.Text);
-                ht.Add("cpName", tb3.Text);
-                ht.Add("weight", tb4.Text);
-                ht.Add("EA", tb5.Text);
-                ht.Add("filename", filename);
-                ht.Add("filedata", filedata);
-                api.Post("http://192.168.3.12:5000/update", ht);
-                api.SelectListView("http://192.168.3.12:5000/select", lv);
+                    string filedata = Convert.ToBase64String(imgData);//바이트 스트링으로 변환
+
+                    ht.Add("hNo", hNo);
+                    ht.Add("hName", tb2.Text);
+                    ht.Add("cpName", tb3.Text);
+                    ht.Add("weight", tb4.Text);
+                    ht.Add("EA", tb5.Text);
+                    ht.Add("filename", filename);
+                    ht.Add("filedata", filedata);
+                    api.Post("http://192.168.3.12:5000/update", ht);
+                    api.SelectListView("http://192.168.3.12:5000/select", lv);
+                }
+
             }
 
             else if (name == "insert")
             {
-                Image img = Image.FromFile(urlstr);
-                int start = urlstr.LastIndexOf("\\") + 1;
-                int len = urlstr.Length - start;
-                filename = urlstr.Substring(start, len);//파일의 경로에 string 값의 마지막 파일명을 잘라서 사용
+                if (yn)
+                {
+                    MessageBox.Show("이미지를 선택해주세요.");
+                }
+                else
+                {
+                    Image img = Image.FromFile(urlstr);
+                    int start = urlstr.LastIndexOf("\\") + 1;
+                    int len = urlstr.Length - start;
+                    filename = urlstr.Substring(start, len);//파일의 경로에 string 값의 마지막 파일명을 잘라서 사용
 
-                WebClient wc = new WebClient();
+                    WebClient wc = new WebClient();
 
-                MemoryStream ms = new MemoryStream();//스트림을 바이트단위로 바로 바뀌지 않아서 메모리 스트림 생성
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                byte[] imgData = ms.ToArray();
+                    MemoryStream ms = new MemoryStream();//스트림을 바이트단위로 바로 바뀌지 않아서 메모리 스트림 생성
+                    img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] imgData = ms.ToArray();
 
-                string filedata = Convert.ToBase64String(imgData);//바이트 스트링으로 변환
+                    string filedata = Convert.ToBase64String(imgData);//바이트 스트링으로 변환
 
-                ht.Add("hName", tb2.Text);
-                ht.Add("cpName", tb3.Text);
-                ht.Add("weight", tb4.Text);
-                ht.Add("EA", tb5.Text);
-                ht.Add("filename", filename);
-                ht.Add("filedata", filedata);
-                api.Post("http://192.168.3.12:5000/insert", ht);
+                    ht.Add("hName", tb2.Text);
+                    ht.Add("cpName", tb3.Text);
+                    ht.Add("weight", tb4.Text);
+                    ht.Add("EA", tb5.Text);
+                    ht.Add("filename", filename);
+                    ht.Add("filedata", filedata);
+                    api.Post("http://192.168.3.12:5000/insert", ht);
+                    api.SelectListView("http://192.168.3.12:5000/select", lv);
+                }
+            }
+            else if (name == "delete")
+            {
+                ht.Add("hNo", hNo);
+                api.Post("http://192.168.3.12:5000/delete", ht);
                 api.SelectListView("http://192.168.3.12:5000/select", lv);
             }
             tb2.Text = "";
