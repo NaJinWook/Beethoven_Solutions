@@ -57,8 +57,9 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "pn1");
             main_pnl = cmm.getPanel2(hashtable, this);
 
+            /* 왼쪽 패널 */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(780, 520));
+            hashtable.Add("size", new Size(780, 540));
             hashtable.Add("point", new Point(0, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn1");
@@ -71,8 +72,9 @@ namespace WindowsFormsApp1
             hashtable.Add("name", "pn2");
             pn2 = cmm.getPanel(hashtable, main_pnl);
 
+            /* 오른쪽 패널 */
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(650, 520));
+            hashtable.Add("size", new Size(650, 540));
             hashtable.Add("point", new Point(790, 0));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "pn4");
@@ -80,7 +82,7 @@ namespace WindowsFormsApp1
             pn4.BorderStyle = BorderStyle.FixedSingle;
             
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(620, 520));
+            hashtable.Add("size", new Size(650, 540));
             hashtable.Add("point", new Point(0, 0));
             hashtable.Add("pictureboxsizemode", PictureBoxSizeMode.CenterImage);
             pc1 = cmm.getPictureBox(hashtable, pn4);
@@ -90,7 +92,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(1111, 5));
+            hashtable.Add("point", new Point(1114, 5));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "update");
             hashtable.Add("text", "수정");
@@ -103,7 +105,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(1221, 5));
+            hashtable.Add("point", new Point(1223, 5));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "insert");
             hashtable.Add("text", "저장");
@@ -116,7 +118,7 @@ namespace WindowsFormsApp1
             
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(1331, 5));
+            hashtable.Add("point", new Point(1332, 5));
             hashtable.Add("color", Color.Black);
             hashtable.Add("name", "delete");
             hashtable.Add("text", "삭제");
@@ -126,13 +128,39 @@ namespace WindowsFormsApp1
             btn3.ForeColor = Color.White;
             btn3.FlatStyle = FlatStyle.Flat;
             btn3.FlatAppearance.BorderSize = 0;
-            
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(70, 50));
+            hashtable.Add("point", new Point(709, 5));
+            hashtable.Add("color", Color.FromArgb(45, 35, 135));
+            hashtable.Add("name", "btn6");
+            hashtable.Add("text", "");
+            hashtable.Add("click", (EventHandler)upload_click);
+            btn6 = cmm.getButton(hashtable, pn2);
+            btn6.Image = Properties.Resources.file_img;
+            btn6.ForeColor = Color.White;
+            btn6.FlatStyle = FlatStyle.Flat;
+            btn6.FlatAppearance.BorderSize = 0;
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(100, 50));
+            hashtable.Add("point", new Point(1005, 5));
+            hashtable.Add("color", Color.Black);
+            hashtable.Add("name", "btn7");
+            hashtable.Add("text", "초기화");
+            hashtable.Add("click", (EventHandler)btn_clear);
+            btn7 = cmm.getButton(hashtable, pn2);
+            btn7.Font = font1;
+            btn7.ForeColor = Color.White;
+            btn7.FlatStyle = FlatStyle.Flat;
+            btn7.FlatAppearance.BorderSize = 0;
+
             //=========================================여기까지 패널2번
             //--------------------------------------여기부터 패널3번부분
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(67, 30));
-            hashtable.Add("point", new Point(10, 15));
+            hashtable.Add("point", new Point(10, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb1");
             hashtable.Add("text", "제품명");
@@ -142,7 +170,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(67, 30));
-            hashtable.Add("point", new Point(240, 15));
+            hashtable.Add("point", new Point(240, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb2");
             hashtable.Add("text", "회사명");
@@ -152,7 +180,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 30));
-            hashtable.Add("point", new Point(470, 15));
+            hashtable.Add("point", new Point(468, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb3");
             hashtable.Add("text", "무게");
@@ -162,7 +190,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 30));
-            hashtable.Add("point", new Point(610, 15));
+            hashtable.Add("point", new Point(591, 13));
             hashtable.Add("color", Color.FromArgb(45, 35, 135));
             hashtable.Add("name", "lb4");
             hashtable.Add("text", "수량");
@@ -173,7 +201,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "150");
-            hashtable.Add("point", new Point(80, 15));
+            hashtable.Add("point", new Point(77, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb2");
             hashtable.Add("enabled", true);
@@ -182,7 +210,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "150");
-            hashtable.Add("point", new Point(310, 15));
+            hashtable.Add("point", new Point(306, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb3");
             hashtable.Add("enabled", true);
@@ -191,7 +219,7 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(525, 15));
+            hashtable.Add("point", new Point(518, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb4");
             hashtable.Add("enabled", true);
@@ -200,38 +228,12 @@ namespace WindowsFormsApp1
 
             hashtable = new Hashtable();
             hashtable.Add("width", "60");
-            hashtable.Add("point", new Point(675, 15));
+            hashtable.Add("point", new Point(641, 14));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "tb5");
             hashtable.Add("enabled", true);
             tb5 = cmm.getTextBox(hashtable, pn2);
             tb5.Font = font1;
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(70, 50));
-            hashtable.Add("point", new Point(760, 5));
-            hashtable.Add("color", Color.FromArgb(45, 35, 135));
-            hashtable.Add("name", "btn6");
-            hashtable.Add("text", "");
-            hashtable.Add("click", (EventHandler)upload_click);
-            btn6 = cmm.getButton(hashtable, pn2);
-            btn6.Image= Properties.Resources.file_img;
-            btn6.ForeColor = Color.White;
-            btn6.FlatStyle = FlatStyle.Flat;
-            btn6.FlatAppearance.BorderSize = 0;
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(940, 5));
-            hashtable.Add("color", Color.Black);
-            hashtable.Add("name", "btn7");
-            hashtable.Add("text", "CLEAR");
-            hashtable.Add("click", (EventHandler)btn_clear);
-            btn7 = cmm.getButton(hashtable, pn2);
-            btn7.Font = font1;
-            btn7.ForeColor = Color.White;
-            btn7.FlatStyle = FlatStyle.Flat;
-            btn7.FlatAppearance.BorderSize = 0;
 
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
@@ -245,6 +247,7 @@ namespace WindowsFormsApp1
             lv.Columns.Add("수량", 80, HorizontalAlignment.Center);
             lv.Columns.Add("구매일", 235, HorizontalAlignment.Center);
             lv.Font = font1;
+            lv.ColumnWidthChanging += Lv_ColumnWidthChanging;
             option();
             api.SelectListView("http://192.168.3.12:5000/select", lv);
             tb2.Text = "";
@@ -255,6 +258,14 @@ namespace WindowsFormsApp1
             hNo = "";
             filename = "";
         }
+
+        /*              리스트뷰 컬럼 크기 고정                     */
+        private void Lv_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.NewWidth = lv.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
+
         private void listView_click(object sender, MouseEventArgs e)
         {
             int index;

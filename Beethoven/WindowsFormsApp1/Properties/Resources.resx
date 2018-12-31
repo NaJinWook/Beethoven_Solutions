@@ -127,13 +127,13 @@
   <data name="login_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\login_background.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="normal_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\normal_img.Png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\home.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="file_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\file_img.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="normal_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\normal_img.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
